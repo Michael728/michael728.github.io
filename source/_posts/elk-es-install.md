@@ -430,6 +430,8 @@ wget https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-icu/a
 http://127.0.0.1:9200/_cat/plugins
 ```
 
+> 一个三个节点的 ES 集群，如果安装插件则需要三个节点都安装
+
 ## ES-FAQ
 
 ### Q1：[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
