@@ -1,5 +1,5 @@
 ---
-title: Elasticsearch7.X 安装及集群的配置
+title: Elasticsearch安装及集群的配置
 date: 2020-04-12 23:10:57
 categories: ELK
 tags:
@@ -208,6 +208,8 @@ ES 默认会加载位于 `$ES_HOME/config/elasticsearch.yml` 的配置文件。
 ./bin/elasticsearch -d -Ecluster.name=my_cluster -Enode.name=node_1
 ```
 
+> 通过 `-E`  会覆盖掉 `elasticsearch.yml` 中的配置。
+
 ---
 
 #### cluster.name
@@ -410,7 +412,10 @@ mkdir -p data/data{1,2,3}
 ## 安装插键
 
 ```shell
-./bin/elasticsearch-plugin install analysis-icu
+# 查看已经安装的插键列表
+bin/elasticsearch-plugin list
+# 安装一个国际化分词插键
+bin/elasticsearch-plugin install analysis-icu
 ```
 
 如果插键安装慢，可以先下载下来，再安装：
@@ -418,6 +423,11 @@ mkdir -p data/data{1,2,3}
 ```shell
 wget https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-icu/analysis-icu-7.3.0.zip
 ./bin/elasticsearch-plugin install file://file path Of analysis-icu-7.1.0.zip
+```
+
+如下 API 也可以查看 ES 插键列表：
+```
+http://127.0.0.1:9200/_cat/plugins
 ```
 
 ## ES-FAQ

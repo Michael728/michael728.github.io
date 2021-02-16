@@ -27,13 +27,13 @@ keywords:
 同样，Kibana 在我司镜像站上也有对应的软件包：
 
 ```shell
-https://mirrors.huaweicloud.com/kibana/7.3.0/
-wget https://mirrors.huaweicloud.com/kibana/7.3.0/kibana-7.3.0-linux-x86_64.tar.gz
-wget https://mirrors.huaweicloud.com/kibana/7.3.0/kibana-7.3.0-linux-x86_64.tar.gz.sha512
-shasum -a 512 -c elasticsearch-7.3.0-linux-x86_64.tar.gz.sha512
-tar xzf kibana-7.3.0-linux-x86_64.tar.gz
-chown -R michael kibana-7.3.0-linux-x86_64
-cd kibana-7.3.0-linux-x86_64
+https://mirrors.huaweicloud.com/kibana/7.3.2/
+wget https://mirrors.huaweicloud.com/kibana/7.3.2/kibana-7.3.2-linux-x86_64.tar.gz
+wget https://mirrors.huaweicloud.com/kibana/7.3.2/kibana-7.3.2-linux-x86_64.tar.gz.sha512
+shasum -a 512 -c elasticsearch-7.3.2-linux-x86_64.tar.gz.sha512
+tar xzf kibana-7.3.2-linux-x86_64.tar.gz
+chown -R michael kibana-7.3.2-linux-x86_64
+cd kibana-7.3.2-linux-x86_64
 ```
 
 ### 配置 Kibana

@@ -1,5 +1,5 @@
 ---
-title: Elasticsearch 集群中节点角色的介绍
+title: Elasticsearch集群中节点角色的介绍
 date: 2020-09-20 15:10:57
 categories: ELK
 tags:
@@ -27,16 +27,22 @@ keywords:
 我理解，这里的专用（`dedicated`）一词就是表示，将一个节点的角色不要设置那么多，主节点资格的节点就是用于当主节点，而不是同时设置数据节点的角色！
 {% endnote%}
 
+- 开发环境中，一个节点可以承担多种角色
+- 生产环境中，应该设置单一的角色的节点（dedicated node）
+
 本文 ES 是 7.3.0 版本，查看官方文档，发现 ES 7.9.0 的配置和它是有点区别的。
 
 ## master-eligible node
 
-`master-eligible node`：默认值就是 `true`。具有该角色的节点表示它有资格被选举为 `mater node`。备注：`eligible` 一词表示符合条件的含义。
+`master-eligible node`：默认值就是 `true`，意味着每个节点启动后，默认就是一个 Master eligible 节点。具有该角色的节点表示它有资格被选举为 `mater node`。备注：`eligible` 一词表示符合条件的含义。
 
-主节点负责维护集群的状态，集群范围内的轻量级操作，例如：
+主节点负责维护集群的状态，集群范围内的轻量级操作（只有 Master 节点才能修改集群的状态信息），例如：
 - 创建或删除索引，
 - 跟踪哪些节点是集群的一部分
-- 确定将哪些分片分配给哪些节点。
+- 确定将哪些分片分配给哪些节点
+- 分片的路由信息
+
+> 任意节点都能修改信息，会导致数据的不一致性
 
 **拥有稳定的主节点对于群集健康非常重要。**
 
@@ -71,6 +77,8 @@ cluster.remote.connect: false
 
 > xpack 功能时付费功能，因此，一般情况下，可以忽略 xpack 的设置。
 
+一个集群中可以有多个 master 节点，active 的 master 节点只有一个！
+
 ## Voting-only master-eligible node
 
 一个具有 `voting-only` `master-eligible` 两种角色的节点，它是参与主节点的选举但不会充当主节点的节点。特别指出，`voting-only` 可以在选举中为决胜局服务。
@@ -103,9 +111,11 @@ cluster.remote.connect: false
 
 ## Data Node
 
-数据节点包含包含您已建立索引的文档的分片。数据节点处理与数据相关的操作，例如：
+数据节点包含您已建立索引的文档的分片。数据节点处理与数据相关的操作，例如：
 - CRUD，
 - 搜索和聚合。
+
+> 数据节点在数据扩展上起到了至关重要的作用
 
 这些操作是 I/O，内存和 CPU 密集型的。**监视这些资源并在过载时添加更多数据节点非常重要。**
 
@@ -140,9 +150,14 @@ node.ml: false
 cluster.remote.connect: false
 ```
 
+Ingest Node，可以用来承担一些数据管道的数据转换工作，例如，为你的文档增加一个新的字段，例如帮转换文档中的字段。
+
 ## Coordinating only nodes
 
 如果您不具备处理主节点职责、保存数据和预处理文档的能力，那么你就剩下一个仅可路由请求的协调节点角色（`coordinating only nodes`），处理搜索缩减阶段、分配批量索引的。本质上，coordinating only nodes 可充当智能负载平衡器。
+
+- 负责接受 Client 的请求，将请求分发到合适的节点，最终把结果汇集到一起。
+- 每个节点默认都起到了 Coordinating Node 的职责
 
 > 仅协调节点也称为负载均衡节点或 Client 节点
 
@@ -160,6 +175,13 @@ node.ingest: false
 node.ml: false 
 cluster.remote.connect: false 
 ```
+
+## 其他节点类型
+
+- Hot & Warm Node
+  - 不同硬件配置的 Data Node，用来实现 Hot & Warm 架构，降低集群部署的成本
+- Machine Learning Node
+  - 负责跑机器学习的 Job，用来做异常检测 
 
 ## 单一职责节点
 
