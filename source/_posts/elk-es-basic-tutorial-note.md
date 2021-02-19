@@ -87,6 +87,7 @@ Index 索引是文档的容器，是一类「文档」的集合
   - 副本分片数是可以动态调整的
   - 增加副本数，还可以在一定程度上提高服务的可用性（读取的吞吐 ）。
   
+
 增删改属于写操作，增加副本只可能降低写入速度，但是会提高数据安全性。从写的角度看，会把请求分发到不同的副本，只要这些副本在不同的机器，机器资源又足够，那就实现了水平的扩展，提高了读取的并发性。
 
 补充：
@@ -154,7 +155,6 @@ Index 索引是文档的容器，是一类「文档」的集合
 
 - [简书/Elasticsearch是如何做到快速索引的](https://www.jianshu.com/p/ed7e1ebb2fb7)
 ## Analysis 与 Analyzer
-
 
 - Analysis：文本分析是把全文本转换一系列单词（term/token）的过程，也叫分词
 - Analysis 是通过 Analyzer 来实现的
@@ -693,3 +693,81 @@ PUT /ik_index
 #### 其他
 
 - [THULAC](https://github.com/microbun/elasticsearch-thulac-plugin) 清华大学的一套中文分词器，[官网主页](http://thulac.thunlp.org/)
+
+## Search API
+
+ES 的搜索可以分为两大类：
+- URI Search：在 URL 中使用查询参数
+- Request Body Search：使用 ES 提供的，基于 JSON 格式的更加完备的 Query Domain Specific Language（DSL）
+
+### 指定查询的索引
+
+| 语法                   | 范围                     |
+| ---------------------- | ------------------------ |
+| /_search_              | 集群上所有的索引         |
+| /index1/_search        | 查询索引 index1          |
+| /index1,index2/_search | 查询索引 index1 和index2 |
+| /index*/_search        | 查询以 index 开头的索引  |
+
+### URI 查询
+- 使用 `q` 指定查询字符串
+- `query string syntax` KV 键值对
+
+示例：
+```shell
+curl -XGET "http://localhost:9200/kibana_sample_data_ecommerce/_search?q=customer_first_name:Eddie"
+```
+
+说明：对索引 `kibana_sample_data_ecommerce` 中字段 `customer_first_name` 进行查询，查询的值是 Eddie
+
+### Request Body 查询
+
+
+```shell
+curl -XGET "http://localhost:9200/kibana_sample_data_ecommerce/_search" -H 'Content-Type:application/json' -d '
+{
+  "query":{
+    "match_all": {}
+  }
+}'
+```
+
+说明：
+- 支持 POST 和 GET
+- `_search` 表明执行搜索的操作
+- 查询返回所有的文档
+
+### 搜索 Response
+搜索结果如何看懂，示例：
+
+![response](https://gitee.com/michael_xiang/images/raw/master/uPic/0MXq8l.png)
+
+- `took`：表示花费的时间
+- `total`：表示符合条件的文档数
+- `hits`：表示结果集，默认前 10 个文档
+- `_index`：索引名
+- `_id`：文档 ID
+- `_score`：相关度评分
+- `_source`：文档原始信息
+
+### 搜索的相关性 Relevance
+
+用户关心的是搜索结果的相关性
+- 是否可以找到所有相关的内容
+- 有多少不相关的内容被返回了
+- 文档的打分是否合理
+- 结合业务需求，平衡结果排名
+
+#### 衡量相关性
+
+Information Retrieval
+- Precision 查准率：召回的结果集中，正确结果的比例
+- Recall 查全率：召回结果中的正确结果数占实际全部的正确结果的比例
+- Ranking：是否能够按照相关度进行排序？
+
+比如搜索苹果，搜索出结果一共有 8 条，其中 6 条确实是和苹果有关的，但是实际上数据集中一共有 10 个苹果相关的文档，那么，查准率就是 6/8，查全率就是 6/10。很显然，查准率和查全率我们都希望越高越好！
+
+![precision recall](https://gitee.com/michael_xiang/images/raw/master/uPic/3wr4jV.png)
+
+## 参考
+
