@@ -246,7 +246,6 @@ POST my_index/_msearch
 
 - 上面的查询涉及了 2 个索引，一个是 my_index 索引，还有一个是 test 索引
 
-
 ## _analyzer API
 ## 常见错误返回
 
