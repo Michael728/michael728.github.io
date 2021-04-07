@@ -44,7 +44,6 @@ Lombok 当你使用 lombok 包进行开发时，要同时安装该插键才行�
 [Mybatis Log](https://blog.csdn.net/qq_22194659/article/details/89011988) 
  在控制台打印mybatis的脚本日志，需要配置才能在控制台输出，[参考](https://blog.csdn.net/VICHOU_FA/article/details/79285749)
 
-
 ----
 
 Mongo
@@ -107,6 +106,29 @@ String Manipulation：字符串转换工具，安装好插件后，选中需要�
 anyrule：该插键在 VSCode 也有提供，可以用来搜索适合场景的正则表达式
 - 新建一个文件（因为 anyrule 一定要在文本环境下才能生成正则表达式），然后按下快捷键 `Alt+a` 功能键，这时候就会弹出 anyrule 正则表达式搜索框（anyrule 生成的是 javascript 的正则表达式，如果需要用到 Java 中。需要将最前面和最后面的"/"去掉）
 - 理解这个表达式的运行原理，点击右下角的"图解正则"。（就是将刚才any-rule生成的正则表达式填入 https://regexper.com/
+
+---
+
+### GsonFormatPlus
+
+给你一段 Json 格式数据，除了手写之外，利用该插键可以快速生成一个和该Json数据对应的Java对象：
+
+比如一段Json格式数据如下：
+
+```shell
+{
+    "status": 0,
+    "msg": "操作成功",
+    "data": 1
+}
+```
+
+GsonFormat则是一个JSON格式数据 → 对象的快速代码自动生成插件
+
+---
+
+### saveAction
+格式化、serialVersionUID生成等，很有用的插键
 
 参考：
 - [嗨：VSCode和IDEA都请安装上这个神奇的插件](https://mp.weixin.qq.com/s/h7RBvJ20NfQxwTYXaa0eiA)

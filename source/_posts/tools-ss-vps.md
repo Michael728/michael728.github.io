@@ -37,7 +37,7 @@ vultr速度比较：
 
 ``` shell
 # 查看时间和本地时间是否一致
-data -R
+date -R
 # 设置一致，东八区
 sudo -i
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

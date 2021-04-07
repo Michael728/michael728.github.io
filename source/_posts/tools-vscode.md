@@ -111,6 +111,16 @@ categories: ToolsDev
 - 显示 Debug:`Ctrl+Shift+D`
 - 显示 Output:`Ctrl+Shift+U`
 
+## 设置
+
+### 修改 VSCode 默认 terminal/终端
+
+在 vscode 设置中，搜索 `terminal.integrated.shell.windows`，点击在 `settings.json` 中编辑，将 git bash 终端路径设置进去即可
+
+```
+D:\\Program Files\\Git\\bin\\bash.exe
+```
+
 ## 其他
 
 自动保存：File -> AutoSave ，或者 Ctrl+Shift+P，输入 auto

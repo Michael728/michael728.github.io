@@ -47,7 +47,7 @@ HDR电视标准：
 
 ## 画质芯片
 
-- 索尼 X1
+- 索尼 X1、XR
 - 三星 8K 的 AI 芯片
 - LG 的 α9、α7
 - 海信的 Hi-View Pro
@@ -130,9 +130,21 @@ HDR电视标准：
 关注型号：
 - E8D 5669 ULED/140%色域/3+ 32G/CPU A73✖️2核+A53✖️2核数/刷新率 60HZ/支持蓝牙耳机
 
+## 尺寸
+
+在国外这个网站 [rtings/size-to-distance-relationship](https://www.rtings.com/tv/reviews/by-size/size-to-distance-relationship) 有提供关于根据观影距离和视频分别率推荐电视尺寸的工具，非常值得推荐！
+
+![2TbUZE](https://gitee.com/michael_xiang/images/raw/master/uPic/2TbUZE.png)
+
+![6fyosV](https://gitee.com/michael_xiang/images/raw/master/uPic/6fyosV.png)
+
+![mqIQva](https://gitee.com/michael_xiang/images/raw/master/uPic/mqIQva.png)
+
+- [海尔官网/你真的会选电视尺寸吗?](https://www.haier.com/guang/guide/20180102_126329.shtml)
+
 ## 参考
 
 - [B站/知电晓春哥/液晶电视选择的坑你踩了几个？屏好不等于电视好，液晶电视选购必看](https://www.bilibili.com/video/BV1ub411M7Ni/?spm_id_from=333.788.videocard.3) 提到了关注芯片、接口、视频格式等关键因素
 - [科技狗/油管/【選購指南】2020年4K 電視怎麼選？](https://www.youtube.com/watch?v=SozJZIWcO5c) 更专业的评测，提供很多专业讲解
 - [什么值得买/从参数到推荐：2020年电视机选购指南](https://post.smzdm.com/p/akm7rdw8/)
-- [B站/索尼电视2020新品又挤牙膏？快去抢X9500G！SONY 85寸9500G评测 上集](https://www.bilibili.com/video/av243373433/)
+- [B站 Wayne的生活/索尼电视2020新品又挤牙膏？快去抢X9500G！SONY 85寸9500G评测 上集](https://www.bilibili.com/video/av243373433/)
