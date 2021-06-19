@@ -2,8 +2,8 @@
 title: 安卓手机必备 APP 清单
 tags: [ APP]
 toc: true
-date: 2021-02-211 21:29:08
-categories: Life
+date: 2021-02-11 21:29:08
+categories: 数码
 ---
 
 ## 前言
