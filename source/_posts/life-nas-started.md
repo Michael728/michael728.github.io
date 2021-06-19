@@ -3,7 +3,7 @@ title: 群晖 NAS 920+ 使用笔记
 tags: [数码, 多媒体]
 toc: true
 date: 2021-05-30 21:29:08
-categories: Life
+categories: 数码
 ---
 
 ## 前言

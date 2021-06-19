@@ -3,7 +3,7 @@ title: Tivo Stream TV 激活配置使用笔记
 tags: [数码, 多媒体]
 toc: true
 date: 2021-04-25 21:29:08
-categories: Life
+categories: 数码
 ---
 
 ## 前言

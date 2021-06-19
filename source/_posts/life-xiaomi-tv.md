@@ -3,7 +3,7 @@ title: 小米电视大师 82 寸的使用心得
 tags: [数码, 多媒体]
 toc: true
 date: 2021-06-12 21:29:08
-categories: Life
+categories: 数码
 ---
 
 ## aida64
