@@ -6,6 +6,9 @@ date: 2021-06-12 21:29:08
 categories: 数码
 ---
 
+## 前言
+
+![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/kxUeaF.png)
 ## aida64
 
 这个软件可以方便的查看电视机的系统信息、CPU 架构等。

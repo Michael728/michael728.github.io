@@ -12,7 +12,7 @@ categories: 数码
 
 目前国产电视机的硬件性能其实都还 OK，个人觉得影响观看体验的重要因素反而是片源！国内「优爱腾」流媒体的质量还有待提高，2K/4K 的片源质量堪忧，甚至 1080P 的片源都不行。因为小米电视并不是 Netflix 认证的设备，是无法直接安装 Netflix 官方 APP 的。因此，决定购入一个国外的电视盒子——TiVo Stream TV 盒子，然后在它上面安装 Netflix、Youtube 等 APP 观看世界各地高质量的片源了。
 
-![效果图](https://gitee.com/michael_xiang/images/raw/master/uPic/nFIi8b.png)
+![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/kxUeaF.png)
 
 上图就是效果图啦，美滋滋，顺带安利一部剧《纸钞屋》，西班牙剧真是给力！
 
