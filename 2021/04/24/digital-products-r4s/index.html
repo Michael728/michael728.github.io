@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="介绍为了让新家的网络可以自由访问各大流媒体资源，以及方便自己开发环境中下载各种国外资源依赖软件包等，购入了 R4S 软路由设备。">
+<meta name="keywords" content="软路由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R4S 使用笔记">
+<meta property="og:url" content="https://michael728.github.io/2021/04/24/digital-products-r4s/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="介绍为了让新家的网络可以自由访问各大流媒体资源，以及方便自己开发环境中下载各种国外资源依赖软件包等，购入了 R4S 软路由设备。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/8TOcgI.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/qP6Vec.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/T8y7cW.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/izrusV.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/Zi5HbO.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/sSGwHY.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/iZOSy2.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/nsCBOu.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/uruSYQ.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/FjVAl8.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/TnR7eT.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/uHBDsU.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/TP1VOf.png">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R4S 使用笔记">
+<meta name="twitter:description" content="介绍为了让新家的网络可以自由访问各大流媒体资源，以及方便自己开发环境中下载各种国外资源依赖软件包等，购入了 R4S 软路由设备。">
+<meta name="twitter:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/8TOcgI.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2021/04/24/digital-products-r4s/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>R4S 使用笔记 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2021/04/24/digital-products-r4s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">R4S 使用笔记
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-24 23:21:24" itemprop="dateCreated datePublished" datetime="2021-04-24T23:21:24+00:00">2021-04-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数码/" itemprop="url" rel="index"><span itemprop="name">数码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>为了让新家的网络可以自由访问各大流媒体资源，以及方便自己开发环境中下载各种国外资源依赖软件包等，购入了 R4S 软路由设备。</p>
+<a id="more"></a>
+<h2 id="固件下载"><a href="#固件下载" class="headerlink" title="固件下载"></a>固件下载</h2><ul>
+<li><a href="https://wiki.friendlyarm.com/wiki/index.php/NanoPi_R4S/zh#.E4.B8.8B.E8.BD.BD.E7.B3.BB.E7.BB.9F.E5.9B.BA.E4.BB.B6" target="_blank" rel="noopener">官方固件/NanoPi R4S/zh</a> 对应的<a href="https://pan.baidu.com/share/init?surl=IVKSPo5m4SGGh8z_hY_hTg" target="_blank" rel="noopener">网盘地址/5fd2</a></li>
+<li><a href="https://github.com/klever1988/nanopi-openwrt" target="_blank" rel="noopener">klever1988/nanopi-openwrt</a> Star 2.3K，推荐</li>
+<li><a href="https://github.com/SuLingGG/OpenWrt-Rpi" target="_blank" rel="noopener">SuLingGG/OpenWrt-Rpi</a> Star 2.1K</li>
+<li><a href="https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt" target="_blank" rel="noopener">QiuSimons/R2S-R4S-X86-OpenWrt</a></li>
+<li><a href="https://bigdongdong.gitbook.io/nanopi-r2s/r4s-gu-jian-ji-gong-ju-xia-zai" target="_blank" rel="noopener">Dongdong/R4S第三方固件</a> </li>
+<li><a href="https://github.com/DHDAXCW/NanoPi-R4S-2021/releases/" target="_blank" rel="noopener">骷髅头/DHDAXCW/NanoPi-R4S-2021</a> </li>
+</ul>
+<blockquote>
+<p>语雀上有个文章总结的挺好，推荐 <a href="https://www.yuque.com/friendlyelec/r2s/gd4g3l" target="_blank" rel="noopener">NanoPi-R2S / NanoPi-R4S 常见第三方固件选择</a></p>
+</blockquote>
+<p>如果想自己编译固件，可以看如下资源：</p>
+<ul>
+<li><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">coolsnowwolf/lede</a> Lean的Openwrt源码仓库，高 Star 项目</li>
+</ul>
+<h2 id="刷固件"><a href="#刷固件" class="headerlink" title="刷固件"></a>刷固件</h2><ul>
+<li><a href="https://www.youtube.com/watch?v=ZCmbbnIBD78" target="_blank" rel="noopener">洋葱油管/R2S软路由销量之王！R2S安装openwrt攻略 openwrt软路由设置</a></li>
+<li><a href="https://www.youtube.com/watch?v=UYl-dgrPnTI&amp;t=114s" target="_blank" rel="noopener">DongDong/R2S 使用指南</a></li>
+</ul>
+<p>刷固件的软件：</p>
+<ul>
+<li><a href="https://www.balena.io/etcher/?ref=etcher_footer" target="_blank" rel="noopener">balenaEtcher</a></li>
+<li><a href="https://bigdongdong.gitbook.io/nanopi-r2s/" target="_blank" rel="noopener">bigdongdong/R2S/R4S 使用指导</a></li>
+</ul>
+<p>写盘工具：可以使用 Rufus 或者 balenaEtcher，其实，就和之前做 Linux 启动盘一样，就是拿着固件镜像文件做一个启动盘。</p>
+<p>注意点：刷完固件的 TF 卡下次插入电脑，可能会弹出需要格式化，千万不要进行格式化，否则可能会丢失容量。下次刷固件，不用格式化就可以直接刷固件即可！</p>
+<p>balenaEtcher 刷固件</p>
+<ol>
+<li>select image：选择要刷入的固件</li>
+<li>select dirve：选择 tf 卡，也就是要将固件刷入的存储介质</li>
+<li>flash：开始刷入固件</li>
+</ol>
+<p>刷好固件的 TF 卡插入 R4S，SYS 灯常亮之后，通过一根网线将 R4S 的 LAN 口和电脑连接。</p>
+<p>接着就可以打开 R4S 的后台，浏览器访问 192.168.2.1。</p>
+<ul>
+<li>用户名 root</li>
+<li>密码 password</li>
+</ul>
+<p>至此， R4S 的系统已经安装启动完毕，接着开始配置网络。</p>
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>要搞清楚是猫拨号还是路由器拨号。进入路由器后台观察它的上网方式设置，如果是 DHCP 的方式，则表示是光猫拨号上网的方式。</p>
+<p>连接设备：光猫的线接入 R4S 的 WAN 口，然后用网线将 R4S 的 LAN 口和路由器的 WAN 口相连。</p>
+<blockquote>
+<p>个人理解，WAN 口就是信号的入口，LAN 口就是信号的出口，这么理解，就知道上面为何这么连接了。</p>
+</blockquote>
+<p>备注：路由器的上网方式其实就是对 WAN 口进行设置，局域网设置的就是对 LAN 口设置的。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/8TOcgI.png" alt="网络接线"></p>
+<blockquote>
+<p>图片来自 <a href="https://www.yuque.com/friendlyelec/r2s/fh1msa" target="_blank" rel="noopener">语雀/NanoPi R2S / R4S 软路由常见网络接线指引</a></p>
+</blockquote>
+<h3 id="将无线路由器改为无线交换机，有线中继模式"><a href="#将无线路由器改为无线交换机，有线中继模式" class="headerlink" title="将无线路由器改为无线交换机，有线中继模式"></a>将无线路由器改为无线交换机，有线中继模式</h3><p>所有设备都在一个局域网，没有路由功能，少一次转发</p>
+<p>判断路由器是否支持场景二的设置：登录路由器后台，判断路由器是否支持无线接入点（AP）模式/有线中继模式，他们一样，只是叫法不同。</p>
+<blockquote>
+<p>小米路由器在上网设置菜单下有工作模式的切换</p>
+</blockquote>
+<p>后台管理地址一定要记住：重启之后，这台路由器就不是路由器了，就是一台无线交换机，以后，路由器的网口没有 WAN 口和 LAN 区分了。</p>
+<ul>
+<li>如果是光猫拨号，网络接口的 WAN 协议就是 DHCP 客户端</li>
+<li>如果是软路由拨号上网，就切成 PPPoE，配置宽带账号密码（填好重启光猫）</li>
+</ul>
+<h2 id="路由器设置"><a href="#路由器设置" class="headerlink" title="路由器设置"></a>路由器设置</h2><ul>
+<li><a href="https://blog.qust.me/posts/nanopir4s/" target="_blank" rel="noopener">NanoPi R4S 上手体验</a> 介绍了 OpenClash 的使用，简略</li>
+<li><a href="https://didiboy0702.gitbook.io/wukongdaily/" target="_blank" rel="noopener">资料：悟空的日常</a></li>
+<li>测速网站：<a href="https://fast.com/zh/cn/" target="_blank" rel="noopener">https://fast.com/zh/cn/</a></li>
+</ul>
+<h3 id="设置桥接模式"><a href="#设置桥接模式" class="headerlink" title="设置桥接模式"></a>设置桥接模式</h3><p>如果为了让软路由的 IP 和家里联网设备都处于同一网段，那么，可以将路由器设为桥接模式，这样，路由器就相当于 AP，接入路由器的设备不会处于另外的网段。方便在软路由中针对具体的 IP 设备进行联网控制。</p>
+<p>小米路由器进入后台：常用设置-》上网设置-》工作模式切换，选择「有线中继工作模式」：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/qP6Vec.png" alt="工作模式"></p>
+<blockquote>
+<p>要记住改为中继模式后的管理后台 IP</p>
+</blockquote>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/T8y7cW.png" alt="管理台"></p>
+<h2 id="Passwall-使用"><a href="#Passwall-使用" class="headerlink" title="Passwall 使用"></a>Passwall 使用</h2><h3 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h3><p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/izrusV.png" alt="启用"></p>
+<ul>
+<li>UDP 一般选择与 TCP 节点一致</li>
+<li>需要勾选「主开关」保存并应用才真正启用</li>
+</ul>
+<p>模式</p>
+<ul>
+<li>TCP 默认代理模式：一般选择「中国列表以外」</li>
+<li>UDP 默认代理模式：默认是「游戏模式」</li>
+<li>路由器自身 TCP 代理模式：</li>
+<li>路由器自身 UDP 代理模式：</li>
+</ul>
+<p>选项说明：</p>
+<ul>
+<li>不代理：不启用代理</li>
+<li>全局代理：全部网站走代理</li>
+<li>GFW 列表：仅那些被屏蔽的网站走代理</li>
+<li>中国列表以外：只要是外国的都走代理</li>
+<li>中国列表：这个模式一般是国外的用于访问国内网站的，暂时用不到</li>
+</ul>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>控制连接到局域网中的设备，主要是控制他们使用什么节点或者什么模式来访问网络。</p>
+<blockquote>
+<p>要能控制这些设备，有个前提，这些设备要和软路由在同一网段下。</p>
+</blockquote>
+<p>一般家庭网络布置是如下的：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/Zi5HbO.png" alt="光猫拨号"></p>
+<p>上面这种方式，路由器一般是 「DHCP 方式/动态 IP」。只能保证无线接入的设备和路由器在一个网段，但是，路由器和软路由并不在一个网段。这种情况，「访问控制」是无法使用的，因为对于软路由来说，只有路由器这个设备是它能控制的。除此以外，还多了一个缺点，多了一次转发。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/sSGwHY.png" alt="推荐模式"></p>
+<p>上图是 UP 主推荐的模式，避免家中网段过多，光猫改为桥接模式，软路由负责拨号，路由器设为「AP模式/桥接模式/有线中继模式」。这样设置，设备就处于同一网段下了。此时，路由器就类似是一个交换机的角色，他不会像 DHCP 那样，产生一个新的网段。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/iZOSy2.png" alt="简化"></p>
+<p>有时候运宽带运营商是不推荐让光猫改为桥接模式，因为改为桥接模式他们没法直接后台操作网络，升级等。现在光猫的性能都不差，也没必要非要改为桥接模式，让其他设备拨号。上图的模式就比较方便，仅仅是将路由器的模式修改为「AP模式/桥接模式/有线中继模式」，路由器连接的设备也可以和软路由处在同一网段。</p>
+<p>如下的设置，可以实现局域网内某些设备是否可以走代理：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/nsCBOu.png" alt="示例"></p>
+<p>比如我们使用的 NAS，一般都是国外厂商的，当我们模式选择「中国列表以外」时，一般他们的网站都会被代理，这时候想让他们不走代理或者为GFW 列表的方式，就可以使用访问控制的功能来设置了。</p>
+<h3 id="自动切换"><a href="#自动切换" class="headerlink" title="自动切换"></a>自动切换</h3><p>自动切换功能就是添加若干个备用节点，当其中一个节点不可用，会自动切换到备用节点，实现「高可用」。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/uruSYQ.png" alt="自动切换"></p>
+<h3 id="直连-代理名单管理"><a href="#直连-代理名单管理" class="headerlink" title="直连/代理名单管理"></a>直连/代理名单管理</h3><ul>
+<li>直连列表：可以实现加入的 域名/IP 不走代理，这就可以让一些防火墙中的网址依然不能访问，对所有模式生效，优先级最高</li>
+<li>代理列表：加入的 域名/IP 将走代理；</li>
+<li>屏蔽列表：加入的 域名/IP 将屏蔽；</li>
+</ul>
+<p>举例，<code>https://www.speedtest.net/</code> 这个测速网站是国外网站，如果在使用代理的情况，默认会是在国外节点进行测速，如果我们将它加到「直连列表」中，则会测量我们家中实际运营商的网速，这才是我们关心的：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/FjVAl8.png" alt="测速示例"></p>
+<h3 id="高级设置"><a href="#高级设置" class="headerlink" title="高级设置"></a>高级设置</h3><p>设置节点数量，可以使用多个 TCP 节点，然后配合上面介绍的访问控制，可以实现针对某个设备指定使用某个节点：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/TnR7eT.png" alt="节点数量"></p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/uHBDsU.png" alt="指定节点"></p>
+<blockquote>
+<p>例如使用某些不限流量的节点给 NAS 云盘备份使用</p>
+</blockquote>
+<h3 id="分流"><a href="#分流" class="headerlink" title="分流"></a>分流</h3><p>实现让特定的网站使用指定的节点，比如奈菲使用新加坡节点，油管使用香港节点。</p>
+<p>只需要在「节点列表」-》「添加」，按照如下示例选择：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/TP1VOf.png" alt="分流"></p>
+<p>当创建好这个「分流节点」之后，需要在「基本设置」中，选择我们刚刚创建的这个节点。这样，就可以实现分流了。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=qkga9DN5H08&amp;t=7s" target="_blank" rel="noopener">油管/使用PassWALL 完美掌控内网科学上网</a></li>
+</ul>
+<h2 id="软路由设置重启"><a href="#软路由设置重启" class="headerlink" title="软路由设置重启"></a>软路由设置重启</h2><p>在使用一周左右，发现网速降低比较明显，重启软路由之后正常了。因此，决定设置定时任务，让软路由每天清晨自动重启。</p>
+<ul>
+<li>首先在系统》启动项中，检查 <code>cron</code> 服务是启用的状态</li>
+<li>在系统》计划任务的输入框中，添加 <code>0 4 * * * sleep 70 &amp;&amp; touch /etc/banner &amp;&amp; reboot</code>，然后提交保存。计划每天凌晨 4 点重启</li>
+</ul>
+<blockquote>
+<p>上面这个定时任务，其实，直接进入 TTYD 终端界面，<code>crontab -e</code> 也可以编辑保存</p>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://einverne.github.io/post/2017/03/auto-reboot-openwrt.html" target="_blank" rel="noopener">使用 Cron 定时重启 Openwrt 路由器</a></li>
+</ul>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>客户端：</p>
+<ul>
+<li><a href="https://github.com/Kr328/ClashForAndroid/releases" target="_blank" rel="noopener">Clash andriod</a></li>
+<li><a href="https://smartyoutubetv.github.io/" target="_blank" rel="noopener">smartyoutubetv</a> 针对没有谷歌框架的设备可以安装的 Youtube 客户端</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/05/30/digital-products-nas-started/" rel="bookmark">群晖 NAS 920+ 使用笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/04/25/digital-products-tivo-tv/" rel="bookmark">Tivo Stream TV 使用笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/02/11/digital-products-mobile-app-backup/" rel="bookmark">安卓手机必备 APP 清单</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/06/12/digital-products-xiaomi-tv/" rel="bookmark">小米电视大师 82 寸的使用心得</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2021/04/24/digital-products-r4s/" title="R4S 使用笔记">https://michael728.github.io/2021/04/24/digital-products-r4s/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数码/" rel="tag"># 数码</a>
+          
+            <a href="/tags/多媒体/" rel="tag"># 多媒体</a>
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/02/16/elk-es-operation-api/" rel="next" title="Elasticsearch常见API">
+                <i class="fa fa-chevron-left"></i> Elasticsearch常见API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/25/digital-products-tivo-tv/" rel="prev" title="Tivo Stream TV 使用笔记">
+                Tivo Stream TV 使用笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#固件下载"><span class="nav-number">2.</span> <span class="nav-text">固件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#刷固件"><span class="nav-number">3.</span> <span class="nav-text">刷固件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">4.</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将无线路由器改为无线交换机，有线中继模式"><span class="nav-number">4.1.</span> <span class="nav-text">将无线路由器改为无线交换机，有线中继模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器设置"><span class="nav-number">5.</span> <span class="nav-text">路由器设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置桥接模式"><span class="nav-number">5.1.</span> <span class="nav-text">设置桥接模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Passwall-使用"><span class="nav-number">6.</span> <span class="nav-text">Passwall 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本设置"><span class="nav-number">6.1.</span> <span class="nav-text">基本设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">6.2.</span> <span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动切换"><span class="nav-number">6.3.</span> <span class="nav-text">自动切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直连-代理名单管理"><span class="nav-number">6.4.</span> <span class="nav-text">直连/代理名单管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级设置"><span class="nav-number">6.5.</span> <span class="nav-text">高级设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分流"><span class="nav-number">6.6.</span> <span class="nav-text">分流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.7.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软路由设置重启"><span class="nav-number">7.</span> <span class="nav-text">软路由设置重启</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端"><span class="nav-number">8.</span> <span class="nav-text">客户端</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2021/04/24/digital-products-r4s/";
+    this.page.identifier = "2021/04/24/digital-products-r4s/";
+    this.page.title = 'R4S 使用笔记';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="将 Mac 日常使用的软件和开发软件区分开，将之前写的 Mac 配置的文章分成了两篇：  Mac 配置教程-日常篇 Mac 配置教程-开发篇  支持 NTFS 磁盘阅读文章 Mac 免费支持 NTFS 格式的移动硬盘/U盘 图床这篇文章介绍的 优雅的图床工具，简直完美～  uPic 支持利用 Github 或者 Gitee 作为图床，赞了！微博图床封了之后，这个是一个好选择！设置快捷键是 com">
+<meta name="keywords" content="mac,config,develop,app,tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac 配置教程-开发篇">
+<meta property="og:url" content="https://michael728.github.io/2019/04/14/tools-dev-mac/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="将 Mac 日常使用的软件和开发软件区分开，将之前写的 Mac 配置的文章分成了两篇：  Mac 配置教程-日常篇 Mac 配置教程-开发篇  支持 NTFS 磁盘阅读文章 Mac 免费支持 NTFS 格式的移动硬盘/U盘 图床这篇文章介绍的 优雅的图床工具，简直完美～  uPic 支持利用 Github 或者 Gitee 作为图床，赞了！微博图床封了之后，这个是一个好选择！设置快捷键是 com">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/computer-mac.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/mw690/6d9475f6ly1fw7jjv06kdj20j103gwey.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxzcmjc8qhj30gl07a75g.jpg">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac 配置教程-开发篇">
+<meta name="twitter:description" content="将 Mac 日常使用的软件和开发软件区分开，将之前写的 Mac 配置的文章分成了两篇：  Mac 配置教程-日常篇 Mac 配置教程-开发篇  支持 NTFS 磁盘阅读文章 Mac 免费支持 NTFS 格式的移动硬盘/U盘 图床这篇文章介绍的 优雅的图床工具，简直完美～  uPic 支持利用 Github 或者 Gitee 作为图床，赞了！微博图床封了之后，这个是一个好选择！设置快捷键是 com">
+<meta name="twitter:image" content="https://gitee.com/michael_xiang/images/raw/master/computer-mac.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2019/04/14/tools-dev-mac/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Mac 配置教程-开发篇 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2019/04/14/tools-dev-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Mac 配置教程-开发篇
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-14 15:05:50" itemprop="dateCreated datePublished" datetime="2019-04-14T15:05:50+00:00">2019-04-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ToolsDev/" itemprop="url" rel="index"><span itemprop="name">ToolsDev</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://gitee.com/michael_xiang/images/raw/master/computer-mac.jpg" alt></p>
+<p>将 Mac 日常使用的软件和开发软件区分开，将之前写的 Mac 配置的文章分成了两篇：</p>
+<ul>
+<li><a href="https://michael728.github.io/2018/12/08/tools-daily-mac/">Mac 配置教程-日常篇</a></li>
+<li><a href="https://michael728.github.io/2019/04/14/tools-dev-mac/">Mac 配置教程-开发篇</a></li>
+</ul>
+<h2 id="支持-NTFS-磁盘"><a href="#支持-NTFS-磁盘" class="headerlink" title="支持 NTFS 磁盘"></a>支持 NTFS 磁盘</h2><p>阅读文章 <a href="https://michael728.github.io/2019/11/17/tools-mac-support-ntfs/">Mac 免费支持 NTFS 格式的移动硬盘/U盘</a></p>
+<h2 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h2><p>这篇文章介绍的 <a href="https://mp.weixin.qq.com/s?__biz=MzI5MDM4NTYwOA==&amp;mid=2247488563&amp;idx=1&amp;sn=cb55f805c25b4f2414e6412a1aa2ca58&amp;chksm=ec21ef94db5666825d5a1a3d90dbe52b177688ef5c1241e6b0d4085427bff392eb5f159c9503&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1564983102216&amp;sharer_shareid=ae8eb1508a08c1b134df82bb484ea38d#rd" target="_blank" rel="noopener">优雅的图床工具，简直完美～</a></p>
+<ul>
+<li><a href="https://gitee.com/gee1k/uPic/releases" target="_blank" rel="noopener">uPic</a> 支持利用 Github 或者 Gitee 作为图床，赞了！微博图床封了之后，这个是一个好选择！设置快捷键是 <code>command+shift+p</code>，<a href="https://blog.svend.cc/upic/tutorials/gitee/" target="_blank" rel="noopener">文档</a></li>
+<li><a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">PicGo</a> 设置快捷键是 <code>command+shift+p</code>，<a href="https://picgo.github.io/PicGo-Doc/zh/guide/" target="_blank" rel="noopener">文档</a></li>
+<li><a href="https://toolinbox.net/iPic/" target="_blank" rel="noopener">iPic</a> 设置快捷键 <code>Command+Shift+u</code></li>
+</ul>
+<h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><p>安装 Homebrew 的指导见 <a href="https://michael728.github.io/2018/12/08/tools-daily-mac/">Mac 配置教程-日常篇</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew install ssh-copy-id</span><br><span class="line">ssh-copy-id root@1.2.3.4</span><br><span class="line"><span class="meta">#</span> 等价于</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@1.2.3.4 -p 22</span><br></pre></td></tr></table></figure>
+<p><code>ssh-copy-id</code> 这个工具，它的原理其实是把自己的公钥（默认使用 <code>~/.ssh/id_rsa.pub</code> 这个文件中的内容）复制到目标服务器的<code>~/.ssh/authorized_keys</code> 文件内。</p>
+<p>可以利用 SSH 的配置文件来记住已有的配置，快速登录：</p>
+<p>编辑<code>~/.ssh/config</code> 文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host ss</span><br><span class="line">    HostName x.x.x.x</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+<p>后续，仅需要<code>ssh ss</code>，即可免密登录。</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI3MTI2NzkxMA==&amp;mid=2247487942&amp;idx=1&amp;sn=c46f510ff119bd0bdfe30689f0398854&amp;chksm=eac530efddb2b9f9a8b1bf08454084d68b200dc7d4d999fa65d0d1ed69e78c386a26331533ea&amp;mpshare=1&amp;scene=1&amp;srcid=#rd" target="_blank" rel="noopener">图解 SSH 原理</a></li>
+</ul>
+<h2 id="网络分析"><a href="#网络分析" class="headerlink" title="网络分析"></a>网络分析</h2><ul>
+<li><a href="https://httptoolkit.tech/view/" target="_blank" rel="noopener">HTTP View</a> 超酷的HTTP(S)的调试助手，一键拦截HTTP(S)，仔细研究和检查流量，并准确地发现您的代码正在发送什么。</li>
+</ul>
+<h2 id="编程字体"><a href="#编程字体" class="headerlink" title="编程字体"></a>编程字体</h2><ul>
+<li><a href="https://github.com/source-foundry/Hack" target="_blank" rel="noopener">Hack</a> 专为在源代码中使用而设计的开源字体</li>
+</ul>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><ul>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载安装</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ssh-keygen -t rsa -C "649168982@qq.com"</span><br><span class="line"><span class="meta">$</span> git config --global user.name "Michael728"</span><br><span class="line"><span class="meta">$</span> git config --global user.email "649168982@qq.com"</span><br></pre></td></tr></table></figure>
+<ul>
+<li>我的 Git 配置文件在：<a href="https://github.com/Michael728/my-config-files/tree/master/git" target="_blank" rel="noopener">my-config-files/git</a></li>
+<li>更多的设置，阅读 <a href="https://michael728.github.io/2019/11/14/git-install-config/">https://michael728.github.io/2019/11/14/git-install-config/</a></li>
+</ul>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><p>Q1： <code>git status</code>乱码<br>执行：<code>git config --global core.quotepath false</code><br>参考：<a href="http://blog.crhan.com/2012/09/git-status-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/" target="_blank" rel="noopener">Git Status 中文乱码解决</a></p>
+<p>Q2：Github 下载速度慢</p>
+<ul>
+<li><a href="https://aoenian.github.io/2018/05/12/github-access-fast/" target="_blank" rel="noopener">加快国内访问Github网站的速度</a></li>
+<li><a href="https://www.wangmaoxian.com/201808/%E5%9B%BD%E5%86%85%E4%B8%BA%E4%BD%95%E8%AE%BF%E9%97%AEGithub%E5%A6%82%E6%AD%A4%E6%85%A2/" target="_blank" rel="noopener">国内为何访问Github如此慢</a></li>
+</ul>
+<h3 id="Homebrew-amp-Cask-amp-launchrocket"><a href="#Homebrew-amp-Cask-amp-launchrocket" class="headerlink" title="Homebrew &amp; Cask &amp; launchrocket"></a>Homebrew &amp; Cask &amp; launchrocket</h3><p>在安装其他软件之前，这个首先要介绍安装一下，可以理解为 Mac 平台下的包管理器，用命令行可以安装一下软件工具。</p>
+<p><a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">Homebrew-官网</a>安装 brew 命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br></pre></td></tr></table></figure>
+<p><a href="http://caskroom.io/" target="_blank" rel="noopener">Homebrew cask</a>可以优雅、简单、快速的安装和管理 OS X 图形界面程序，比如 Google Chrome 和 Dropbox，安装 cask 命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew tap caskroom/cask</span><br></pre></td></tr></table></figure>
+<p>常用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">brew search xxx // 搜索</span><br><span class="line">brew cask search xxx // 搜索</span><br><span class="line">brew list --versions // 查看安装过的包列表，同时显示版本号</span><br><span class="line">brew update // 更新 brew</span><br><span class="line">brew upgrade &lt;package_name&gt; // 更新用brew安装的软件</span><br><span class="line">brew cleanup // 清理旧版本的包缓存时，清除安装包</span><br><span class="line">brew cask cleanup // 清除安装包</span><br><span class="line">brew doctor // 检测</span><br><span class="line">brew outdated // 看一下哪些软件可以升级</span><br><span class="line">brew info xxx // 查看某个软件信息</span><br><span class="line">brew cask info xxx // 查看某个软件信息</span><br><span class="line">brew unlink vim</span><br><span class="line">brew link macvim</span><br></pre></td></tr></table></figure>
+<p>更多命令可以通过<code>man brew</code>查看：</p>
+<ul>
+<li><a href="https://docs.brew.sh/Manpage" target="_blank" rel="noopener">brew 命令官网</a></li>
+<li><a href="https://segmentfault.com/a/1190000012826983" target="_blank" rel="noopener">SF-homebrew的tap功能详解</a></li>
+<li><a href="https://blog.csdn.net/beyond__devil/article/details/52649362" target="_blank" rel="noopener">CSDN-mac的homebrew命令详解&amp;全部选项翻译</a></li>
+<li><a href="https://wsgzao.github.io/post/homebrew/" target="_blank" rel="noopener">HelloDog-macOS 使用 Homebrew 的经验分享</a></li>
+</ul>
+<p>Homebrew 能够安装哪些软件：</p>
+<ul>
+<li><code>brew search xxx</code></li>
+<li>在<a href="https://formulae.brew.sh/formula/" target="_blank" rel="noopener">官网</a>浏览</li>
+<li>在<a href="https://brewformulas.org/" target="_blank" rel="noopener">Homebrew formulas index</a>查看详细的使用信息</li>
+</ul>
+<p>测试安装是否成功：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew install wget</span><br><span class="line">brew cask install google-chrome</span><br><span class="line">brew cask install cakebrew # brew</span><br><span class="line">brew cask install launchrocket # 管理 brew 安装的 service 的工具，安装之后可以看所有的 service 的运行状态</span><br></pre></td></tr></table></figure>
+<ul>
+<li>brew 方式安装的软件都在<code>/usr/local/Cellar</code>目录下，执行<code>brew link xxx</code>，则会在<code>/usr/local/share</code>创建软连接。</li>
+<li>brew cask 方式安装的软件在<code>/usr/local/Caskroom</code>目录下</li>
+</ul>
+<p>Homebrew已成为Mac开发用户必不可少的工具, 大部分开发工具的安装和环境构建都非常方便. 但是如果配合<a href="https://www.cakebrew.com/" target="_blank" rel="noopener">Cakebrew</a>和<a href="(https://github.com/jimbojsb/launchrocket">LaunchRocket</a>, 那将会更方便管理。</p>
+<p><a href="https://www.zhihu.com/question/22624898" target="_blank" rel="noopener">brew和brew cask有什么区别？</a>：<a href="http://caskroom.io/" target="_blank" rel="noopener">cask</a> 更偏向图形化软件的安装。</p>
+<h3 id="Homebrew-源加速"><a href="#Homebrew-源加速" class="headerlink" title="Homebrew 源加速"></a>Homebrew 源加速</h3><p>我目前采用的加速方法，可以查看这篇文章 <a href="https://michael728.github.io/2019/11/13/tools-tips-mac-accelate/">Mac 环境对 Github Homebrew 等终端工具的加速设置</a></p>
+<p>还可以用修改原的方式加速，效果并不好，具体参考：<a href="https://opsx.alibaba.com/mirror" target="_blank" rel="noopener">阿里镜像源-brew</a></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/31360766" target="_blank" rel="noopener">Homebrew有比较快的源（mirror）吗？</a></li>
+<li><a href="http://mirrors.ustc.edu.cn/help/homebrew-cask.git.html" target="_blank" rel="noopener">Homebrew Cask 源使用帮助</a></li>
+<li><a href="https://sspai.com/topic/181" target="_blank" rel="noopener">Homebrew专栏</a></li>
+<li><a href="http://blog.devtang.com/2014/02/26/the-introduction-of-homebrew-and-brewcask/" target="_blank" rel="noopener">使用brew cask来安装Mac应用</a></li>
+</ul>
+<h3 id="拓展预览程序"><a href="#拓展预览程序" class="headerlink" title="拓展预览程序"></a>拓展预览程序</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">brew cask install qlcolorcode \</span><br><span class="line">                  qlstephen \ </span><br><span class="line">                  qlmarkdown \ </span><br><span class="line">                  quicklook-json \ </span><br><span class="line">                  qlimagesize \ </span><br><span class="line">                  qlvideo \ </span><br><span class="line">                  provisionql \ </span><br><span class="line">                  quicklookapk \</span><br><span class="line">                  betterzip \</span><br></pre></td></tr></table></figure>
+<ul>
+<li>qlcolorcode 预览代码时带有语法高亮</li>
+<li>qlstephen 预览无拓展名的纯文本文件插件</li>
+<li>qlmarkdown</li>
+<li>quicklook-json 预览JSON文件</li>
+<li>qlimagesize 在预览窗口显示图片分辨率及文件大小，并在Finder中显示图片的格式</li>
+<li>qlvideo 让QuickLook兼容.mkv等非原生支持的视频格式，但并不能正常播放，只能显示出一些视频的缩略图和信息</li>
+<li>provisionql 预览iOS / macOS应用和配置信息</li>
+<li>quicklookapk 预览Android APK文件</li>
+<li>betterzip 查看Zip压缩文件的信息以及文件目录</li>
+</ul>
+<h3 id="安装一些有用的工具（包含开发工具）"><a href="#安装一些有用的工具（包含开发工具）" class="headerlink" title="安装一些有用的工具（包含开发工具）"></a>安装一些有用的工具（包含开发工具）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 免密工具</span><br><span class="line">brew install ssh-copy-id</span><br><span class="line"><span class="meta">#</span> 安装 Git 工具</span><br><span class="line">brew install git-extras</span><br><span class="line"><span class="meta">#</span> 代码统计工具</span><br><span class="line">brew install cloc</span><br><span class="line"><span class="meta">#</span> 连接虚拟机工具</span><br><span class="line">brew install mosh</span><br><span class="line"><span class="meta">#</span> 多终端会话软件 tmux</span><br><span class="line">brw install tmux</span><br><span class="line"><span class="meta">#</span> 视频下载工具 https://github.com/ytdl-org/youtube-dl</span><br><span class="line">brew install youtube-dl</span><br><span class="line"><span class="meta">#</span> 纠正输入的命名 https://github.com/nvbn/thefuck</span><br><span class="line">brew install thefuck</span><br><span class="line"><span class="meta">#</span> HTTP 请求工具 https://github.com/jakubroztocil/httpie</span><br><span class="line">brew install httpie</span><br><span class="line"><span class="meta">#</span> 全文搜索工具，find 命令对全文搜索有心无力</span><br><span class="line">brew install ack</span><br><span class="line"><span class="meta">#</span> MySQL 命令行终端工具，提供语法提示和高亮</span><br><span class="line">brew install mycli </span><br><span class="line"><span class="meta">#</span> 键盘敲击在屏幕上显示</span><br><span class="line">brew cask install keycastr</span><br><span class="line"><span class="meta">#</span> 安装字体</span><br><span class="line"><span class="meta">#</span> https://github.com/ryanoasis/nerd-fonts#option-4-homebrew-fonts</span><br><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew cask install font-hack-nerd-font</span><br><span class="line"><span class="meta">#</span> 安装 docker https://docs.docker.com/docker-for-mac/</span><br><span class="line">brew cask install docker</span><br><span class="line"><span class="meta">#</span> 下载工具 qBittorrent增强版 https://github.com/c0re100/qBittorrent-Enhanced-Edition</span><br><span class="line">brew cask install c0re100-qbittorrent</span><br><span class="line"><span class="meta">#</span> vscode</span><br><span class="line">brew cask install visual-studio-code</span><br><span class="line"><span class="meta">#</span> 终端</span><br><span class="line">brew cask install iTerm2</span><br><span class="line"><span class="meta">#</span> wireshark</span><br><span class="line">brew cask install wireshark</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://github.com/tj/git-extras/blob/master/Commands.md" target="_blank" rel="noopener">git-extras</a> 提供了一些有用和有趣的命令，例如 <code>git summary</code></li>
+<li><a href="https://xiaozhou.net/learn-the-command-line-tools-md-2018-10-11.html" target="_blank" rel="noopener">程序员内功系列–常用命令行工具</a></li>
+<li><a href="https://chad-it.github.io/2018/06/26/Brew%E5%AE%89%E8%A3%85%E5%BF%AB%E9%80%9F%E9%A2%84%E8%A7%88%E6%8F%92%E4%BB%B6/" target="_blank" rel="noopener">Brew安装快速预览插件</a></li>
+<li><a href="https://github.com/sindresorhus/quick-look-plugins" target="_blank" rel="noopener">sindresorhus/quick-look-plugins</a></li>
+</ul>
+<h2 id="安装-JDK"><a href="#安装-JDK" class="headerlink" title="安装 JDK"></a>安装 JDK</h2><p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/vvv_110/article/details/72897142" target="_blank" rel="noopener">CSDN-MAC安装JDK及环境变量配置</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=Mzg3NjIxMjA1Ng==&amp;mid=2247484027&amp;idx=1&amp;sn=38d690c414e3ed299175d85334db08a6&amp;chksm=cf34f84cf843715a29f376bd684cff9ffdf4a6494072f4b3b3dec69e2eff83c96474330b30fb&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1574228561311&amp;sharer_shareid=ae8eb1508a08c1b134df82bb484ea38d#rd" target="_blank" rel="noopener">Java升级那么快，多个版本如何灵活切换和管理？</a> Jabba jenv sdkman 提供了切换功能</li>
+</ul>
+<p>在 Mac 上默认的安装位置在：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -1 /Library/Java/JavaVirtualMachines</span><br></pre></td></tr></table></figure>
+<h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><p>Maven 的安装，可以看我的配置 repo <a href="https://www.cnblogs.com/helios-fz/p/11061033.html" target="_blank" rel="noopener">my-config-files/maven/</a></p>
+<h2 id="alfred"><a href="#alfred" class="headerlink" title="alfred"></a><a href="https://www.alfredapp.com/" target="_blank" rel="noopener">alfred</a></h2><p>因为篇幅有限，专门总结了一篇介绍 alfred 的使用：<a href></a></p>
+<h2 id="Beyond-Compare"><a href="#Beyond-Compare" class="headerlink" title="Beyond Compare"></a><a href="https://www.scootersoftware.com/download.php" target="_blank" rel="noopener">Beyond Compare</a></h2><p>Beyond Compare：非常好用的diff工具；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /Applications/Beyond\ Compare.app/Contents/MacOS/</span><br><span class="line">mv BCompare BCompare.real</span><br><span class="line">vim BCompare</span><br></pre></td></tr></table></figure>
+<p>添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash </span><br><span class="line">rm &quot;/Users/$(whoami)/Library/Application Support/Beyond Compare/registry.dat&quot; </span><br><span class="line">&quot;`dirname &quot;$0&quot;`&quot;/BCompare.real &amp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第二行即删除注册信息. </li>
+<li>第三行则为启动真实的 BCompare 文件.</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/machh/article/details/89707351" target="_blank" rel="noopener">CSDN——Beyond Compare for mac 无限试用方法</a></li>
+<li><a href="https://www.seidea.com/2017/03/23/beyond-compare-for-mac-%E6%97%A0%E9%99%90%E8%AF%95%E7%94%A8%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">诗意——Beyond Compare for Mac 无限试用方法</a></li>
+</ul>
+<h2 id="Charles"><a href="#Charles" class="headerlink" title="Charles"></a><a href="https://www.charlesproxy.com/download/latest-release/" target="_blank" rel="noopener">Charles</a></h2><ul>
+<li><a href="https://www.jianshu.com/p/89111882fa99" target="_blank" rel="noopener">Charles 注册码/破解</a></li>
+</ul>
+<h2 id="Dash"><a href="#Dash" class="headerlink" title="Dash"></a>Dash</h2><p>Dash：计算机语言文档神器；</p>
+<ul>
+<li>选中文本搜索开发文档：<code>alt/option+s</code></li>
+</ul>
+<h2 id="ForkLift-3"><a href="#ForkLift-3" class="headerlink" title="ForkLift 3"></a>ForkLift 3</h2><p>Mac 上的 Finder 的增强版本，FTP 工具，官网有<a href="https://binarynights.com/" target="_blank" rel="noopener">视频介绍</a>，强烈安利！</p>
+<ul>
+<li><a href="https://sspai.com/post/40554" target="_blank" rel="noopener">被忽视的 FTP 与文件管理工具：ForkLift 3 for Mac</a></li>
+</ul>
+<h2 id="go2shell"><a href="#go2shell" class="headerlink" title="go2shell"></a>go2shell</h2><p>从官网下载安装，然后打开，同意安装到Finder。</p>
+<ul>
+<li><a href="http://zipzapmac.com/go2shell" target="_blank" rel="noopener">go2shell官网</a></li>
+<li><a href="https://www.cnblogs.com/shengulong/p/6655558.html" target="_blank" rel="noopener">Mac通过安装Go2Shell实现“在当前目录打开iTerm2”</a></li>
+</ul>
+<h2 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h2><ul>
+<li>快捷键打开ITerm2:打开设置，<code>keys-hotkey-show/hide window</code>，我设置快捷键为<code>command+~</code></li>
+<li>切分屏幕：<code>command+d</code> 水平切分，<code>command+Shift+d</code>垂直切分；<code>Command + [</code> 和 <code>Command + ]</code> 来切换到左侧或者右侧的标签页。</li>
+<li>一个标签页中开的窗口太多，有时候会找不到当前的鼠标，<code>command+/</code>找到它。</li>
+<li>按<code>command+;</code>弹出自动补齐窗口，列出曾经使用过的命令</li>
+<li>按<code>command+Shift+h</code>弹出历史粘贴记录窗口，<code>command+Shift+;</code>弹出历史命令记录窗口。</li>
+<li><code>command+d</code>，新建垂直标签，利用 <code>command+[/]</code> 左右切换标签窗口。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ctrl + w —往回删除一个单词，光标放在最末尾</span><br><span class="line">ctrl + k —往前删除到末尾，光标放在最前面（可以使用ctrl+a）</span><br><span class="line">ctrl + u 删除光标以前的字符</span><br><span class="line">ctrl + k 删除光标以后的字符</span><br><span class="line">ctrl + a 移动光标至的字符头</span><br><span class="line">ctrl + e 移动光标至的字符尾</span><br><span class="line">ctrl + l 清屏</span><br></pre></td></tr></table></figure>
+<p>iTerm2 中选择文本有三种方式，分别是：</p>
+<ul>
+<li>双击：选中单词</li>
+<li>三击：选中整行</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://wulfric.me/2015/08/iterm2/" target="_blank" rel="noopener">你应该知道的 iTerm2 使用方法–MAC终端工具</a></li>
+</ul>
+<h3 id="皮肤-字体"><a href="#皮肤-字体" class="headerlink" title="皮肤+字体"></a>皮肤+字体</h3><ul>
+<li><a href="https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/schemes" target="_blank" rel="noopener">皮肤资源</a></li>
+<li><a href="https://draculatheme.com/iterm/" target="_blank" rel="noopener">dracula</a>：本人采用的就是这个主题，因为VScode中也是它。</li>
+</ul>
+<p>字体安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> https://github.com/ryanoasis/nerd-fonts#option-4-homebrew-fonts</span><br><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew cask install font-hack-nerd-font</span><br></pre></td></tr></table></figure>
+<p>Iterm2 里配置非 acsii 字体。(Preferences -&gt; Profiles -&gt; Text -&gt; Non-Ascii-Font 选择 nerd-font)。之后重启 Iterm2 生效</p>
+<p>这套皮肤+字体的设置主要是为了配合zsh终端下的现实效果，zsh的使用配置，见文章：<a href="http://michael728.github.io/2018/03/11/tools-zsh-tutorial/">zsh+on-my-zsh配置教程指南（程序员必备）</a></p>
+<p>最后效果如下图：</p>
+<p><img src="https://ws1.sinaimg.cn/mw690/6d9475f6ly1fw7jjv06kdj20j103gwey.jpg" alt></p>
+<p>皮肤安装教程见：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/7de00c73a2bb" target="_blank" rel="noopener">iTerm 2 &amp;&amp; Oh My Zsh【DIY教程——亲身体验过程】</a></li>
+<li><a href="https://www.jianshu.com/p/53eb1075f627" target="_blank" rel="noopener">最简单iTerm2 + oh-my-zsh打造Mac炫酷终端教程-菜鸟版实操整理</a></li>
+</ul>
+<h3 id="FAQ-1"><a href="#FAQ-1" class="headerlink" title="FAQ"></a>FAQ</h3><p>Q1: iterm 本地终端中文不乱码，ssh远程中文乱码</p>
+<ul>
+<li><a href="iterm 配置utf8编码，本地终端中文不乱码，ssh远程中文乱码，咋整啊">iterm 配置utf8编码，本地终端中文不乱码，ssh远程中文乱码，咋整啊</a></li>
+</ul>
+<h2 id="Medis"><a href="#Medis" class="headerlink" title="Medis"></a>Medis</h2><p><a href="https://github.com/luin/medis" target="_blank" rel="noopener">https://github.com/luin/medis</a></p>
+<p>redis 数据库客户端</p>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><ul>
+<li><a href="https://www.sequelpro.com/" target="_blank" rel="noopener">sequelpro</a> mysql 客户端，颜值高。免费</li>
+<li><a href="http://download3.navicat.com/download/navicat121_premium_en.dmg" target="_blank" rel="noopener">navicat-premium</a> 虽然收费，但是真的好用！</li>
+</ul>
+<p>navicat 无限制试用，参考</p>
+<ul>
+<li><a href="https://zhile.io/2018/08/24/navicat-premium-reset-free-trial.html" target="_blank" rel="noopener">NavicatPremium12无限重置试用脚本（MacOS版）</a></li>
+<li><a href="https://blog.cat73.org/20171219/2017121901.navicat-crack/" target="_blank" rel="noopener">Navicat12 无限试用</a></li>
+<li><a href="https://www.cnblogs.com/blueoceansky/p/10783209.html" target="_blank" rel="noopener">Navicat premium 12 for mac 无限试用</a></li>
+</ul>
+<h2 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h2><ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node官网</a>：下载LTS版本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo # 博客所需</span><br><span class="line">sudo npm install gitbook-cli -g # 笔记所需</span><br></pre></td></tr></table></figure>
+<h2 id="Mosh"><a href="#Mosh" class="headerlink" title="Mosh"></a>Mosh</h2><p>Mosh 表示移动 Shell(Mobile Shell)，是一个用于从客户端跨互联网连接远程服务器的命令行工具。它能用于 SSH 连接，但是比 Secure Shell 功能更多。它是一个类似于 SSH 而带有更多功能的应用。程序最初由Keith Winstein 编写，用于类 Unix 的操作系统中，发布于 GNU GPL V3 协议下。</p>
+<p>Mosh 最大的特点是基于UDP方式传输，支持在服务端创建一个临时的Key供客户端一次性连接，退出后失效；也支持通过SSH的配置进行认证，但数据传输本身还是自身的 UDP 方式。</p>
+<p>Mosh 有两个非常有用的功能</p>
+<ul>
+<li>会话的中断不会导致当前正在前端执行的命令中断，相当于你所有的操作都是在 screen 命令中一样在后台执行。</li>
+<li>会话在中断过后，不会立刻退出，而是启用一个计时器，当网络恢复后会自动重新连接，同时会延续之前的会话，不会重新开启一个。</li>
+</ul>
+<p>Mosh 替换 SSH 链接，需要你本机和远端 host 都安装 mosh 才OK：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install mosh # mac</span><br><span class="line">yum install mosh # centos</span><br><span class="line">apt-get install mosh # ubuntu</span><br></pre></td></tr></table></figure>
+<p>PS：</p>
+<ul>
+<li>我用这款工具的主要原因是，在家里我的 Mac 连接虚拟机的速度非常慢，ssh 到虚拟机执行命令非常卡顿，使用 mosh 之后流畅了许多。</li>
+<li>CentOS 有时候还需要有 epel 源才能安装成功 <code>yum -y install epel-release</code></li>
+</ul>
+<p>有时候需要服务器上需要打开防火墙的端口：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=public --add-port=60001/udp --permanent</span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<h2 id="Python3安装"><a href="#Python3安装" class="headerlink" title="Python3安装"></a>Python3安装</h2><ul>
+<li><a href="https://pythonguidecn.readthedocs.io/zh/latest/starting/install3/osx.html" target="_blank" rel="noopener">在Mac OS X上安装Python 3</a></li>
+<li><a href="https://www.anaconda.com/download/#macos" target="_blank" rel="noopener">Python3-Anaconda</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 'export PATH="~/anaconda3/bin:$PATH"' &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>安装之后记得重启终端。</p>
+<h2 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h2><ul>
+<li><a href="https://www.getpostman.com/" target="_blank" rel="noopener">Postman官网</a></li>
+</ul>
+<h2 id="Pycharm"><a href="#Pycharm" class="headerlink" title="Pycharm"></a>Pycharm</h2><ul>
+<li><a href="https://www.jetbrains.com/pycharm/download/#section=mac" target="_blank" rel="noopener">官宣-Pycharm</a></li>
+<li><a href="http://idea.lanyus.com/" target="_blank" rel="noopener">lanyus</a> 福利，细心读者能发现 :)</li>
+</ul>
+<h2 id="SourceTree"><a href="#SourceTree" class="headerlink" title="SourceTree"></a>SourceTree</h2><p>源码管理：SourceTree</p>
+<ul>
+<li><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">sourcetree官网</a></li>
+</ul>
+<h2 id="typora"><a href="#typora" class="headerlink" title="typora"></a>typora</h2><p>Markdown 编辑器： <a href="https://typora.io/" target="_blank" rel="noopener">typora官网</a></p>
+<h2 id="neovim-相关"><a href="#neovim-相关" class="headerlink" title="neovim 相关"></a>neovim 相关</h2><ul>
+<li><a href="https://michael728.github.io/2019/11/17/tools-vim-plugin-plug/">neovim 安装及插键配置</a></li>
+</ul>
+<h2 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h2><p>真是不得不介绍的神器，专门写了一篇文章：</p>
+<ul>
+<li><a href="https://michael728.github.io/2018/03/11/tools-zsh-tutorial/">zsh+on-my-zsh配置教程指南（程序员必备）</a></li>
+<li><a href="http://shadow000902.space/2018/10/18/Mac-%E4%B8%8B%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%A7%84%E5%88%99%E5%8F%8A%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener">Mac 下环境变量规则及管理</a></li>
+</ul>
+<h2 id="VScode"><a href="#VScode" class="headerlink" title="VScode"></a>VScode</h2><ul>
+<li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">官宣-VS Code</a></li>
+<li><a href="https://michael728.github.io/2018/10/28/tools-vscode/">打造性感好用的VS Code编辑器</a></li>
+</ul>
+<p>在 VS code 中快捷键 <code>Shift + Command + p</code> 输入 code ,选择安装 code 命令：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxzcmjc8qhj30gl07a75g.jpg" alt></p>
+<p>然后就可以在终端中这么打开 VS Code了 ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code .vimrc</span><br></pre></td></tr></table></figure>
+<h2 id="Mac-相关好文"><a href="#Mac-相关好文" class="headerlink" title="Mac 相关好文"></a>Mac 相关好文</h2><p>精华其实在最后 :)</p>
+<ul>
+<li><a href="https://wild-flame.github.io/guides/docs/mac-os-x-setup-guide/guide-introduction" target="_blank" rel="noopener">推荐-Mac OS X 配置指南 | Mac OS X Setup Guide</a> 比较系统的文章</li>
+<li><a href="http://python-web-guide.readthedocs.io/zh/latest/codingtools/codingtools.html" target="_blank" rel="noopener">Mac开发和编程工具</a></li>
+<li><a href="https://juejin.im/post/5b0e99436fb9a009e405dbb6" target="_blank" rel="noopener">Mac 提升开发效率的小工具</a></li>
+<li><a href="https://leohxj.gitbooks.io/a-programmer-prepares/software/mac/index.html" target="_blank" rel="noopener">GitBook-Mac-程序员的自我修养</a></li>
+<li><a href="https://github.com/serhii-londar/open-source-mac-os-apps" target="_blank" rel="noopener">serhii-londar/open-source-mac-os-apps</a> Github 资源</li>
+<li><a href="https://github.com/sb2nov/mac-setup" target="_blank" rel="noopener">sb2nov/mac-setup</a> Installing Development environment on macOS <a href="http://sourabhbajaj.com/mac-setup/" target="_blank" rel="noopener">阅读</a> Mac 下各种编程语言开发环境配置指引</li>
+<li><a href="https://github.com/donnemartin/dev-setup" target="_blank" rel="noopener">donnemartin/dev-setup</a> macOS 开发环境设置</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>原文链接：<a href="https://michael728.github.io/2018/12/08/hobby-mac/">Mac 配置总结</a></p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/12/08/tools-daily-mac/" rel="bookmark">Mac 配置教程-日常篇</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/09/23/tools-dev-mac-alfred/" rel="bookmark">Mac 效率工具必备神器 —— Alfred</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/11/24/git-advance/" rel="bookmark">Git使用教程笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/06/06/git-cherry-pick/" rel="bookmark">Git 的 cherry-pick 命令还没用过？快来看看它的厉害！</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/06/14/git-diff-patch/" rel="bookmark">Git 基本命令 -- 你用过 git diff 吗？补习一下吧</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2019/04/14/tools-dev-mac/" title="Mac 配置教程-开发篇">https://michael728.github.io/2019/04/14/tools-dev-mac/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tools/" rel="tag"># Tools</a>
+          
+            <a href="/tags/Mac/" rel="tag"># Mac</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/15/python-package-import-order/" rel="next" title="Python 模块的加载顺序">
+                <i class="fa fa-chevron-left"></i> Python 模块的加载顺序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/14/linux-useful-shell-commands-in-work/" rel="prev" title="工作中常用的 Shell 命令及技巧">
+                工作中常用的 Shell 命令及技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-NTFS-磁盘"><span class="nav-number">1.</span> <span class="nav-text">支持 NTFS 磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图床"><span class="nav-number">2.</span> <span class="nav-text">图床</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#免密登录"><span class="nav-number">3.</span> <span class="nav-text">免密登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络分析"><span class="nav-number">4.</span> <span class="nav-text">网络分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程字体"><span class="nav-number">5.</span> <span class="nav-text">编程字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">6.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FAQ"><span class="nav-number">6.1.</span> <span class="nav-text">FAQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Homebrew-amp-Cask-amp-launchrocket"><span class="nav-number">6.2.</span> <span class="nav-text">Homebrew &amp; Cask &amp; launchrocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Homebrew-源加速"><span class="nav-number">6.3.</span> <span class="nav-text">Homebrew 源加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓展预览程序"><span class="nav-number">6.4.</span> <span class="nav-text">拓展预览程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装一些有用的工具（包含开发工具）"><span class="nav-number">6.5.</span> <span class="nav-text">安装一些有用的工具（包含开发工具）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-JDK"><span class="nav-number">7.</span> <span class="nav-text">安装 JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven"><span class="nav-number">8.</span> <span class="nav-text">Maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alfred"><span class="nav-number">9.</span> <span class="nav-text">alfred</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beyond-Compare"><span class="nav-number">10.</span> <span class="nav-text">Beyond Compare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Charles"><span class="nav-number">11.</span> <span class="nav-text">Charles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dash"><span class="nav-number">12.</span> <span class="nav-text">Dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ForkLift-3"><span class="nav-number">13.</span> <span class="nav-text">ForkLift 3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go2shell"><span class="nav-number">14.</span> <span class="nav-text">go2shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iTerm2"><span class="nav-number">15.</span> <span class="nav-text">iTerm2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#皮肤-字体"><span class="nav-number">15.1.</span> <span class="nav-text">皮肤+字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAQ-1"><span class="nav-number">15.2.</span> <span class="nav-text">FAQ</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Medis"><span class="nav-number">16.</span> <span class="nav-text">Medis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-number">17.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node"><span class="nav-number">18.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mosh"><span class="nav-number">19.</span> <span class="nav-text">Mosh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3安装"><span class="nav-number">20.</span> <span class="nav-text">Python3安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Postman"><span class="nav-number">21.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pycharm"><span class="nav-number">22.</span> <span class="nav-text">Pycharm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SourceTree"><span class="nav-number">23.</span> <span class="nav-text">SourceTree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typora"><span class="nav-number">24.</span> <span class="nav-text">typora</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#neovim-相关"><span class="nav-number">25.</span> <span class="nav-text">neovim 相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh"><span class="nav-number">26.</span> <span class="nav-text">zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VScode"><span class="nav-number">27.</span> <span class="nav-text">VScode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac-相关好文"><span class="nav-number">28.</span> <span class="nav-text">Mac 相关好文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">29.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2019/04/14/tools-dev-mac/";
+    this.page.identifier = "2019/04/14/tools-dev-mac/";
+    this.page.title = 'Mac 配置教程-开发篇';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

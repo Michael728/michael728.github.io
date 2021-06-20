@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="工欲善其事必先利其器  基本概念IDEA 没有类似 Eclipse 的工作空间的概念（workspace），最大单元就是 Project。这里可以把 Project 理解为 Eclipse 中的 workspace。Module 可以理解为 Eclipse 中的 project。一个 工程（Project） 下可以创建多个 模块（Moudle）。  src 目录，用于存放代码 .idea 目录和">
+<meta name="keywords" content="pycharm,idea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JetBrains PyCharm&#x2F;IDEA 使用技巧总结">
+<meta property="og:url" content="https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="工欲善其事必先利其器  基本概念IDEA 没有类似 Eclipse 的工作空间的概念（workspace），最大单元就是 Project。这里可以把 Project 理解为 Eclipse 中的 workspace。Module 可以理解为 Eclipse 中的 project。一个 工程（Project） 下可以创建多个 模块（Moudle）。  src 目录，用于存放代码 .idea 目录和">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/open-module.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/view-toolbar.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/idea-no-update.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/idea-code-completion.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/6Ky7B7.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/idea-auto-import.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/lf-wrap.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/idea-compile.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/RkZGhw.png">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fya556wvjbj310c0fkdj8.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fyq6zthfcpj309q0b9q71.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fyq729i5jnj30i70fmdhs.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fyq7f37wkyj30bz0b97aw.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fyq7sdy4chj30gk04g0td.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/gAxEFu.png">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fyp6mdh7h6j31jm0mgwit.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/6d9475f6ly1fyq399jc4eg20lm06xdy8.gif">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/VB32tM.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/Twxx9l.png">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fyq1fwyvdij30ek0bfdlz.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fyq27kq7glj30hs0950th.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fyq3mbopc0j30g206jaar.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fyq3sydbgpj30j10dj76c.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/8pbmj6.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/IDOb18.png">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fya5neqiudj30a00f0dnp.jpg">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JetBrains PyCharm&#x2F;IDEA 使用技巧总结">
+<meta name="twitter:description" content="工欲善其事必先利其器  基本概念IDEA 没有类似 Eclipse 的工作空间的概念（workspace），最大单元就是 Project。这里可以把 Project 理解为 Eclipse 中的 workspace。Module 可以理解为 Eclipse 中的 project。一个 工程（Project） 下可以创建多个 模块（Moudle）。  src 目录，用于存放代码 .idea 目录和">
+<meta name="twitter:image" content="https://gitee.com/michael_xiang/images/raw/master/open-module.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JetBrains PyCharm/IDEA 使用技巧总结 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JetBrains PyCharm/IDEA 使用技巧总结
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-11 16:46:02" itemprop="dateCreated datePublished" datetime="2019-05-11T16:46:02+00:00">2019-05-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ToolsDev/" itemprop="url" rel="index"><span itemprop="name">ToolsDev</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>工欲善其事必先利其器</p>
+</blockquote>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>IDEA 没有类似 Eclipse 的工作空间的概念（workspace），最大单元就是 Project。这里可以把 Project 理解为 Eclipse 中的 workspace。Module 可以理解为 Eclipse 中的 project。一个 工程（Project） 下可以创建多个 模块（Moudle）。</p>
+<ul>
+<li>src 目录，用于存放代码</li>
+<li>.idea 目录和 project01.iml 文件都是 IDEA 工程特有的。</li>
+<li>删除 module ，这样不会删除代码文件，只是从 Project 中移除组织关系，如下图：</li>
+</ul>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/open-module.jpg" alt></p>
+<h2 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h2><h3 id="设置显示收藏栏等工具栏"><a href="#设置显示收藏栏等工具栏" class="headerlink" title="设置显示收藏栏等工具栏"></a>设置显示收藏栏等工具栏</h3><p><img src="https://gitee.com/michael_xiang/images/raw/master/view-toolbar.jpg" alt></p>
+<h3 id="取消更新"><a href="#取消更新" class="headerlink" title="取消更新"></a>取消更新</h3><p>取消 IDEA 自动更新，避免引入不稳定的问题：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/idea-no-update.jpg" alt></p>
+<h3 id="设置Tab为4个空格"><a href="#设置Tab为4个空格" class="headerlink" title="设置Tab为4个空格"></a>设置Tab为4个空格</h3><p>Editor-&gt;Code Style-&gt;Java/Python，不要勾选<code>Use Tab character</code></p>
+<h3 id="支持滚轮调节字体大小"><a href="#支持滚轮调节字体大小" class="headerlink" title="支持滚轮调节字体大小"></a>支持滚轮调节字体大小</h3><p>Editor-&gt;General，勾选 <code>Change font size(Zoom) with Command+Mouse Wheel</code></p>
+<h3 id="鼠标滑过，显示文档"><a href="#鼠标滑过，显示文档" class="headerlink" title="鼠标滑过，显示文档"></a>鼠标滑过，显示文档</h3><p>Editor-&gt;General，<code>Show quick documentation on mouse move</code>，输入延迟时间。鼠标滑过类、方法时，显示文档说明</p>
+<h3 id="显示行号和方法分隔符"><a href="#显示行号和方法分隔符" class="headerlink" title="显示行号和方法分隔符"></a>显示行号和方法分隔符</h3><p>在 Editor-&gt;General-&gt;Apperance 中，勾选：</p>
+<ul>
+<li><code>Show line numbers</code> 显示行号</li>
+<li><code>Show method separators</code> 这个是显示方法分隔符的，我没勾选</li>
+<li><code>Show whitespace</code> 显示空格符号，针对 Python，「游标卡尺」的名号不是白叫的，所以，必须设置显示空格、缩进等</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://brucedone.com/archives/38" target="_blank" rel="noopener">舒服的pycharm设置</a></li>
+</ul>
+<h3 id="给提示时忽略大小写"><a href="#给提示时忽略大小写" class="headerlink" title="给提示时忽略大小写"></a>给提示时忽略大小写</h3><p>Java 是严格区分大小写的，未设置时，输入 <code>str</code> 时，它不会提示 <code>String</code>，要想实现忽略大小写的情况它也能智能提示，可以进行如下设置，而且，这样设置它也不是完全按照首字母进行匹配了，比如你输入 <code>hmap</code> 时，也会看到 <code>HashMap</code> 的智能提示，相当方便。Editor-&gt;Genreral-&gt;Code Completion：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/idea-code-completion.jpg" alt></p>
+<div class="note success no-icon">
+            <p>这个设置是非常有帮助的，强烈推荐设置。可以顺带勾选上 <code>Show the documentation</code>，这样在补充时，也会显示文档。</p>
+          </div>
+<h3 id="取消单行方法折叠的设置"><a href="#取消单行方法折叠的设置" class="headerlink" title="取消单行方法折叠的设置"></a>取消单行方法折叠的设置</h3><p>IDEA 中对于单行方法会默认折叠，使代码更紧凑。但是我阅读代码时，不太喜欢这种默认设置。可以根据如下设置修改：</p>
+<p>Settings-&gt;Editor-&gt;General-&gt;Code Folding-&gt;One-line methods，取消勾选即可</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/6Ky7B7.png" alt="6Ky7B7"></p>
+<h3 id="自动导包-import-popup"><a href="#自动导包-import-popup" class="headerlink" title="自动导包 import popup"></a>自动导包 <code>import popup</code></h3><p><code>Editor-&gt;General-&gt;Auto Import-&gt;Python-&gt;Show import popup</code></p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/idea-auto-import.jpg" alt></p>
+<p>手动导包的快捷键是 <code>Alt+Enter</code></p>
+<h3 id="设置换行符默认为LF"><a href="#设置换行符默认为LF" class="headerlink" title="设置换行符默认为LF"></a>设置换行符默认为LF</h3><p><code>Editor-&gt;Code Style</code> 页面不仅能设置换行符，还可以设置 <code>wrap columns</code>。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/lf-wrap.jpg" alt></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/ECHO_FOLLOW_HEART/article/details/48314523" target="_blank" rel="noopener">IntelliJ换行CRLF, LF, CR的解释和默认设置</a></li>
+</ul>
+<h3 id="设置-File-Encodings-文件编码"><a href="#设置-File-Encodings-文件编码" class="headerlink" title="设置 File Encodings 文件编码"></a>设置 <code>File Encodings</code> 文件编码</h3><p><code>Settings-&gt;Editor-&gt;File Encodings</code>，编码全都设为 <code>UTF-8</code>。</p>
+<p>不建议勾选 <code>Transparent native-to-ascii convention</code></p>
+<h3 id="设置头信息"><a href="#设置头信息" class="headerlink" title="设置头信息"></a>设置头信息</h3><p><code>Settings-&gt;Editor-&gt;File and Code Templates-Files-&gt;Includes-&gt;File Header</code> 设置如下模板</p>
+<p>Python 头信息设置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Date    : $&#123;DATE&#125; $&#123;TIME&#125;</span><br><span class="line"># @Author  : $&#123;USER&#125;</span><br><span class="line"># @File    : $&#123;NAME&#125;.py</span><br><span class="line"># @Software: $&#123;PRODUCT_NAME&#125;</span><br></pre></td></tr></table></figure>
+<p>Java 头信息设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * description: </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> $&#123;USER&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> $&#123;DATE&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> $&#123;TIME&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h3 id="自动编译"><a href="#自动编译" class="headerlink" title="自动编译"></a>自动编译</h3><p>有时候我们需要操作 class 文件时，却忘记了对 java 类文件进行编译，从而还是对旧的文件进行了操作。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/idea-compile.jpg" alt></p>
+<h3 id="import-每个类而非整个包，少用通配符"><a href="#import-每个类而非整个包，少用通配符" class="headerlink" title="import 每个类而非整个包，少用通配符"></a>import 每个类而非整个包，少用通配符</h3><p><code>settings &gt; Editor &gt; Colors Style &gt; Java &gt; Imports &gt; Class count to use import with ‘*’</code> 设置大一点。</p>
+<p>当 Java 类中 import 某个包下的类超过这里设置的个数，就会换成用星号来代替，比如 <code>import java.util.*</code></p>
+<h3 id="设置-Tab-标签页"><a href="#设置-Tab-标签页" class="headerlink" title="设置 Tab 标签页"></a>设置 Tab 标签页</h3><p><code>File-&gt;Editor-&gt;General-&gt;EditorTable-&gt;Tab closing Policy-&gt;Tab limit</code></p>
+<p>在 <code>Windows-&gt;Editor Tabs</code> 可以设置标签页的相关内容，比如：</p>
+<ul>
+<li><code>Tabs Placement</code> 放置位置，我勾选了 <code>Top</code></li>
+<li>勾选了 <code>Sort Tabs By Filename</code></li>
+<li>勾选了 <code>Open New Tabs At The End</code></li>
+<li>取消勾选 <code>Show tab in single row</code>，避免打开类文件多时，选择不方便</li>
+</ul>
+<p>我设置最多打开标签页10个，同时将位置移到了右边，通过<code>alt+←/→</code>可以切换工作区。默认是10，即最多打开十个窗口，再打开新的就会把之前的窗口T掉！</p>
+<ul>
+<li><a href="https://blog.csdn.net/SJZYLC/article/details/49078261" target="_blank" rel="noopener">IntelliJ IDEA设置打开窗口的数量</a></li>
+</ul>
+<h3 id="自定义-Terminal"><a href="#自定义-Terminal" class="headerlink" title="自定义 Terminal"></a>自定义 Terminal</h3><p><code>settings-&gt;Tools-&gt;Terminal</code></p>
+<p><code>Shell path</code> 原来的值是:</p>
+<ul>
+<li><code>C:\Windows\System32\cmd.exe</code> Windows</li>
+</ul>
+<p>修改为：</p>
+<ul>
+<li><code>C:\Program Files\Git\bin\bash.exe</code> 修改为 <code>Git bash</code> 的终端；</li>
+<li><code>&quot;C:\Windows\System32\cmd.exe&quot; /k &quot;&quot;%CMDER_ROOT%\vendor\init.bat&quot;&quot;</code> 修改为 <code>Cmder</code> 的终端，这种方式就会弹出 Cmder 的窗口，需要配置系统变量 <code>CMDER_ROOT</code>，值为：<code>D:\Green-SF\cmder</code>。</li>
+</ul>
+<p>设置 Terminal 窗口字体和大小：Editor–&gt;Color Scheme–&gt;Console Font，在右侧面板修改Font为自己想要的字体。</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/RkZGhw.png" alt="RkZGhw"></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.jetbrains.com/help/pycharm/settings-tools-terminal.html" target="_blank" rel="noopener">Pycharm官宣-Terminal</a></li>
+<li><a href="https://github.com/cmderdev/cmder/issues/282" target="_blank" rel="noopener">Github-Run cmder inside IntelliJ idea</a></li>
+<li><a href="https://blog.qxzzf.com/363" target="_blank" rel="noopener">Windows 上切换 Jetbrains IDE 的 terminal 为 PowerShell 或 cmder</a></li>
+</ul>
+<h3 id="版本控制下文件变化的显示"><a href="#版本控制下文件变化的显示" class="headerlink" title="版本控制下文件变化的显示"></a>版本控制下文件变化的显示</h3><p>settings—Version Control—Show directories with changed descendants</p>
+<p>开启后若想调整文件夹的显示颜色：<code>settings—Version Control—File Status Color</code></p>
+<h3 id="打开内存使用状态"><a href="#打开内存使用状态" class="headerlink" title="打开内存使用状态"></a>打开内存使用状态</h3><p>settings—Appearance &amp; Behavior—Appearance—Show memory indicator</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://jadyer.cn/2016/04/20/idea-config/" target="_blank" rel="noopener">玄玉-idea配置小结</a> 博主介绍的很详细</li>
+</ul>
+<h3 id="用-标识编辑过的文件"><a href="#用-标识编辑过的文件" class="headerlink" title="用 * 标识编辑过的文件"></a>用 * 标识编辑过的文件</h3><p>这样被修改的文件会以 <code>*</code> 号标识出来：</p>
+<p>Editor –&gt; General –&gt; Editor Tabs，勾选 <code>Mark modifyied(*)</code></p>
+<h3 id="脚本运行结束后留在命令行"><a href="#脚本运行结束后留在命令行" class="headerlink" title="脚本运行结束后留在命令行"></a>脚本运行结束后留在命令行</h3><p>这样脚本运行中的变量在脚本结束后还可以调用，调试时还是挺好用</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fya556wvjbj310c0fkdj8.jpg" alt></p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000010783422" target="_blank" rel="noopener">pycharm常用设置和技巧</a></li>
+</ul>
+<h3 id="添加-JavaDOC-注释"><a href="#添加-JavaDOC-注释" class="headerlink" title="添加 JavaDOC 注释"></a>添加 JavaDOC 注释</h3><ul>
+<li>把光标停在类名或者方法名上，然后 <code>Alt+enter</code>，出现几个选项，选择 <code>Add Javadoc</code> 就 OK 了</li>
+<li>默认 <code>Fix doc comment</code> 是没有设置快捷键的，我这里把他设置成 <code>Alt + M</code></li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="https://my.oschina.net/zjllovecode/blog/1510055" target="_blank" rel="noopener">开源中国-IDEA添加JavaDOC注释 方法 快捷键</a></li>
+</ul>
+<h3 id="生成-JavaDOC"><a href="#生成-JavaDOC" class="headerlink" title="生成 JavaDOC"></a>生成 JavaDOC</h3><p>Javadoc 用于描述类或者方法的作用，具体介绍，可查看<a href="https://blog.csdn.net/vbirdbest/article/details/80296136" target="_blank" rel="noopener">CSDN-Javadoc 使用详解</a></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fyq6zthfcpj309q0b9q71.jpg" alt></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Locale：输入语言类型：zh_CN</span><br><span class="line">Other command line arguments：-encoding UTF-8 -charset UTF-8</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fyq729i5jnj30i70fmdhs.jpg" alt></p>
+<h3 id="缓存和索引的清理"><a href="#缓存和索引的清理" class="headerlink" title="缓存和索引的清理"></a>缓存和索引的清理</h3><p>IDEA 首次加载项目时，都会创建索引。创建索引的过程，暂时不要去编辑代码，避免遇到未知问题。有时候意外断电或蓝屏，出现索引损坏情况，可以清除缓存和索引，还原成默认状态。</p>
+<p>File-Invalidate Caches</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fyq7f37wkyj30bz0b97aw.jpg" alt></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fyq7sdy4chj30gk04g0td.jpg" alt></p>
+<p>这个会将本地修改历史也会清理掉，如果想要将这个数据保留，LocalHistory 需要提前备份：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> system  目录，系统文件目录，是 IDEA 与开发项目一个桥梁目录，里边主要有缓存、索引、容器文件输出等等</span><br><span class="line">/Users/michael/Library/Caches/IntelliJIdea2018.2/LocalHistory</span><br><span class="line"><span class="meta">#</span> 顺带看一下 config 目录，是 IDEA 个性化设置目录，是整个 IDE 设置目录</span><br><span class="line">/Users/michael/Library/Preferences/IntelliJIdea2018.2</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/23115091/where-is-intellij-idea-config-stored-in-osx/23141889" target="_blank" rel="noopener">Where is IntelliJ IDEA config stored in OSX?</a></li>
+<li><a href="https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs" target="_blank" rel="noopener">官宣-Directories used by the IDE to store settings, caches, plugins and logs</a></li>
+</ul>
+<h3 id="显示窗口-split"><a href="#显示窗口-split" class="headerlink" title="显示窗口 split"></a>显示窗口 split</h3><p>有时候可以将当前窗口 split，可以垂直或者水平分割，方便阅读代码</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/gAxEFu.png" alt="split"></p>
+<h3 id="省电模式"><a href="#省电模式" class="headerlink" title="省电模式"></a>省电模式</h3><p>在菜单栏 <code>File</code> 下面有一个选项是 <code>Power Save Mode</code>，这个叫「省电模式」，如果不小心勾选了这个选项，那么会关掉代码检查和代码提示等功能，所以需要注意。</p>
+<h2 id="快捷菜单"><a href="#快捷菜单" class="headerlink" title="快捷菜单"></a>快捷菜单</h2><p>Mac 的 <code>Command</code> 键一般是对应了 Win 的 <code>Ctrl</code> 键，在 Win 上，还可以用 <code>Alt+&lt;n&gt;</code> 打开相关窗口，在 Mac 上同样要使用 <code>Command+&lt;n&gt;</code>。</p>
+<p>除此以外，还可以在 <code>Settings-Keymap</code> 中，设置快捷键、输入快捷键查看对应的功能。</p>
+<h3 id="快捷键设置"><a href="#快捷键设置" class="headerlink" title="快捷键设置"></a>快捷键设置</h3><ul>
+<li><code>alt+r</code>：打开最近项目</li>
+<li><code>ctrl+shift+o</code>：打开项目</li>
+<li>自动补全快捷键，默认是 <code>ctrl+空格</code>，这个和一些中文输入法的切换快捷键冲突了，于是，我多设置了一个 <code>ctrl+/</code> ：</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fyp6mdh7h6j31jm0mgwit.jpg" alt></p>
+<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><p>在介绍常用快捷键之前，先看看这个快捷键 <code>ctrl+shift+a</code>，Find Action 快捷键，输入关键词，不会的就问它，超级赞！！！★★★</p>
+<ul>
+<li><code>alt+↑/↓</code>: 快速在方法间跳转 ★★</li>
+<li><code>alt+p</code>：打开Python控制台 ★★★</li>
+<li><code>alt+insert</code> 生成代码(如 get, set 方法,构造函数等) 或者右键（Generate），在 Mac 上是 <code>ctrl+n</code> ★★★</li>
+<li><code>alt+enter</code> 万能键，任何地方都可以尝试使用，不同场景有不同的表现方式，比如自动导包等功能，不管出错了不知道怎么办，知道怎么办想这么办时都按下这个快捷键，有惊喜，万能纠错键 ★★★</li>
+<li><code>alt+f7</code> 找当前变量、方法在哪些地方用了 <code>find usaged</code> ★★★</li>
+<li><code>alt+f12</code> 打开命令行终端(view-&gt;tool window) ★★★</li>
+<li><code>ctrl+space</code> 万能提示键，基本代码补全</li>
+<li><code>ctrl+f4</code>：关闭当前页</li>
+<li><code>ctrl+f12</code>: 结构视图 File Structure，查看 class method field，阅读源码查看类方法时很方便 ★★★</li>
+<li><code>ctrl+home</code>、<code>ctrl+end</code> 回到页首/页尾，关键字 <code>Move Caret to Text End</code> 或者 开头 <code>Move Caret to Text Start</code>，<a href="https://segmentfault.com/q/1010000007099956" target="_blank" rel="noopener">参考</a></li>
+<li>查看接口继承关系：<ul>
+<li><code>ctrl+h</code> 查看类型继承关系 <code>type hierarchy</code>,只能查看向上向下继承关系，而不能看实现了哪些接口。查看继承关系，右击，点击 Digram 查看；</li>
+<li><code>ctrl+alt+h</code> 查看函数调用层次结构关系 <code>call hierarchy</code>，可以看到函数被哪些地方调用了，但是需要谨慎，部分人不会注意到后面的调用次数！为了防止遗漏，建议使用 <code>alt+f7</code> 这个快捷键 ★★★</li>
+<li><code>ctrl+alt+b</code> 查找接口的实现类</li>
+</ul>
+</li>
+<li>注释<ul>
+<li><code>ctrl+/</code>  注释</li>
+<li><code>ctrl+shift+/</code> 多行注释</li>
+</ul>
+</li>
+<li><code>ctrl+u</code> 查看当前方法的父方法 <code>super method</code>，比如 service 的实现类中，跳转到覆盖的接口方法</li>
+<li><code>ctrl+d</code> 复制当前行 ★★</li>
+<li><code>ctrl+e</code> 打开最近文件 ★★★</li>
+<li><code>ctrl+p</code> 有时候敲了方法，忘记方法可以使用什么参数，那么这个快捷键可以显示 <code>parameter info</code></li>
+<li>删除当前行<ul>
+<li><code>ctrl+y</code> 删除当前行 ★★★</li>
+<li><code>ctrl+x</code> 剪切（会删除当前行）★★★</li>
+</ul>
+</li>
+<li><code>ctrl+w</code> 不断按下这个快捷键，选择代码块范围逐步扩大；★★★</li>
+<li>换行<ul>
+<li><code>shift+enter</code> 向下另起一行 ★★★</li>
+<li><code>ctrl+alt+enter</code> 向上另起一行 ★★★</li>
+</ul>
+</li>
+<li><code>crtl+q</code> 查询documentation</li>
+<li><code>ctrl+鼠标点击</code> 查看内置函数啥的</li>
+<li><code>ctrl+alt+←/→</code> 快速跳转光标刚刚所在行 ★★★</li>
+<li><code>ctrl+alt+b</code> 所有的实现类（Implementation）★★★</li>
+<li><code>ctrl+alt+h</code> 谁调用了这个方法，查看调用层次（Call Hierarchy）★★</li>
+<li><code>ctrl+alt+L</code>，格式化代码（Reformat Code） ★★★</li>
+<li><code>ctrl+alt+o</code> 优化 imports <code>Optimize Imports</code>，优化导入的类和包 ★</li>
+<li><code>ctrl+shift+enter</code> 补全语句，<code>complete current statement</code> 不管光标是不是在行尾，可以补全必要的字符，比如行尾的分号 ★★</li>
+<li><code>ctrl+shift+b</code> 查看接口中方法的实现方法；</li>
+<li><code>ctrl+shift+u</code>：大小写转换，在 <code>Edit-&gt;Toggle Case</code> 中能看到选项 ★</li>
+<li><code>ctrl+shift+v</code>：从最近的缓冲区粘贴</li>
+<li><code>ctrl+shift+backspace</code> 快速跳转到最后修改的地方 ★★★</li>
+<li><code>ctrl+shift+v</code> 在 Pycharm 中，访问历史粘贴板 ★★</li>
+<li><code>ctrl+shift+/-</code> 代码块折叠★</li>
+<li><code>ctrl+alt+shit+j</code> 多目标选择选择的词，或者用<code>alt+鼠标点击</code>也可以实现效果，<code>Select All occurrences</code>★★</li>
+<li><code>ctrl+alt+shit+t</code> 重构利器</li>
+<li><code>shift+f6</code>：文件重命名 ★★★</li>
+<li><code>shift+f2</code>：跳转到上一个高亮错误 或 警告位置</li>
+<li>搜索<ul>
+<li><code>shift</code> 双击，搜索一切，不管是 IDE 功能、快捷键、文件、方法、变量，它都能搜索，使用频率很高的一个快捷键！可以按最近使用过的文件名, 类名, 方法名等去搜索定位! ★★★</li>
+<li><code>ctrl＋n</code>：快速按照名字搜索类</li>
+<li><code>ctrl＋shift＋n</code>：快速搜索文件</li>
+<li><code>ctrl+shift+f</code>: 在整个项目中 或 指定目录里 进行全局搜索 ★★★</li>
+<li><code>ctrl＋alt+shift＋n</code>：快速搜索函数</li>
+</ul>
+</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/keymap-introduce.html" target="_blank" rel="noopener">极客学院-IntelliJ IDEA 使用教程-快捷键</a></li>
+</ul>
+<h3 id="alt-enter-快捷键的妙用"><a href="#alt-enter-快捷键的妙用" class="headerlink" title="alt+enter  快捷键的妙用"></a>alt+enter  快捷键的妙用</h3><p>万能接错/生成返回值变量。创建对象时，可以先 <code>new</code> 后<code>alter+enter</code>，IDEA 会自动补全，直接让你输入对象名：</p>
+<p><img src="https://ws1.sinaimg.cn/large/6d9475f6ly1fyq399jc4eg20lm06xdy8.gif" alt></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><code>scroll from source</code>，点击这个按钮，可以快速跳转到打开的文件所在的文件夹中，非常有用提高效率的按钮 ★★★</li>
+</ul>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/VB32tM.png" alt></p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>模板：</p>
+<ul>
+<li>Editor-&gt;Live Templetes，可以做一些用户的定义，可修改<ul>
+<li>关注 <code>iteration</code></li>
+<li>关注 <code>other</code></li>
+<li>关注 <code>output</code></li>
+<li>关注 <code>plain</code></li>
+</ul>
+</li>
+<li>Editor-&gt;General-&gt;Postfix Completion 不可修改</li>
+</ul>
+<h3 id="常用模板"><a href="#常用模板" class="headerlink" title="常用模板"></a>常用模板</h3><ul>
+<li><code>psvm</code> 再按 Tab 生成 main 方法，或者，输入 main 之后，再按 <code>ctrl+j</code></li>
+<li><code>sout</code> 输出函数<ul>
+<li><code>soutp</code> 打印函数的形参</li>
+<li><code>soutv</code> 打印变量值，就近的打印变量的值；</li>
+<li><code>soutm</code> 打印方法的名字</li>
+<li><code>xxx.out</code> 打印某变量 xxx 的值；</li>
+</ul>
+</li>
+<li><code>fori</code> 循环，按 <code>tab/enter</code> 进入下一处修改<ul>
+<li><code>itar</code> 循环控制语句是 <code>xxx.length</code></li>
+<li><code>iter</code> 增强 for 循环（<code>for each</code>）</li>
+<li><code>users.for+tab</code> 快速生成 users 的增强 for 循环</li>
+</ul>
+</li>
+<li><code>list.for</code> 集合<ul>
+<li><code>list.fori</code></li>
+<li><code>list.forr</code> 逆序遍历，倒序遍历</li>
+</ul>
+</li>
+<li><code>ifn</code> 条件判断，判断等于 <code>null</code><ul>
+<li><code>inn</code> 不等于 <code>null</code></li>
+</ul>
+</li>
+<li><code>prsf</code> 私有静态的常量<ul>
+<li><code>psf</code> 生成 <code>public static final</code></li>
+<li><code>psfs</code> 生成 <code>public static final String</code></li>
+</ul>
+</li>
+</ul>
+<p>快捷键 <code>ctrl/command+j</code> 可以查看有哪些缩写字符。</p>
+<p>更多关于模板的知识，点击<a href="https://www.jetbrains.com/help/idea/using-live-templates.html" target="_blank" rel="noopener">官宣-live templates</a></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/tiantiandjava/article/details/42269173" target="_blank" rel="noopener">IntelliJ 创建main函数快捷</a></li>
+</ul>
+<h3 id="修改模板"><a href="#修改模板" class="headerlink" title="修改模板"></a>修改模板</h3><p>在 Live Templates 中修改模板</p>
+<ul>
+<li><code>abbreviation</code> 模板的缩略名称</li>
+<li>template text` 模板的 diamante 片段</li>
+<li>应用范围，点解 Define，选择 Java</li>
+</ul>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/Twxx9l.png" alt="修改"></p>
+<p>添加一个 String 类型的带注释的模板，叫 <code>prsc</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * $VAR1$</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">private</span> String $VAR2$;</span><br><span class="line"> $END$</span><br></pre></td></tr></table></figure>
+<h2 id="版本控制-VCS"><a href="#版本控制-VCS" class="headerlink" title="版本控制 VCS"></a>版本控制 VCS</h2><p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fyq1fwyvdij30ek0bfdlz.jpg" alt="VCS"></p>
+<h3 id="添加-Github-账户"><a href="#添加-Github-账户" class="headerlink" title="添加 Github 账户"></a>添加 Github 账户</h3><ul>
+<li>Settings-&gt;Version Control-&gt;GitHub</li>
+</ul>
+<p>为何要添加这个账户呢？</p>
+<p>因为你就可以直接在 VCS 菜单栏中克隆代码库，多种方式：</p>
+<ul>
+<li><code>Checkout from Version Control</code> -&gt; Git</li>
+<li>Git -&gt; Clone 可以选择待下载的代码库</li>
+<li>File -&gt; Project from Version Control -&gt; Git</li>
+</ul>
+<h3 id="在-Github-创建仓库"><a href="#在-Github-创建仓库" class="headerlink" title="在 Github 创建仓库"></a>在 Github 创建仓库</h3><p>VCS -&gt; Import into Version Control -&gt; Share Porject on GitHub</p>
+<p>会将代码仓库提交到 GitHub 上，新建一个仓库</p>
+<h3 id="使用-Git-工具"><a href="#使用-Git-工具" class="headerlink" title="使用 Git 工具"></a>使用 Git 工具</h3><ul>
+<li>查找背锅侠：Annotate/Blame</li>
+<li>选中 Annotate 的 Commit，点击 Show Diff 观察差异（<code>Ctrl+D</code>）</li>
+<li>查看当前文件的历史版本：工具栏有个时间标志，Show History，查看最近是否有人修改过，通过 <code>Ctrl+D</code> 查看对比——<code>Alt+H</code></li>
+<li>高级筛选方式查找 commit 记录</li>
+<li>显示差异： Show Diff —— <code>Ctrl+D</code></li>
+<li>右键菜单中有一个 Open On Github，跳转到正在浏览的行所在的文件，方便分享讨论具体问题</li>
+</ul>
+<h2 id="调试-amp-源码阅读技巧"><a href="#调试-amp-源码阅读技巧" class="headerlink" title="调试&amp;源码阅读技巧"></a>调试&amp;源码阅读技巧</h2><p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fyq27kq7glj30hs0950th.jpg" alt></p>
+<ol>
+<li><code>step over</code> F8 下一步，当前断点如果是一个方法，不会进入方法体内；</li>
+<li><code>step into</code> F7 下一步，当前断点如果是一个方法，则进入方法体内，不过默认情情况下并不会进入 <code>java.*</code> 等类的方法中。如果需要进入，可以在 Setting -&gt; Stepping 中设置,排除即可</li>
+<li><code>force step into</code> Alt+Shift+F7 下一步，当前行如果是一个方法，强制进入方法体内；</li>
+<li><code>step out</code> Shift+F8 跳出</li>
+<li><code>run to curser</code> Alt+F9 运行到鼠标所在行，临时设置断点，有用</li>
+<li><code>resume program</code> F9 运行到下一个断点处，是不是有点像 pdb 中的 c 快捷键；</li>
+<li><code>stop</code> Command+F2 停止</li>
+<li><code>view breakpoints</code> 查看所有断点，可以在运行时选择哪些断点暂停略过；</li>
+<li><code>mute breakpoints</code> 所有断点失效/生效的切换；</li>
+</ol>
+<h3 id="调试器是什么"><a href="#调试器是什么" class="headerlink" title="调试器是什么"></a>调试器是什么</h3><p>debugger 调试器，“除虫器”，调试器是用来告诉 JVM，请你在具体的哪个断点处停下来</p>
+<ul>
+<li>堆 Heap: 所有对象都在堆上分配</li>
+<li>栈 Stack：先进后出 LIFO 后进先出，<code>Last In First Out</code></li>
+<li>线程：每个线程会有一个方法栈，出栈，后进先出，你自己的是 main 线程，观察这个方法栈即可；</li>
+<li>栈帧 Stack Frame：方法栈中的每一个小方块，局部变量仅存在于方法的栈帧中，当方法运行完，栈帧就会被丢弃</li>
+</ul>
+<p>可以修改执行结果，修改执行流程中的值：</p>
+<ul>
+<li>右击调试器中的变量，<code>View/Edit Text</code></li>
+<li>右击调试器中的变量，<code>Set Value</code></li>
+</ul>
+<p>跳转到源代码</p>
+<ul>
+<li>右击调试器中的变量，<code>Jump to Type Source</code></li>
+</ul>
+<h3 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h3><p>在循环里增加条件判断，具体操作：在断点处右击，在某个条件下，实施断点。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fyq3mbopc0j30g206jaar.jpg" alt></p>
+<p>查看表达式的值（可以查看已有变量的值）：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fyq3sydbgpj30j10dj76c.jpg" alt></p>
+<h3 id="线程断点"><a href="#线程断点" class="headerlink" title="线程断点"></a>线程断点</h3><p>我们可以在断点上使用鼠标右键弹出断点设置框，在 Suspend 选择 Thread 选项。断点的多线程属性可以设置默认属性，点击 Make Default 按钮，设置默认 Suspend 属性</p>
+<h3 id="调用栈"><a href="#调用栈" class="headerlink" title="调用栈"></a>调用栈</h3><p><code>ctrl+alt+h</code> 快捷键</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/ghj1976/p/5382455.html" target="_blank" rel="noopener">IDEA的查询引用、调用关系图的功能</a></li>
+<li><a href="https://my.oschina.net/Mkeeper/blog/1837432" target="_blank" rel="noopener">Intellij IDEA神器常用技巧八-2018版本新增快捷键</a></li>
+<li><a href="http://qinghua.github.io/intellij-idea-debug/" target="_blank" rel="noopener">挖掘IntelliJ IDEA的调试功能</a></li>
+</ul>
+<h3 id="DEBUG-模式下提前返回，而不终止程序"><a href="#DEBUG-模式下提前返回，而不终止程序" class="headerlink" title="DEBUG 模式下提前返回，而不终止程序"></a>DEBUG 模式下提前返回，而不终止程序</h3><p>在 Frames 窗口下，选择当前的 Frame，右击，选择 <code>Force Return</code>。</p>
+<p>这个功能在调试的时候十分有用，既可节约运行的时间，避免程序重启，又可以避免程序走到后面不想调试的步骤去。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://segmentfault.com/q/1010000011000876" target="_blank" rel="noopener">Intellij IDEA 在DEBUG模式下如何不执行后续代码直接停止程序？</a></li>
+</ul>
+<h3 id="查看继承关系"><a href="#查看继承关系" class="headerlink" title="查看继承关系"></a>查看继承关系</h3><p>快捷键：<code>Ctrl+H</code></p>
+<ul>
+<li><a href="https://blog.csdn.net/Jae_Wang/article/details/80058541" target="_blank" rel="noopener">IDEA查看接口或类的继承实现关系图</a></li>
+<li><a href="https://blog.csdn.net/qq_27093465/article/details/52857307" target="_blank" rel="noopener">IntelliJ IDEA 中如何查看一个类的所有继承关系(当前类的所有继承关系图)</a></li>
+</ul>
+<p>还有一个更加厉害的功能 <code>show diagram</code>，可以查看继承链。鼠标右键中有 <code>Diagrams</code> 的菜单。快捷键：<code>Ctrl+Alt+Shift+U</code></p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/8pbmj6.png" alt="8pbmj6"></p>
+<ul>
+<li>蓝色实线是指继承关系</li>
+<li>绿色实线表示的是接口的继承关系</li>
+<li>绿色虚线是指接口实现关系</li>
+</ul>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/IDOb18.png" alt="IDOb18"></p>
+<p>详细介绍参考：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/deng-cc/p/6927447.html" target="_blank" rel="noopener">cnblogs-使用IntelliJ IDEA查看类的继承关系图形</a></li>
+</ul>
+<h3 id="设置程序环境变量"><a href="#设置程序环境变量" class="headerlink" title="设置程序环境变量"></a>设置程序环境变量</h3><p>Run-&gt;Edit Configurations-&gt;Environment-&gt;Environment variables</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.getenv(<span class="string">"HOME_TEST"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Maven-设置"><a href="#Maven-设置" class="headerlink" title="Maven 设置"></a>Maven 设置</h2><p>不推荐使用 IDEA 自带的 Maven 配置。在 Settings -&gt; Build Excution Deployment -&gt; Build Tools -&gt; Maven 中修改：</p>
+<ul>
+<li><code>Maven home directory</code> maven 安装目录</li>
+<li><code>User settings file</code> 勾选 Override，改为自己的 <code>settings.xml</code> 文件</li>
+<li><code>Local repository</code> 依赖包存储位置</li>
+</ul>
+<p>在 Settings -&gt; Build Excution Deployment -&gt; Build Tools -&gt; Maven -&gt; Importing 中：</p>
+<ul>
+<li>勾选 <code>Import Maven projects automatically</code> pom 文件增加了新依赖，会自动下载；</li>
+</ul>
+<p>为了避免每次打开或者新建项目时，都要设置一次 Maven 的配置，可以给 IDEA 设置默认 maven 版本：</p>
+<ul>
+<li>选择 <code>File -&gt; Other Settings -&gt; Settings For New Projects... -&gt; Build,Execution,Deployment -&gt; Build Tools -&gt; Maven</code>，找到 maven 配置的地方，选择需要默认配置的版本，保存。至此便完成了默认 maven 版本的配置。</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/wuyujin1997/article/details/98472420" target="_blank" rel="noopener">CSDN - IDEA 配置自定义maven</a></li>
+</ul>
+<h2 id="高效定位代码-无处不在的跳转"><a href="#高效定位代码-无处不在的跳转" class="headerlink" title="高效定位代码-无处不在的跳转"></a>高效定位代码-无处不在的跳转</h2><h3 id="project之间跳转"><a href="#project之间跳转" class="headerlink" title="project之间跳转"></a>project之间跳转</h3><p><code>ctrl+alt+左右方括号</code>：</p>
+<h3 id="查看快捷键"><a href="#查看快捷键" class="headerlink" title="查看快捷键"></a>查看快捷键</h3><p><code>ctrl+shift+a</code>：搜搜快捷键</p>
+<h3 id="查看最近文件"><a href="#查看最近文件" class="headerlink" title="查看最近文件"></a>查看最近文件</h3><p><code>ctrl+e</code><br>可以在<code>ctrl+shift+a</code>：搜索reccent …</p>
+<h3 id="快速跳转到最后修改的地方"><a href="#快速跳转到最后修改的地方" class="headerlink" title="快速跳转到最后修改的地方"></a>快速跳转到最后修改的地方</h3><p><code>ctrl+shift+backspace</code> 快速跳转到最后修改的地方</p>
+<h3 id="利用书签跳转"><a href="#利用书签跳转" class="headerlink" title="利用书签跳转"></a>利用书签跳转</h3><ul>
+<li><code>F11</code>：添加、取消书签</li>
+<li><code>ctrl+f11</code>：添加、取消有标记的书签</li>
+<li><code>ctrl+&lt;n&gt;</code>：跳转到有标记的书签处</li>
+</ul>
+<h3 id="添加收藏-Favorites"><a href="#添加收藏-Favorites" class="headerlink" title="添加收藏 Favorites"></a>添加收藏 Favorites</h3><p><code>alt+shift+f</code>：add to favorities</p>
+<h3 id="编辑区和文件区的跳转"><a href="#编辑区和文件区的跳转" class="headerlink" title="编辑区和文件区的跳转"></a>编辑区和文件区的跳转</h3><p><code>alt+1</code>进入文件区<br><code>esc</code>：进入编辑区</p>
+<h2 id="精准搜索"><a href="#精准搜索" class="headerlink" title="精准搜索"></a>精准搜索</h2><h3 id="类搜索"><a href="#类搜索" class="headerlink" title="类搜索"></a>类搜索</h3><p><code>ctrl+n</code>：快速搜索类</p>
+<h3 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h3><p>快速打开指定的文件，方便★★★：<br><code>ctrl+shift+n</code></p>
+<h3 id="函数搜索-symbol"><a href="#函数搜索-symbol" class="headerlink" title="函数搜索-symbol"></a>函数搜索-symbol</h3><p><code>ctrl+shift+alt+n</code></p>
+<h3 id="搜索-Maven-依赖包中的内容"><a href="#搜索-Maven-依赖包中的内容" class="headerlink" title="搜索 Maven 依赖包中的内容"></a>搜索 Maven 依赖包中的内容</h3><p>有时候可能需要在源码分析时想要搜索 Maven 依赖包中的内容，只要如下设置即可扩大搜索范围：</p>
+<p><code>ctrl+shift+f</code> -&gt;<code>scope</code>-&gt;<code>All Places</code></p>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><ul>
+<li><p><code>Shift+F6</code>  重命名<br>所有的文件，类名，函数名，属性名都可以重命名，值得点赞的是，只要你使用 <code>Shift+F6</code> 重命名，所有使用过这个名称的地方都会跟着改变；</p>
+</li>
+<li><p>函数的重构，<code>Ctrl+F6</code> 重构函数<br>当你需要重构方法时，无论是增加参数，修改返回值，还是更改函数实现，只需要Ctrl+F6，就可以把所有用到此函数的地方一起重构</p>
+</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/clwydjgs/p/9390488.html#!comments" target="_blank" rel="noopener">你们都在用IntelliJ IDEA吗？或许你们需要看一下这篇博文</a></li>
+</ul>
+<h2 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h2><ul>
+<li>选中单词转大写</li>
+</ul>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fya5neqiudj30a00f0dnp.jpg" alt></p>
+<h3 id="多光标选中"><a href="#多光标选中" class="headerlink" title="多光标选中"></a>多光标选中</h3><ul>
+<li>多光标</li>
+</ul>
+<p>按住 <code>Alt</code> 键，可以快速实现多光标、块选择。</p>
+<h2 id="界面中的基本功能"><a href="#界面中的基本功能" class="headerlink" title="界面中的基本功能"></a>界面中的基本功能</h2><p>如果没有如老师那样的窗口，可点击<code>view-&gt;tool buttons</code>打开</p>
+<h3 id="alt-lt-n-gt-快捷键-★★★"><a href="#alt-lt-n-gt-快捷键-★★★" class="headerlink" title="alt+&lt;n&gt;快捷键 ★★★"></a><code>alt+&lt;n&gt;</code>快捷键 ★★★</h3><p>如下图圈出的数字 n，可以使用<code>alt+&lt;n&gt;</code>的方式快捷使用，替代鼠标操作。</p>
+<p>注意，Mac  使用的是 <code>command+&lt;n&gt;</code>方式；</p>
+<h4 id="打开收藏-★★★"><a href="#打开收藏-★★★" class="headerlink" title="打开收藏 ★★★"></a>打开收藏 ★★★</h4><p>在一些调试的函数那里打断点，然后<code>alt+7</code>收藏中就会方便的查看；</p>
+<h4 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a><code>TODO</code></h4><p>在项目中使用<code># TODO</code>，可以在<code>Alt+6</code>中看到哪些待开发的备注</p>
+<h2 id="必备插件"><a href="#必备插件" class="headerlink" title="必备插件"></a>必备插件</h2><p>关于插键，单独总结了关于<a href="https://michael728.github.io/2020/05/05/tools-dev-pycharm-idea-plugins/">插键的文章</a></p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="Q-intellj-Idea中给新建的项目导入jar包？"><a href="#Q-intellj-Idea中给新建的项目导入jar包？" class="headerlink" title="Q: intellj Idea中给新建的项目导入jar包？"></a>Q: intellj Idea中给新建的项目导入jar包？</h3><ul>
+<li><a href="https://www.cnblogs.com/zadomn0920/p/6196962.html" target="_blank" rel="noopener">推荐intellij idea Project Structure 讲解</a></li>
+</ul>
+<h3 id="Q-找不到提示"><a href="#Q-找不到提示" class="headerlink" title="Q: 找不到提示"></a>Q: 找不到提示</h3><p><a href="https://stackoverflow.com/questions/37282285/intellij-cannot-find-any-declarations" target="_blank" rel="noopener">IntelliJ cannot find any declarations</a></p>
+<ul>
+<li>Right-click src folder</li>
+<li>Mark Directory as &gt; Sources Root</li>
+</ul>
+<h3 id="Q-IDEA编译通过能运行但是出现红色下划线"><a href="#Q-IDEA编译通过能运行但是出现红色下划线" class="headerlink" title="Q: IDEA编译通过能运行但是出现红色下划线"></a>Q: IDEA编译通过能运行但是出现红色下划线</h3><p>原因就是可能没有清除原来的历史缓存，导致一些错误，解决方法是：File-Invalidate Caches，然后重启IDEA</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>近期由于微博图床挂了，所以，截图都看不了了，点击原文链接，可查看图片：</p>
+<ul>
+<li><a href="https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/">PyCharm/IDEA 使用技巧总结</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/keymap-introduce.html" target="_blank" rel="noopener">IntelliJ IDEA 使用教程</a></li>
+<li><a href="https://www.jianshu.com/p/8b4ee9499a79" target="_blank" rel="noopener">简书-IntelliJ IDEA 教程 技巧篇</a> 作者写了一系列的总结</li>
+<li><a href="https://www.zhihu.com/question/37787004" target="_blank" rel="noopener">你有哪些想要分享的 PyCharm 使用技巧？</a></li>
+<li><a href="http://www.imooc.com/learn/924" target="_blank" rel="noopener">IntelliJ IDEA神器使用技巧</a></li>
+<li><a href="http://tengj.top/2017/02/22/idea1-1/" target="_blank" rel="noopener">Java人员正确使用 IntelliJ IDEA的方式</a></li>
+<li><a href="http://qinghua.github.io/intellij-idea-debug/" target="_blank" rel="noopener">挖掘IntelliJ IDEA的调试功能</a></li>
+<li><a href="http://idea.lanyus.com/" target="_blank" rel="noopener">IDEA 注册-lanyu</a></li>
+<li><a href="https://github.com/judasn/IntelliJ-IDEA-Tutorial/blob/master/keymap-introduce.md" target="_blank" rel="noopener">Github-judasn/IntelliJ-IDEA-Tutorial</a></li>
+<li><a href="https://www.ghpym.com/idea.html" target="_blank" rel="noopener">IntelliJ IDEA 2019.3.3 便携增强版</a></li>
+<li><a href="https://zhangzw.com/tags/IDEA/" target="_blank" rel="noopener">张振伟的博客/IDEA</a> 作者写了很多 IDEA 使用技巧的文章，推荐</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/10/28/tools-vscode/" rel="bookmark">打造性感好用的VS Code编辑器</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/11/24/git-advance/" rel="bookmark">Git使用教程笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/06/06/git-cherry-pick/" rel="bookmark">Git 的 cherry-pick 命令还没用过？快来看看它的厉害！</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/06/14/git-diff-patch/" rel="bookmark">Git 基本命令 -- 你用过 git diff 吗？补习一下吧</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/" title="JetBrains PyCharm/IDEA 使用技巧总结">https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IDE/" rel="tag"># IDE</a>
+          
+            <a href="/tags/IDEA/" rel="tag"># IDEA</a>
+          
+            <a href="/tags/Pycharm/" rel="tag"># Pycharm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/27/tools-ss-vps/" rel="next" title="ss+vps+mac">
+                <i class="fa fa-chevron-left"></i> ss+vps+mac
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/11/think-core-skill-programmer/" rel="prev" title="【转】程序员的核心能力">
+                【转】程序员的核心能力 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统设置"><span class="nav-number">2.</span> <span class="nav-text">系统设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置显示收藏栏等工具栏"><span class="nav-number">2.1.</span> <span class="nav-text">设置显示收藏栏等工具栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取消更新"><span class="nav-number">2.2.</span> <span class="nav-text">取消更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Tab为4个空格"><span class="nav-number">2.3.</span> <span class="nav-text">设置Tab为4个空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持滚轮调节字体大小"><span class="nav-number">2.4.</span> <span class="nav-text">支持滚轮调节字体大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鼠标滑过，显示文档"><span class="nav-number">2.5.</span> <span class="nav-text">鼠标滑过，显示文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示行号和方法分隔符"><span class="nav-number">2.6.</span> <span class="nav-text">显示行号和方法分隔符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给提示时忽略大小写"><span class="nav-number">2.7.</span> <span class="nav-text">给提示时忽略大小写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取消单行方法折叠的设置"><span class="nav-number">2.8.</span> <span class="nav-text">取消单行方法折叠的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动导包-import-popup"><span class="nav-number">2.9.</span> <span class="nav-text">自动导包 import popup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置换行符默认为LF"><span class="nav-number">2.10.</span> <span class="nav-text">设置换行符默认为LF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置-File-Encodings-文件编码"><span class="nav-number">2.11.</span> <span class="nav-text">设置 File Encodings 文件编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置头信息"><span class="nav-number">2.12.</span> <span class="nav-text">设置头信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动编译"><span class="nav-number">2.13.</span> <span class="nav-text">自动编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-每个类而非整个包，少用通配符"><span class="nav-number">2.14.</span> <span class="nav-text">import 每个类而非整个包，少用通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置-Tab-标签页"><span class="nav-number">2.15.</span> <span class="nav-text">设置 Tab 标签页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义-Terminal"><span class="nav-number">2.16.</span> <span class="nav-text">自定义 Terminal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本控制下文件变化的显示"><span class="nav-number">2.17.</span> <span class="nav-text">版本控制下文件变化的显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开内存使用状态"><span class="nav-number">2.18.</span> <span class="nav-text">打开内存使用状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用-标识编辑过的文件"><span class="nav-number">2.19.</span> <span class="nav-text">用 * 标识编辑过的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本运行结束后留在命令行"><span class="nav-number">2.20.</span> <span class="nav-text">脚本运行结束后留在命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-JavaDOC-注释"><span class="nav-number">2.21.</span> <span class="nav-text">添加 JavaDOC 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-JavaDOC"><span class="nav-number">2.22.</span> <span class="nav-text">生成 JavaDOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存和索引的清理"><span class="nav-number">2.23.</span> <span class="nav-text">缓存和索引的清理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示窗口-split"><span class="nav-number">2.24.</span> <span class="nav-text">显示窗口 split</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#省电模式"><span class="nav-number">2.25.</span> <span class="nav-text">省电模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷菜单"><span class="nav-number">3.</span> <span class="nav-text">快捷菜单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷键设置"><span class="nav-number">3.1.</span> <span class="nav-text">快捷键设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用快捷键"><span class="nav-number">3.2.</span> <span class="nav-text">常用快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alt-enter-快捷键的妙用"><span class="nav-number">3.3.</span> <span class="nav-text">alt+enter  快捷键的妙用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板"><span class="nav-number">4.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用模板"><span class="nav-number">4.1.</span> <span class="nav-text">常用模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模板"><span class="nav-number">4.2.</span> <span class="nav-text">修改模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本控制-VCS"><span class="nav-number">5.</span> <span class="nav-text">版本控制 VCS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-Github-账户"><span class="nav-number">5.1.</span> <span class="nav-text">添加 Github 账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Github-创建仓库"><span class="nav-number">5.2.</span> <span class="nav-text">在 Github 创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Git-工具"><span class="nav-number">5.3.</span> <span class="nav-text">使用 Git 工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试-amp-源码阅读技巧"><span class="nav-number">6.</span> <span class="nav-text">调试&amp;源码阅读技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调试器是什么"><span class="nav-number">6.1.</span> <span class="nav-text">调试器是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件断点"><span class="nav-number">6.2.</span> <span class="nav-text">条件断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程断点"><span class="nav-number">6.3.</span> <span class="nav-text">线程断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用栈"><span class="nav-number">6.4.</span> <span class="nav-text">调用栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEBUG-模式下提前返回，而不终止程序"><span class="nav-number">6.5.</span> <span class="nav-text">DEBUG 模式下提前返回，而不终止程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看继承关系"><span class="nav-number">6.6.</span> <span class="nav-text">查看继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置程序环境变量"><span class="nav-number">6.7.</span> <span class="nav-text">设置程序环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-设置"><span class="nav-number">7.</span> <span class="nav-text">Maven 设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高效定位代码-无处不在的跳转"><span class="nav-number">8.</span> <span class="nav-text">高效定位代码-无处不在的跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#project之间跳转"><span class="nav-number">8.1.</span> <span class="nav-text">project之间跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看快捷键"><span class="nav-number">8.2.</span> <span class="nav-text">查看快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看最近文件"><span class="nav-number">8.3.</span> <span class="nav-text">查看最近文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速跳转到最后修改的地方"><span class="nav-number">8.4.</span> <span class="nav-text">快速跳转到最后修改的地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用书签跳转"><span class="nav-number">8.5.</span> <span class="nav-text">利用书签跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加收藏-Favorites"><span class="nav-number">8.6.</span> <span class="nav-text">添加收藏 Favorites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑区和文件区的跳转"><span class="nav-number">8.7.</span> <span class="nav-text">编辑区和文件区的跳转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精准搜索"><span class="nav-number">9.</span> <span class="nav-text">精准搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类搜索"><span class="nav-number">9.1.</span> <span class="nav-text">类搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件搜索"><span class="nav-number">9.2.</span> <span class="nav-text">文件搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数搜索-symbol"><span class="nav-number">9.3.</span> <span class="nav-text">函数搜索-symbol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索-Maven-依赖包中的内容"><span class="nav-number">9.4.</span> <span class="nav-text">搜索 Maven 依赖包中的内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重构"><span class="nav-number">10.</span> <span class="nav-text">重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列操作"><span class="nav-number">11.</span> <span class="nav-text">列操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多光标选中"><span class="nav-number">11.1.</span> <span class="nav-text">多光标选中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面中的基本功能"><span class="nav-number">12.</span> <span class="nav-text">界面中的基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alt-lt-n-gt-快捷键-★★★"><span class="nav-number">12.1.</span> <span class="nav-text">alt+&lt;n&gt;快捷键 ★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打开收藏-★★★"><span class="nav-number">12.1.1.</span> <span class="nav-text">打开收藏 ★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TODO"><span class="nav-number">12.1.2.</span> <span class="nav-text">TODO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必备插件"><span class="nav-number">13.</span> <span class="nav-text">必备插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQ"><span class="nav-number">14.</span> <span class="nav-text">FAQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-intellj-Idea中给新建的项目导入jar包？"><span class="nav-number">14.1.</span> <span class="nav-text">Q: intellj Idea中给新建的项目导入jar包？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-找不到提示"><span class="nav-number">14.2.</span> <span class="nav-text">Q: 找不到提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-IDEA编译通过能运行但是出现红色下划线"><span class="nav-number">14.3.</span> <span class="nav-text">Q: IDEA编译通过能运行但是出现红色下划线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">15.</span> <span class="nav-text">最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">16.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2019/05/11/tools-dev-pycharm-idea/";
+    this.page.identifier = "2019/05/11/tools-dev-pycharm-idea/";
+    this.page.title = 'JetBrains PyCharm/IDEA 使用技巧总结';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

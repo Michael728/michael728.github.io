@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="强烈推荐ipython无论你工作在什么项目上，IPython都是值得推荐的。利用ipython --pylab，可以进入PyLab模式，已经导入了matplotlib库与相关软件包（例如Numpy和Scipy)，额可以直接使用相关库的功能。">
+<meta name="keywords" content="Matplotlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python--matplotlib绘图可视化知识点整理">
+<meta property="og:url" content="https://michael728.github.io/2016/05/14/python-matplotlib-basic/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="强烈推荐ipython无论你工作在什么项目上，IPython都是值得推荐的。利用ipython --pylab，可以进入PyLab模式，已经导入了matplotlib库与相关软件包（例如Numpy和Scipy)，额可以直接使用相关库的功能。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3roxctsj9j20eo0d9q40.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rgk720hfj20ag078jrp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rggwh5q1j20cq078dg2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rglix2v7j20b70erwf5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rgn3vpifj20c107agm9.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6d9475f6jw1f3rgr2m11cj20ao077t94.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1f3rh9xuqs6j20dx0acjs0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rhhjm875j20dk09uaaq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3q6ylj1yjj20cw07qjrh.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1f3ri9l7efkj20dm0anmy6.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1f3rok0spuej20a506j74d.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6d9475f6jw1f3row583k8j20bd07tt9e.jpg">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python--matplotlib绘图可视化知识点整理">
+<meta name="twitter:description" content="强烈推荐ipython无论你工作在什么项目上，IPython都是值得推荐的。利用ipython --pylab，可以进入PyLab模式，已经导入了matplotlib库与相关软件包（例如Numpy和Scipy)，额可以直接使用相关库的功能。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1f3roxctsj9j20eo0d9q40.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2016/05/14/python-matplotlib-basic/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python--matplotlib绘图可视化知识点整理 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2016/05/14/python-matplotlib-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Python--matplotlib绘图可视化知识点整理
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-05-14 15:50:02" itemprop="dateCreated datePublished" datetime="2016-05-14T15:50:02+00:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>强烈推荐ipython</strong><br>无论你工作在什么项目上，IPython都是值得推荐的。利用<code>ipython --pylab</code>，可以进入PyLab模式，已经导入了matplotlib库与相关软件包（例如Numpy和Scipy)，额可以直接使用相关库的功能。</p>
+<a id="more"></a>
+<p>本文作为学习过程中对matplotlib一些常用知识点的整理，方便查找。</p>
+<p>这样IPython配置为使用你所指定的matplotlib GUI后端（TK/wxPython/PyQt/Mac OS X native/GTK)。对于大部分用户而言，默认的后端就已经够用了。Pylab模式还会向IPython引入一大堆模块和函数以提供一种更接近MATLAB的界面。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://old.sebug.net/paper/books/scipydoc/matplotlib_intro.html" target="_blank" rel="noopener">matplotlib-绘制精美的图表</a></li>
+<li><a href="http://www.360doc.com/content/15/0113/23/16740871_440559122.shtml" target="_blank" rel="noopener">matplotlib.pyplot.plt参数介绍</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">labels=&apos;frogs&apos;,&apos;hogs&apos;,&apos;dogs&apos;,&apos;logs&apos;</span><br><span class="line">sizes=15,20,45,10</span><br><span class="line">colors=&apos;yellowgreen&apos;,&apos;gold&apos;,&apos;lightskyblue&apos;,&apos;lightcoral&apos;</span><br><span class="line">explode=0,0.1,0,0</span><br><span class="line">plt.pie(sizes,explode=explode,labels=labels,colors=colors,autopct=&apos;%1.1f%%&apos;,shadow=True,startangle=50)</span><br><span class="line">plt.axis(&apos;equal&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="matplotlib图标正常显示中文"><a href="#matplotlib图标正常显示中文" class="headerlink" title="matplotlib图标正常显示中文"></a>matplotlib图标正常显示中文</h1><p>为了在图表中能够显示中文和负号等，需要下面一段设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">plt.rcParams[&apos;font.sas-serig&apos;]=[&apos;SimHei&apos;] #用来正常显示中文标签</span><br><span class="line">plt.rcParams[&apos;axes.unicode_minus&apos;]=False #用来正常显示负号</span><br></pre></td></tr></table></figure></p>
+<h1 id="matplotlib-inline和pylab-inline"><a href="#matplotlib-inline和pylab-inline" class="headerlink" title="matplotlib inline和pylab inline"></a>matplotlib inline和pylab inline</h1><p>可以使用<code>ipython --pylab</code>打开ipython命名窗口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline  #notebook模式下</span><br><span class="line">%pylab inline   #ipython模式下</span><br></pre></td></tr></table></figure>
+<p>这两个命令都可以在绘图时，将图片内嵌在交互窗口，而不是弹出一个图片窗口，但是，有一个缺陷：除非将代码一次执行，否则，无法叠加绘图，因为在这两种模式下，是要有<code>plt</code>出现，图片会立马<code>show</code>出来，因此：</p>
+<p><strong>推荐在ipython notebook时使用，这样就能很方便的一次编辑完代码，绘图。</strong></p>
+<h1 id="为项目设置matplotlib参数"><a href="#为项目设置matplotlib参数" class="headerlink" title="为项目设置matplotlib参数"></a>为项目设置matplotlib参数</h1><p>在代码执行过程中，有两种方式更改参数：</p>
+<ul>
+<li>使用参数字典(rcParams)</li>
+<li>调用matplotlib.rc()命令   通过传入关键字元祖，修改参数</li>
+</ul>
+<p>如果不想每次使用matplotlib时都在代码部分进行配置，可以修改matplotlib的文件参数。可以用<code>matplot.get_config()</code>命令来找到当前用户的配置文件目录。</p>
+<p>配置文件包括以下配置项：</p>
+<blockquote>
+<p>axex: 设置坐标轴边界和表面的颜色、坐标刻度值大小和网格的显示<br>backend: 设置目标暑促TkAgg和GTKAgg<br>figure: 控制dpi、边界颜色、图形大小、和子区( subplot)设置<br>font: 字体集（font family）、字体大小和样式设置<br>grid: 设置网格颜色和线性<br>legend: 设置图例和其中的文本的显示<br>line: 设置线条（颜色、线型、宽度等）和标记<br>patch: 是填充2D空间的图形对象，如多边形和圆。控制线宽、颜色和抗锯齿设置等。<br>savefig: 可以对保存的图形进行单独设置。例如，设置渲染的文件的背景为白色。<br>verbose: 设置matplotlib在执行期间信息输出，如silent、helpful、debug和debug-annoying。<br>xticks和yticks: 为x,y轴的主刻度和次刻度设置颜色、大小、方向，以及标签大小。</p>
+</blockquote>
+<h1 id="线条相关属性标记设置"><a href="#线条相关属性标记设置" class="headerlink" title="线条相关属性标记设置"></a>线条相关属性标记设置</h1><h2 id="用来该表线条的属性"><a href="#用来该表线条的属性" class="headerlink" title="用来该表线条的属性"></a>用来该表线条的属性</h2><table>
+<thead>
+<tr>
+<th>线条风格linestyle或ls</th>
+<th>描述</th>
+<th>线条风格linestyle或ls</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘-‘</td>
+<td>实线</td>
+<td>‘:’</td>
+<td>虚线</td>
+<td></td>
+</tr>
+<tr>
+<td>‘–’</td>
+<td>破折线</td>
+<td>‘None’,’ ‘,’’</td>
+<td>什么都不画</td>
+<td></td>
+</tr>
+<tr>
+<td>‘-.’</td>
+<td>点划线</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="线条标记"><a href="#线条标记" class="headerlink" title="线条标记"></a>线条标记</h2><table>
+<thead>
+<tr>
+<th>标记maker</th>
+<th>描述</th>
+<th>标记</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘o’</td>
+<td>圆圈</td>
+<td>‘.’</td>
+<td>点</td>
+</tr>
+<tr>
+<td>‘D’</td>
+<td>菱形</td>
+<td>‘s’</td>
+<td>正方形</td>
+</tr>
+<tr>
+<td>‘h’</td>
+<td>六边形1</td>
+<td>‘*’</td>
+<td>星号</td>
+</tr>
+<tr>
+<td>‘H’</td>
+<td>六边形2</td>
+<td>‘d’</td>
+<td>小菱形</td>
+</tr>
+<tr>
+<td>‘_’</td>
+<td>水平线</td>
+<td>‘v’</td>
+<td>一角朝下的三角形</td>
+</tr>
+<tr>
+<td>‘8’</td>
+<td>八边形</td>
+<td>‘&lt;’</td>
+<td>一角朝左的三角形</td>
+</tr>
+<tr>
+<td>‘p’</td>
+<td>五边形</td>
+<td>‘&gt;’</td>
+<td>一角朝右的三角形</td>
+</tr>
+<tr>
+<td>‘,’</td>
+<td>像素</td>
+<td>‘^’</td>
+<td>一角朝上的三角形</td>
+</tr>
+<tr>
+<td>‘+’</td>
+<td>加号</td>
+<td>‘\</td>
+<td>‘</td>
+<td>竖线</td>
+</tr>
+<tr>
+<td>‘None’,’’,’ ‘</td>
+<td>无</td>
+<td>‘x’</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><p>可以通过调用<code>matplotlib.pyplot.colors()</code>得到matplotlib支持的所有颜色。</p>
+<table>
+<thead>
+<tr>
+<th>别名</th>
+<th>颜色</th>
+<th>别名</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>b</td>
+<td>蓝色</td>
+<td>g</td>
+<td>绿色</td>
+</tr>
+<tr>
+<td>r</td>
+<td>红色</td>
+<td>y</td>
+<td>黄色</td>
+</tr>
+<tr>
+<td>c</td>
+<td>青色</td>
+<td>k</td>
+<td>黑色</td>
+<td></td>
+</tr>
+<tr>
+<td>m</td>
+<td>洋红色</td>
+<td>w</td>
+<td>白色</td>
+</tr>
+</tbody>
+</table>
+<p>如果这两种颜色不够用，还可以通过两种其他方式来定义颜色值：</p>
+<ul>
+<li>使用HTML十六进制字符串   <code>color=&#39;eeefff&#39;</code> 使用合法的HTML颜色名字（’red’,’chartreuse’等）。</li>
+<li>也可以传入一个归一化到[0,1]的RGB元祖。 <code>color=(0.3,0.3,0.4)</code></li>
+</ul>
+<p>很多方法可以介绍颜色参数，如title()。<br><code>plt.tilte(&#39;Title in a custom color&#39;,color=&#39;#123456&#39;）</code></p>
+<h2 id="背景色"><a href="#背景色" class="headerlink" title="背景色"></a>背景色</h2><p>通过向如<code>matplotlib.pyplot.axes()</code>或者<code>matplotlib.pyplot.subplot()</code>这样的方法提供一个<code>axisbg</code>参数，可以指定坐标这的背景色。</p>
+<p><code>subplot(111,axisbg=(0.1843,0.3098,0.3098)</code></p>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><p>如果你向plot()指令提供了一维的数组或列表，那么matplotlib将默认它是一系列的y值，并自动为你生成x的值。默认的x向量从0开始并且具有和y同样的长度，因此x的数据是[0,1,2,3].</p>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3roxctsj9j20eo0d9q40.jpg" alt></p>
+<p>图片来自:<a href="http://www.cnblogs.com/vamei/archive/2013/01/30/2879700.html#commentform" target="_blank" rel="noopener">绘图: matplotlib核心剖析</a></p>
+<h2 id="确定坐标范围"><a href="#确定坐标范围" class="headerlink" title="确定坐标范围"></a>确定坐标范围</h2><ul>
+<li>plt.axis([xmin, xmax, ymin, ymax])<br>上面例子里的axis()命令给定了坐标范围。</li>
+<li>xlim(xmin, xmax)和ylim(ymin, ymax)来调整x,y坐标范围<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from pylab import *</span><br><span class="line"></span><br><span class="line">x = np.arange(-5.0, 5.0, 0.02)</span><br><span class="line">y1 = np.sin(x)</span><br><span class="line"></span><br><span class="line">plt.figure(1)</span><br><span class="line">plt.subplot(211)</span><br><span class="line">plt.plot(x, y1)</span><br><span class="line"></span><br><span class="line">plt.subplot(212)</span><br><span class="line">#设置x轴范围</span><br><span class="line">xlim(-2.5, 2.5)</span><br><span class="line">#设置y轴范围</span><br><span class="line">ylim(-1, 1)</span><br><span class="line">plt.plot(x, y1)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rgk720hfj20ag078jrp.jpg" alt></p>
+<h2 id="叠加图"><a href="#叠加图" class="headerlink" title="叠加图"></a>叠加图</h2><p>用一条指令画多条不同格式的线。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># evenly sampled time at 200ms intervals</span><br><span class="line">t = np.arange(0., 5., 0.2)</span><br><span class="line"></span><br><span class="line"># red dashes, blue squares and green triangles</span><br><span class="line">plt.plot(t, t, &apos;r--&apos;, t, t**2, &apos;bs&apos;, t, t**3, &apos;g^&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rggwh5q1j20cq078dg2.jpg" alt></p>
+<h2 id="plt-figure"><a href="#plt-figure" class="headerlink" title="plt.figure()"></a>plt.figure()</h2><p>你可以多次使用figure命令来产生多个图，其中，图片号按顺序增加。这里，要注意一个概念当前图和当前坐标。所有绘图操作仅对当前图和当前坐标有效。通常，你并不需要考虑这些事，下面的这个例子为大家演示这一细节。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">plt.figure(1)                # 第一张图</span><br><span class="line">plt.subplot(211)             # 第一张图中的第一张子图</span><br><span class="line">plt.plot([1,2,3])</span><br><span class="line">plt.subplot(212)             # 第一张图中的第二张子图</span><br><span class="line">plt.plot([4,5,6])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.figure(2)                # 第二张图</span><br><span class="line">plt.plot([4,5,6])            # 默认创建子图subplot(111)</span><br><span class="line"></span><br><span class="line">plt.figure(1)                # 切换到figure 1 ; 子图subplot(212)仍旧是当前图</span><br><span class="line">plt.subplot(211)             # 令子图subplot(211)成为figure1的当前图</span><br><span class="line">plt.title(&apos;Easy as 1,2,3&apos;)   # 添加subplot 211 的标题</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rglix2v7j20b70erwf5.jpg" alt></p>
+<p>figure感觉就是给图像ID，之后可以索引定位到它。</p>
+<h2 id="plt-text-添加文字说明"><a href="#plt-text-添加文字说明" class="headerlink" title="plt.text()添加文字说明"></a>plt.text()添加文字说明</h2><ul>
+<li>text()可以在图中的任意位置添加文字，并支持LaTex语法</li>
+<li>xlable(), ylable()用于添加x轴和y轴标签</li>
+<li>title()用于添加图的题目</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">mu, sigma = 100, 15</span><br><span class="line">x = mu + sigma * np.random.randn(10000)</span><br><span class="line"></span><br><span class="line"># 数据的直方图</span><br><span class="line">n, bins, patches = plt.hist(x, 50, normed=1, facecolor=&apos;g&apos;, alpha=0.75)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.xlabel(&apos;Smarts&apos;)</span><br><span class="line">plt.ylabel(&apos;Probability&apos;)</span><br><span class="line">#添加标题</span><br><span class="line">plt.title(&apos;Histogram of IQ&apos;)</span><br><span class="line">#添加文字</span><br><span class="line">plt.text(60, .025, r&apos;$\mu=100,\ \sigma=15$&apos;)</span><br><span class="line">plt.axis([40, 160, 0, 0.03])</span><br><span class="line">plt.grid(True)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rgn3vpifj20c107agm9.jpg" alt><br>text中前两个参数感觉应该是文本出现的坐标位置。</p>
+<h2 id="plt-annotate-文本注释"><a href="#plt-annotate-文本注释" class="headerlink" title="plt.annotate()文本注释"></a>plt.annotate()文本注释</h2><p>在数据可视化的过程中，图片中的文字经常被用来注释图中的一些特征。使用annotate()方法可以很方便地添加此类注释。在使用annotate时，要考虑两个点的坐标：被注释的地方xy(x, y)和插入文本的地方xytext(x, y)。[^1]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">ax = plt.subplot(111)</span><br><span class="line"></span><br><span class="line">t = np.arange(0.0, 5.0, 0.01)</span><br><span class="line">s = np.cos(2*np.pi*t)</span><br><span class="line">line, = plt.plot(t, s, lw=2)</span><br><span class="line"></span><br><span class="line">plt.annotate(&apos;local max&apos;, xy=(2, 1), xytext=(3, 1.5),</span><br><span class="line">            arrowprops=dict(facecolor=&apos;black&apos;, shrink=0.05),</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line">plt.ylim(-2,2)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/large/6d9475f6jw1f3rgr2m11cj20ao077t94.jpg" alt><br>[^1]:<a href="http://www.datahub.top/coursedetail/?id=29" target="_blank" rel="noopener">DataHub-Python 数据可视化入门1</a></p>
+<h2 id="plt-xticks-plt-yticks-设置轴记号"><a href="#plt-xticks-plt-yticks-设置轴记号" class="headerlink" title="plt.xticks()/plt.yticks()设置轴记号"></a>plt.xticks()/plt.yticks()设置轴记号</h2><p>现在是明白干嘛用的了，就是人为设置坐标轴的刻度显示的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 导入 matplotlib 的所有内容（nympy 可以用 np 这个名字来使用）</span><br><span class="line">from pylab import *</span><br><span class="line"></span><br><span class="line"># 创建一个 8 * 6 点（point）的图，并设置分辨率为 80</span><br><span class="line">figure(figsize=(8,6), dpi=80)</span><br><span class="line"></span><br><span class="line"># 创建一个新的 1 * 1 的子图，接下来的图样绘制在其中的第 1 块（也是唯一的一块）</span><br><span class="line">subplot(1,1,1)</span><br><span class="line"></span><br><span class="line">X = np.linspace(-np.pi, np.pi, 256,endpoint=True)</span><br><span class="line">C,S = np.cos(X), np.sin(X)</span><br><span class="line"></span><br><span class="line"># 绘制余弦曲线，使用蓝色的、连续的、宽度为 1 （像素）的线条</span><br><span class="line">plot(X, C, color=&quot;blue&quot;, linewidth=1.0, linestyle=&quot;-&quot;)</span><br><span class="line"></span><br><span class="line"># 绘制正弦曲线，使用绿色的、连续的、宽度为 1 （像素）的线条</span><br><span class="line">plot(X, S, color=&quot;r&quot;, lw=4.0, linestyle=&quot;-&quot;)</span><br><span class="line"></span><br><span class="line">plt.axis([-4,4,-1.2,1.2])</span><br><span class="line"># 设置轴记号</span><br><span class="line"></span><br><span class="line">xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],</span><br><span class="line">       [r&apos;$-\pi$&apos;, r&apos;$-\pi/2$&apos;, r&apos;$0$&apos;, r&apos;$+\pi/2$&apos;, r&apos;$+\pi$&apos;])</span><br><span class="line"></span><br><span class="line">yticks([-1, 0, +1],</span><br><span class="line">       [r&apos;$-1$&apos;, r&apos;$0$&apos;, r&apos;$+1$&apos;])</span><br><span class="line"># 在屏幕上显示</span><br><span class="line">show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1f3rh9xuqs6j20dx0acjs0.jpg" alt><br>当我们设置记号的时候，我们可以同时设置记号的标签。注意这里使用了 LaTeX。[^2]</p>
+<p>[^2]:<a href="http://liam0205.me/2014/09/11/matplotlib-tutorial-zh-cn/" target="_blank" rel="noopener">Matplotlib 教程</a></p>
+<h2 id="移动脊柱-坐标系"><a href="#移动脊柱-坐标系" class="headerlink" title="移动脊柱 坐标系"></a>移动脊柱 坐标系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ax = gca()</span><br><span class="line">ax.spines[&apos;right&apos;].set_color(&apos;none&apos;)</span><br><span class="line">ax.spines[&apos;top&apos;].set_color(&apos;none&apos;)</span><br><span class="line">ax.xaxis.set_ticks_position(&apos;bottom&apos;)</span><br><span class="line">ax.spines[&apos;bottom&apos;].set_position((&apos;data&apos;,0))</span><br><span class="line">ax.yaxis.set_ticks_position(&apos;left&apos;)</span><br><span class="line">ax.spines[&apos;left&apos;].set_position((&apos;data&apos;,0))</span><br></pre></td></tr></table></figure>
+<p>这个地方确实没看懂，囧，以后再说吧，感觉就是移动了坐标轴的位置。</p>
+<h2 id="plt-legend-添加图例"><a href="#plt-legend-添加图例" class="headerlink" title="plt.legend()添加图例"></a>plt.legend()添加图例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plot(X, C, color=&quot;blue&quot;, linewidth=2.5, linestyle=&quot;-&quot;, label=&quot;cosine&quot;)</span><br><span class="line">plot(X, S, color=&quot;red&quot;,  linewidth=2.5, linestyle=&quot;-&quot;, label=&quot;sine&quot;)</span><br><span class="line"></span><br><span class="line">legend(loc=&apos;upper left&apos;)</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3rhhjm875j20dk09uaaq.jpg" alt></p>
+<h1 id="matplotlib-pyplot"><a href="#matplotlib-pyplot" class="headerlink" title="matplotlib.pyplot"></a>matplotlib.pyplot</h1><p>使用<code>plt.style.use(&#39;ggplot&#39;)</code>命令，可以作出ggplot风格的图片。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># Import necessary packages</span><br><span class="line">import pandas as pd</span><br><span class="line">%matplotlib inline</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">plt.style.use(&apos;ggplot&apos;)</span><br><span class="line">from sklearn import datasets</span><br><span class="line">from sklearn import linear_model</span><br><span class="line">import numpy as np</span><br><span class="line"># Load data</span><br><span class="line">boston = datasets.load_boston()</span><br><span class="line">yb = boston.target.reshape(-1, 1)</span><br><span class="line">Xb = boston[&apos;data&apos;][:,5].reshape(-1, 1)</span><br><span class="line"># Plot data</span><br><span class="line">plt.scatter(Xb,yb)</span><br><span class="line">plt.ylabel(&apos;value of house /1000 ($)&apos;)</span><br><span class="line">plt.xlabel(&apos;number of rooms&apos;)</span><br><span class="line"># Create linear regression object</span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"># Train the model using the training sets</span><br><span class="line">regr.fit( Xb, yb)</span><br><span class="line"># Plot outputs</span><br><span class="line">plt.scatter(Xb, yb,  color=&apos;black&apos;)</span><br><span class="line">plt.plot(Xb, regr.predict(Xb), color=&apos;blue&apos;,</span><br><span class="line">         linewidth=3)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1f3q6ylj1yjj20cw07qjrh.jpg" alt></p>
+<h2 id="给特殊点做注释"><a href="#给特殊点做注释" class="headerlink" title="给特殊点做注释"></a>给特殊点做注释</h2><p>好吧，又是注释，多个例子参考一下！</p>
+<p>我们希望在 2π/32π/3 的位置给两条函数曲线加上一个注释。首先，我们在对应的函数图像位置上画一个点；然后，向横轴引一条垂线，以虚线标记；最后，写上标签。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">t = 2*np.pi/3</span><br><span class="line"># 作一条垂直于x轴的线段，由数学知识可知，横坐标一致的两个点就在垂直于坐标轴的直线上了。这两个点是起始点。</span><br><span class="line">plot([t,t],[0,np.cos(t)], color =&apos;blue&apos;, linewidth=2.5, linestyle=&quot;--&quot;)</span><br><span class="line">scatter([t,],[np.cos(t),], 50, color =&apos;blue&apos;)</span><br><span class="line"></span><br><span class="line">annotate(r&apos;$\sin(\frac&#123;2\pi&#125;&#123;3&#125;)=\frac&#123;\sqrt&#123;3&#125;&#125;&#123;2&#125;$&apos;,</span><br><span class="line">         xy=(t, np.sin(t)), xycoords=&apos;data&apos;,</span><br><span class="line">         xytext=(+10, +30), textcoords=&apos;offset points&apos;, fontsize=16,</span><br><span class="line">         arrowprops=dict(arrowstyle=&quot;-&gt;&quot;, connectionstyle=&quot;arc3,rad=.2&quot;))</span><br><span class="line"></span><br><span class="line">plot([t,t],[0,np.sin(t)], color =&apos;red&apos;, linewidth=2.5, linestyle=&quot;--&quot;)</span><br><span class="line">scatter([t,],[np.sin(t),], 50, color =&apos;red&apos;)</span><br><span class="line"></span><br><span class="line">annotate(r&apos;$\cos(\frac&#123;2\pi&#125;&#123;3&#125;)=-\frac&#123;1&#125;&#123;2&#125;$&apos;,</span><br><span class="line">         xy=(t, np.cos(t)), xycoords=&apos;data&apos;,</span><br><span class="line">         xytext=(-90, -50), textcoords=&apos;offset points&apos;, fontsize=16,</span><br><span class="line">         arrowprops=dict(arrowstyle=&quot;-&gt;&quot;, connectionstyle=&quot;arc3,rad=.2&quot;))</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1f3ri9l7efkj20dm0anmy6.jpg" alt></p>
+<h1 id="plt-subplot"><a href="#plt-subplot" class="headerlink" title="plt.subplot()"></a>plt.subplot()</h1><p><code>plt.subplot(2,3,1)</code>表示把图标分割成2*3的网格。也可以简写<code>plt.subplot(231)</code>。其中，第一个参数是行数，第二个参数是列数，第三个参数表示图形的标号。</p>
+<h1 id="plt-axes"><a href="#plt-axes" class="headerlink" title="plt.axes()"></a>plt.axes()</h1><p>我们先来看什么是Figure和Axes对象。在matplotlib中，整个图像为一个Figure对象。在Figure对象中可以包含一个，或者多个Axes对象。每个Axes对象都是一个拥有自己坐标系统的绘图区域。其逻辑关系如下[^3][^4]：<br><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1f3rok0spuej20a506j74d.jpg" alt></p>
+<p><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.axes" target="_blank" rel="noopener">plt.axes-官方文档</a></p>
+<ul>
+<li>axes() by itself creates a default full subplot(111) window axis.</li>
+<li>axes(rect, axisbg=’w’) where rect = [left, bottom, width, height] in normalized (0, 1) units. axisbg is the background color for the axis, default white.</li>
+<li>axes(h) where h is an axes instance makes h the current axis. An Axes instance is returned.<blockquote>
+<p>rect=[左, 下, 宽, 高] 规定的矩形区域,rect矩形简写，这里的数值都是以figure大小为比例，因此，若是要两个axes并排显示，那么axes[2]的左=axes[1].左+axes[1].宽，这样axes[2]才不会和axes[1]重叠。</p>
+</blockquote>
+</li>
+</ul>
+<p>show code:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">http://matplotlib.org/examples/pylab_examples/axes_demo.html</span><br><span class="line"></span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"># create some data to use for the plot</span><br><span class="line">dt = 0.001</span><br><span class="line">t = np.arange(0.0, 10.0, dt)</span><br><span class="line">r = np.exp(-t[:1000]/0.05)               # impulse response</span><br><span class="line">x = np.random.randn(len(t))</span><br><span class="line">s = np.convolve(x, r)[:len(x)]*dt  # colored noise</span><br><span class="line"></span><br><span class="line"># the main axes is subplot(111) by default</span><br><span class="line">plt.plot(t, s)</span><br><span class="line">plt.axis([0, 1, 1.1*np.amin(s), 2*np.amax(s)])</span><br><span class="line">plt.xlabel(&apos;time (s)&apos;)</span><br><span class="line">plt.ylabel(&apos;current (nA)&apos;)</span><br><span class="line">plt.title(&apos;Gaussian colored noise&apos;)</span><br><span class="line"></span><br><span class="line"># this is an inset axes over the main axes</span><br><span class="line">a = plt.axes([.65, .6, .2, .2], axisbg=&apos;y&apos;)</span><br><span class="line">n, bins, patches = plt.hist(s, 400, normed=1)</span><br><span class="line">plt.title(&apos;Probability&apos;)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line"># this is another inset axes over the main axes</span><br><span class="line">a = plt.axes([0.2, 0.6, .2, .2], axisbg=&apos;y&apos;)</span><br><span class="line">plt.plot(t[:len(r)], r)</span><br><span class="line">plt.title(&apos;Impulse response&apos;)</span><br><span class="line">plt.xlim(0, 0.2)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww3.sinaimg.cn/large/6d9475f6jw1f3row583k8j20bd07tt9e.jpg" alt></p>
+<p>[^3]:<a href="http://www.cnblogs.com/vamei/archive/2013/01/30/2879700.html#commentform" target="_blank" rel="noopener">绘图: matplotlib核心剖析</a><br>[^4]:<a href="https://www.zhihu.com/question/21953954" target="_blank" rel="noopener">python如何调整子图的大小？</a></p>
+<h1 id="pyplot-pie参数"><a href="#pyplot-pie参数" class="headerlink" title="pyplot.pie参数"></a>pyplot.pie参数</h1><ul>
+<li><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.pie" target="_blank" rel="noopener">matplotlib.pyplot.pie</a></li>
+</ul>
+<h2 id="colors颜色"><a href="#colors颜色" class="headerlink" title="colors颜色"></a>colors颜色</h2><p>找出matpltlib.pyplot.plot中的colors可以取哪些值？</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/22408237/named-colors-in-matplotlib" target="_blank" rel="noopener">so-Named colors in matplotlib</a></li>
+<li><a href="http://blog.csdn.net/kkxgx/article/details/6951959" target="_blank" rel="noopener">CSDN-matplotlib学习之（四）设置线条颜色、形状</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for name,hex in matplotlib.colors.cnames.iteritems():</span><br><span class="line">    print name,hex</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>打印颜色值和对应的RGB值。</p>
+<ul>
+<li><code>plt.axis(&#39;equal&#39;)</code>避免比例压缩为椭圆</li>
+</ul>
+<h2 id="autopct"><a href="#autopct" class="headerlink" title="autopct"></a>autopct</h2><ul>
+<li><a href="http://stackoverflow.com/questions/6170246/how-do-i-use-matplotlib-autopct" target="_blank" rel="noopener">How do I use matplotlib autopct?</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">autopct enables you to display the percent value using Python string formatting. For example, if autopct=&apos;%.2f&apos;, then for each pie wedge, the format string is &apos;%.2f&apos; and the numerical percent value for that wedge is pct, so the wedge label is set to the string &apos;%.2f&apos;%pct.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<script src="//w.segmentfault.com/card/1030000002497141.js?w=0&3rd=0&bg=0&bd=DDDDDD&cl=333333&btn=009a61&noBtn=0"></script>
+
+<hr>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/12/09/python-argparse-note/" rel="bookmark">Python 标准库 argparse 的用法</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/12/15/python-debug-ipdb/" rel="bookmark">Python 调试模块 ipdb</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/09/07/python-effective-tips/" rel="bookmark">Python 实用技巧总结</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2016/05/14/python-matplotlib-basic/" title="Python--matplotlib绘图可视化知识点整理">https://michael728.github.io/2016/05/14/python-matplotlib-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Matplotlib/" rel="tag"># Matplotlib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/03/SQL/" rel="next" title="SQL基础语法笔记教程整理">
+                <i class="fa fa-chevron-left"></i> SQL基础语法笔记教程整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/25/life-about-intern-in-Shanghai/" rel="prev" title="在魔都实习生活">
+                在魔都实习生活 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matplotlib图标正常显示中文"><span class="nav-number">2.</span> <span class="nav-text">matplotlib图标正常显示中文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matplotlib-inline和pylab-inline"><span class="nav-number">3.</span> <span class="nav-text">matplotlib inline和pylab inline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为项目设置matplotlib参数"><span class="nav-number">4.</span> <span class="nav-text">为项目设置matplotlib参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线条相关属性标记设置"><span class="nav-number">5.</span> <span class="nav-text">线条相关属性标记设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用来该表线条的属性"><span class="nav-number">5.1.</span> <span class="nav-text">用来该表线条的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线条标记"><span class="nav-number">5.2.</span> <span class="nav-text">线条标记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色"><span class="nav-number">5.3.</span> <span class="nav-text">颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景色"><span class="nav-number">5.4.</span> <span class="nav-text">背景色</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-number">6.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定坐标范围"><span class="nav-number">6.1.</span> <span class="nav-text">确定坐标范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#叠加图"><span class="nav-number">6.2.</span> <span class="nav-text">叠加图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plt-figure"><span class="nav-number">6.3.</span> <span class="nav-text">plt.figure()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plt-text-添加文字说明"><span class="nav-number">6.4.</span> <span class="nav-text">plt.text()添加文字说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plt-annotate-文本注释"><span class="nav-number">6.5.</span> <span class="nav-text">plt.annotate()文本注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plt-xticks-plt-yticks-设置轴记号"><span class="nav-number">6.6.</span> <span class="nav-text">plt.xticks()/plt.yticks()设置轴记号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动脊柱-坐标系"><span class="nav-number">6.7.</span> <span class="nav-text">移动脊柱 坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plt-legend-添加图例"><span class="nav-number">6.8.</span> <span class="nav-text">plt.legend()添加图例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matplotlib-pyplot"><span class="nav-number">7.</span> <span class="nav-text">matplotlib.pyplot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#给特殊点做注释"><span class="nav-number">7.1.</span> <span class="nav-text">给特殊点做注释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plt-subplot"><span class="nav-number">8.</span> <span class="nav-text">plt.subplot()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plt-axes"><span class="nav-number">9.</span> <span class="nav-text">plt.axes()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pyplot-pie参数"><span class="nav-number">10.</span> <span class="nav-text">pyplot.pie参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#colors颜色"><span class="nav-number">10.1.</span> <span class="nav-text">colors颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#autopct"><span class="nav-number">10.2.</span> <span class="nav-text">autopct</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2016/05/14/python-matplotlib-basic/";
+    this.page.identifier = "2016/05/14/python-matplotlib-basic/";
+    this.page.title = 'Python--matplotlib绘图可视化知识点整理';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

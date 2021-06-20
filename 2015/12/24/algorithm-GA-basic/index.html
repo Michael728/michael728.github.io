@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一、遗传算法进化论背景知识作为遗传算法生物背景的介绍，下面内容了解即可：  种群(Population)：生物的进化以群体的形式进行，这样的一个群体称为种群。  个体：组成种群的单个生物。  基因 ( Gene ) ：一个遗传因子。  染色体 ( Chromosome ) ：包含一组的基因。  生存竞争，适者生存：对环境适应度高的、牛B的个体参与繁殖的机会比较多，后代就会越来越多。适应度低的个体参">
+<meta name="keywords" content="算法,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遗传算法GA(Genetic Algorithm)入门知识梳理">
+<meta property="og:url" content="https://michael728.github.io/2015/12/24/algorithm-GA-basic/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="一、遗传算法进化论背景知识作为遗传算法生物背景的介绍，下面内容了解即可：  种群(Population)：生物的进化以群体的形式进行，这样的一个群体称为种群。  个体：组成种群的单个生物。  基因 ( Gene ) ：一个遗传因子。  染色体 ( Chromosome ) ：包含一组的基因。  生存竞争，适者生存：对环境适应度高的、牛B的个体参与繁殖的机会比较多，后代就会越来越多。适应度低的个体参">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez1iv1p81vj20hr0e5gna.jpg">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="遗传算法GA(Genetic Algorithm)入门知识梳理">
+<meta name="twitter:description" content="一、遗传算法进化论背景知识作为遗传算法生物背景的介绍，下面内容了解即可：  种群(Population)：生物的进化以群体的形式进行，这样的一个群体称为种群。  个体：组成种群的单个生物。  基因 ( Gene ) ：一个遗传因子。  染色体 ( Chromosome ) ：包含一组的基因。  生存竞争，适者生存：对环境适应度高的、牛B的个体参与繁殖的机会比较多，后代就会越来越多。适应度低的个体参">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez1iv1p81vj20hr0e5gna.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2015/12/24/algorithm-GA-basic/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>遗传算法GA(Genetic Algorithm)入门知识梳理 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2015/12/24/algorithm-GA-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">遗传算法GA(Genetic Algorithm)入门知识梳理
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-12-24 21:11:03" itemprop="dateCreated datePublished" datetime="2015-12-24T21:11:03+00:00">2015-12-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、遗传算法进化论背景知识"><a href="#一、遗传算法进化论背景知识" class="headerlink" title="一、遗传算法进化论背景知识"></a>一、遗传算法进化论背景知识</h1><p>作为遗传算法生物背景的介绍，下面内容了解即可：</p>
+<ul>
+<li><p>种群(Population)：生物的进化以群体的形式进行，这样的一个群体称为种群。</p>
+</li>
+<li><p>个体：组成种群的单个生物。</p>
+</li>
+<li><p>基因 ( Gene ) ：一个遗传因子。</p>
+</li>
+<li><p>染色体 ( Chromosome ) ：包含一组的基因。</p>
+</li>
+<li><p>生存竞争，适者生存：对环境适应度高的、牛B的个体参与繁殖的机会比较多，后代就会越来越多。适应度低的个体参与繁殖的机会比较少，后代就会越来越少。</p>
+</li>
+<li><p>遗传与变异：新个体会遗传父母双方各一部分的基因，同时有一定的概率发生基因变异。</p>
+</li>
+</ul>
+<a id="more"></a>
+<p>简单说来就是：繁殖过程，会发生基因交叉( Crossover ) ，基因突变 ( Mutation ) ，适应度( Fitness )低的个体会被逐步淘汰，而适应度高的个体会越来越多。那么经过N代的自然选择后，保存下来的个体都是适应度很高的，其中很可能包含史上产生的适应度最高的那个个体。</p>
+<h1 id="二、遗传算法思想"><a href="#二、遗传算法思想" class="headerlink" title="二、遗传算法思想"></a>二、遗传算法思想</h1><p>GA的组成:</p>
+<ul>
+<li><p>编码（产生初始种群）</p>
+</li>
+<li><p>适应度函数</p>
+</li>
+<li><p>遗传算子（选择、交叉、变异）</p>
+</li>
+<li><p>运行参数</p>
+</li>
+</ul>
+<p>借鉴生物进化论，遗传算法将要解决的问题模拟成一个生物进化的过程，通过复制、交叉、突变等操作产生下一代的解，并逐步淘汰掉适应度函数值低的解，增加适应度函数值高的解。这样进化N代后就很有可能会进化出适应度函数值很高的个体。</p>
+<p>举个例子，使用遗传算法解决“0-1背包问题”的思路：0-1背包的解可以编码为一串0-1字符串（0：不取，1：取） ；首先，随机产生M个0-1字符串，然后评价这些0-1字符串作为0-1背包问题的解的优劣；然后，随机选择一些字符串通过交叉、突变等操作产生下一代的M个字符串，而且较优的解被选中的概率要比较高。这样经过G代的进化后就可能会产生出0-1背包问题的一个“近似最优解”。</p>
+<h2 id="2-1-编码"><a href="#2-1-编码" class="headerlink" title="2.1 编码"></a>2.1 编码</h2><p>需要将问题的解编码成字符串的形式才能使用遗传算法。最简单的一种编码方式是二进制编码，即将问题的解编码成二进制位数组的形式。例如，问题的解是整数，那么可以将其编码成二进制位数组的形式。将0-1字符串作为0-1背包问题的解就属于二进制编码。</p>
+<p>基因在一定能够意义上包含了它所代表的问题的解。基因的编码方式有很多，这也取决于要解决的问题本身。常见的编码方式有：</p>
+<ol>
+<li><p>二进制编码，基因用0或1表示（常用于解决01背包问题） 如：基因A：00100011010 (代表一个个体的染色体)</p>
+</li>
+<li><p>互换编码（用于解决排序问题，如旅行商问题和调度问题） 如旅行商问题中，一串基因编码用来表示遍历的城市顺序，如：234517986，表示九个城市中，先经过城市2，再经过城市3，依此类推。</p>
+</li>
+<li><p>树形编码（用于遗传规划中的演化编程或者表示）</p>
+</li>
+</ol>
+<p>如,问题：给定了很多组输入和输出。请你为这些输入输出选择一个函数，使得这个函数把每个输入尽可能近地映射为输出。 编码方法：基因就是树形结构中的一些函数。</p>
+<ol start="4">
+<li>值编码 （二进制编码不好用时，解决复杂的数值问题）</li>
+</ol>
+<p>在值编码中，每个基因就是一串取值。这些取值可以是与问题有关任何值：整数，实数，字符或者其他一些更复杂的东西。</p>
+<h2 id="2-2-适应度函数"><a href="#2-2-适应度函数" class="headerlink" title="2.2 适应度函数"></a>2.2 适应度函数</h2><p>适应度函数 ( Fitness Function )：用于评价某个染色体的适应度，用f(x)表示。有时需要区分染色体的适应度函数与问题的目标函数。例如：0-1背包问题的目标函数是所取得物品价值，但将物品价值作为染色体的适应度函数可能并不一定适合。适应度函数与目标函数是正相关的，可对目标函数作一些变形来得到适应度函数。</p>
+<p>遗传算子：遗传算法有3个最基本的操作：选择，交叉，变异。</p>
+<h2 id="2-3-选择"><a href="#2-3-选择" class="headerlink" title="2.3 选择"></a>2.3 选择</h2><p>选择一些染色体来产生下一代。一种常用的选择策略是 “比例选择”，也就是个体被选中的概率与其适应度函数值成正比。假设群体的个体总数是M，那么那么一个体Xi被选中的概率为f(Xi)/( f(X1) + f(X2) + …….. + f(Xn) ) 。比例选择实现算法就是所谓的“轮盘赌算法”( Roulette Wheel Selection )。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">轮盘赌算法</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"></span><br><span class="line">* 按设定的概率，随机选中一个个体</span><br><span class="line"></span><br><span class="line">* P[i]表示第i个个体被选中的概率</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">int RWS()</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">m =0;</span><br><span class="line"></span><br><span class="line">r =Random(0,1); //r为0至1的随机数</span><br><span class="line"></span><br><span class="line">for(i=1;i&lt;=N; i++)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">/* 产生的随机数在m~m+P[i]间则认为选中了i</span><br><span class="line"></span><br><span class="line">* 因此i被选中的概率是P[i]</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">m = m + P[i];</span><br><span class="line"></span><br><span class="line">if(r&lt;=m) return i;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-交叉"><a href="#2-4-交叉" class="headerlink" title="2.4 交叉"></a>2.4 交叉</h2><p>所谓交叉运算，是指对两个相互配对的染色体依据交叉概率按某种方式相互交换其部分基因，从而形成两个新的个体。交叉运算在GA中起关键作用，是产生新个体的主要方法。</p>
+<h3 id="2-4-1-2条染色体交换部分基因，来构造下一代的2条新的染色体。例如："><a href="#2-4-1-2条染色体交换部分基因，来构造下一代的2条新的染色体。例如：" class="headerlink" title="2.4.1 2条染色体交换部分基因，来构造下一代的2条新的染色体。例如："></a>2.4.1 2条染色体交换部分基因，来构造下一代的2条新的染色体。例如：</h3><p>交叉前：</p>
+<p>00000|011100000000|10000</p>
+<p>11100|000001111110|00101</p>
+<p>交叉后：</p>
+<p>00000|000001111110|10000</p>
+<p>11100|011100000000|00101</p>
+<p>染色体交叉是以一定的概率发生的，这个概率记为Pc 。</p>
+<h3 id="2-4-2-双交叉点法-（用于二进制编码）"><a href="#2-4-2-双交叉点法-（用于二进制编码）" class="headerlink" title="2.4.2 双交叉点法 （用于二进制编码）"></a>2.4.2 双交叉点法 （用于二进制编码）</h3><p>选择两个交叉点,子代基因在两个交叉点间部分来自一个父代基因,其余部分来自于另外一个父代基因. 如：</p>
+<p>交叉前：</p>
+<p>01 |0010| 11</p>
+<p>11 |0111| 01</p>
+<p>交叉后：</p>
+<p>11 |0010| 01</p>
+<p>01 |0111| 11</p>
+<h3 id="2-4-3-基于“-与-或-”交叉法-（用于二进制编码）"><a href="#2-4-3-基于“-与-或-”交叉法-（用于二进制编码）" class="headerlink" title="2.4.3. 基于“ 与/或 ”交叉法 （用于二进制编码）"></a>2.4.3. 基于“ 与/或 ”交叉法 （用于二进制编码）</h3><p>对父代按位”与”逻辑运算产生一子代A;按位”或”逻辑运算产生另一子代B。该交叉策略在解背包问题中效果较好 . 如：</p>
+<p>交叉前：</p>
+<p>01001011</p>
+<p>11011101</p>
+<p>交叉后：</p>
+<p>01001001</p>
+<p>11011111</p>
+<p>还有其他交叉方法，参考<a href="http://wenku.baidu.com/link?url=AA6keLNbs-oDF8o1QUCIDhbbziMRcx_T5rALgEiDNBgdNynXvo5v3jnE5xp_Vr9GqVA3n_TBYI7CE_oK1fu5lA0qQ6JNWr1ZUnm4Ek8_8cm" target="_blank" rel="noopener">遗传算法学习心得</a></p>
+<h2 id="2-5-变异"><a href="#2-5-变异" class="headerlink" title="2.5 变异"></a>2.5 变异</h2><p>变异是指依据变异概率将个体编码串中的某些基因值用其它基因值来替换，从而形成一个新的个体。GA中的变异运算是产生新个体的辅助方法，它决定了GA的局部搜索能力，同时保持种群的多样性。交叉运算和变异运算的相互配合，共同完成对搜索空间的全局搜索和局部搜索。</p>
+<p>注：变异概率Pm不能太小，这样降低全局搜索能力；也不能太大，Pm &gt; 0.5，这时GA退化为随机搜索。</p>
+<p>在繁殖过程，新产生的染色体中的基因会以一定的概率出错，称为变异。变异发生的概率记为Pm 。</p>
+<h3 id="2-5-1-基本位变异算子-（用于二进制编码）"><a href="#2-5-1-基本位变异算子-（用于二进制编码）" class="headerlink" title="2.5.1. 基本位变异算子 （用于二进制编码）"></a>2.5.1. 基本位变异算子 （用于二进制编码）</h3><p>基本位变异算子是指对个体编码串随机指定的某一位或某几位基因作变异运算。对于基本遗传算法中用二进制编码符号串所表示的个体，若需要进行变异操作的某一基因座上的原有基因值为0，则变异操作将其变为1；反之，若原有基因值为1，则变异操作将其变为0。</p>
+<p>变异前：</p>
+<p>000001110000000010000</p>
+<p>变异后：</p>
+<p>000001110000100010000</p>
+<h3 id="2-5-2-逆转变异算子（用于互换编码）"><a href="#2-5-2-逆转变异算子（用于互换编码）" class="headerlink" title="2.5.2. 逆转变异算子（用于互换编码）"></a>2.5.2. 逆转变异算子（用于互换编码）</h3><p>在个体中随机挑选两个逆转点，再将两个逆转点间的基因交换。 如：</p>
+<p>变异前： 1346798205</p>
+<p>变异后： 1246798305</p>
+<h2 id="2-6-运行参数"><a href="#2-6-运行参数" class="headerlink" title="2.6 运行参数"></a>2.6 运行参数</h2><p>GA运行时选择的参数应该视解决的具体问题而定，到目前为止，还没有一个适用于GA所有应用领域的关于算法参数的理论。下面是一般情况下使用GA时推荐的参数：</p>
+<h3 id="2-6-1-交叉率"><a href="#2-6-1-交叉率" class="headerlink" title="2.6.1 交叉率"></a>2.6.1 交叉率</h3><p>交叉率一般来说应该比较大，推荐使用80％-95％。</p>
+<h3 id="2-6-2-变异率"><a href="#2-6-2-变异率" class="headerlink" title="2.6.2 变异率"></a>2.6.2 变异率</h3><p>变异率一般来说应该比较小，一般使用0.5％-1％最好。</p>
+<h3 id="2-6-3-种群的规模"><a href="#2-6-3-种群的规模" class="headerlink" title="2.6.3 种群的规模"></a>2.6.3 种群的规模</h3><p>种群规模指的是群体中个体的个数。实验发现，比较大的种群的规模并不能优化遗传算法的结果。种群的大小推荐使用20-30，一些研究表明，种群规模 的大小取决于编码的方法，具体的说就是编码串（Encoded String）的大小。也就是说，如果说采用32位为基因编码的时候种群的规模大小最好为32的话，那么当采用16位为基因编码时种群的规模相应应变为原 来的两倍。</p>
+<h3 id="2-6-4-遗传运算的终止进化代数"><a href="#2-6-4-遗传运算的终止进化代数" class="headerlink" title="2.6.4 遗传运算的终止进化代数"></a>2.6.4 遗传运算的终止进化代数</h3><p>个人的想法是，设定一个计数器，如果连续N代出现的最优个体的适应度都一样时，（严格的说应该是，连续N代子代种群的最优个体适应度都&lt;=父代最优个性的适应度）可以终止运算。</p>
+<h1 id="三、SGA（基本遗传算法）的伪代码"><a href="#三、SGA（基本遗传算法）的伪代码" class="headerlink" title="三、SGA（基本遗传算法）的伪代码"></a>三、SGA（基本遗传算法）的伪代码</h1><p>SGA（基本遗传算法）中采用轮盘赌选择方法</p>
+<h2 id="3-1算法流程图"><a href="#3-1算法流程图" class="headerlink" title="3.1算法流程图"></a>3.1算法流程图</h2><p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez1iv1p81vj20hr0e5gna.jpg" alt="GA流程图"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">基本遗传算法伪代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"></span><br><span class="line">* Pc：交叉发生的概率</span><br><span class="line"></span><br><span class="line">* Pm：变异发生的概率</span><br><span class="line"></span><br><span class="line">* M：种群规模</span><br><span class="line"></span><br><span class="line">* G：终止进化的代数</span><br><span class="line"></span><br><span class="line">* Tf：进化产生的任何一个个体的适应度函数超过Tf，则可以终止进化过程</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">初始化Pm，Pc，M，G，Tf等参数。随机产生第一代种群Pop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">do</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">　　计算种群Pop中每一个体的适应度F(i)。</span><br><span class="line"></span><br><span class="line">　　初始化空种群newPop</span><br><span class="line"></span><br><span class="line">　　do</span><br><span class="line"></span><br><span class="line">　　&#123;</span><br><span class="line"></span><br><span class="line">　　　　根据适应度以比例选择算法从种群Pop中选出2个个体</span><br><span class="line"></span><br><span class="line">　　　　if ( random ( 0 , 1 ) &lt; Pc )</span><br><span class="line"></span><br><span class="line">　　　　&#123;</span><br><span class="line"></span><br><span class="line">　　　　　　对2个个体按交叉概率Pc执行交叉操作</span><br><span class="line"></span><br><span class="line">　　　　&#125;</span><br><span class="line"></span><br><span class="line">　　　　if ( random ( 0 , 1 ) &lt; Pm )</span><br><span class="line"></span><br><span class="line">　　　　&#123;</span><br><span class="line"></span><br><span class="line">　　　　　　对2个个体按变异概率Pm执行变异操作</span><br><span class="line"></span><br><span class="line">　　　　&#125;</span><br><span class="line"></span><br><span class="line">将2个新个体加入种群newPop中</span><br><span class="line"></span><br><span class="line">&#125; until ( M个子代被创建 )</span><br><span class="line"></span><br><span class="line">用newPop取代Pop</span><br><span class="line"></span><br><span class="line">&#125;until ( 任何染色体得分超过Tf， 或繁殖代数超过G )</span><br></pre></td></tr></table></figure>
+<h1 id="四、基本遗传算法的优化"><a href="#四、基本遗传算法的优化" class="headerlink" title="四、基本遗传算法的优化"></a>四、基本遗传算法的优化</h1><p>下面的方法可优化遗传算法的性能。</p>
+<h2 id="4-1-灾变"><a href="#4-1-灾变" class="headerlink" title="4.1 灾变"></a>4.1 灾变</h2><p>遗传算法的局部搜索能力较强，但是很容易陷入局部极值。引用网上的一段原话: “那么如何解决遗传算法容易陷入局部极值的问题呢？让我们来看看大自然提供的方案。</p>
+<p>六千五百万年以前，恐龙和灵长类动物并存，恐龙在地球上占绝对统 治地位，如果恐龙没有灭绝灵长类动物是绝没有可能统治地球的。正是恐龙的灭绝才使灵长类动物有了充分进化的余地，事实上地球至少经历了5次物种大灭绝，每 次物种灭绝都给更加高级的生物提供了充分进化的余地。所以要跳出局部极值就必须杀死当前所有的优秀个体，从而让远离当前极值的点有充分的进化余地。这就是灾变的思想。”</p>
+<p>灾变就是杀掉最优秀的个体，这样才可能产生更优秀的物种。那何时进行灾变，灾变次数又如何设定？</p>
+<p>何时进行灾变，可以采用灾变倒计数的方式。如果n代还没有出现比之前更优秀的个体时，可以发生灾变。灾变次数可以这样来确定，如果若干次灾变后产生的个体的适应度与没灾变前的一样，可停止灾变。</p>
+<h2 id="4-2-精英主义-Elitist-Strategy-选择："><a href="#4-2-精英主义-Elitist-Strategy-选择：" class="headerlink" title="4.2 精英主义(Elitist Strategy)选择："></a>4.2 精英主义(Elitist Strategy)选择：</h2><p>当利用交叉和变异产生新的一代时，我们有很大的可能把在某个中间步骤中得到的最优解丢失。</p>
+<p>精英主义的思想是,在每一次产生新的一代时，首先把当前最优解原封不动的复制到新的一代中。然后按照前面所说的那样做就行。精英主义方法可以大幅提高运算速度，因为它可以防止丢失掉找到的最好的解。</p>
+<p>精英主义是基本遗传算法的一种优化。为了防止进化过程中产生的最优解被交叉和变异所破坏，可以将每一代中的最优解原封不动的复制到下一代中。</p>
+<h2 id="4-3-矛盾"><a href="#4-3-矛盾" class="headerlink" title="4.3 矛盾"></a>4.3 矛盾</h2><p>由上面看来,灾变与精英主义之间似乎存在着矛盾.前者是将产生的最优个体杀掉,而后者是将最优秀个体基因直接保存到下一代.</p>
+<p>应该辩证地看待它们之间的矛盾,两者其实是可以共存的.我们在每一代进行交叉运算时,均直接把最优秀的个体复制到下一代;但当连续N代,都没有更优 秀的个体出现时,便可以猜想可能陷入局部最优解了,这样可以采用灾变的手段.可以说,精英主义是伴随的每一代的,但灾变却不需要经常发生,否则算法可能下 降为随机搜索了.</p>
+<p>当然,每个算法中不一定要用精英主义和灾变的手段,应该根据具体的问题而定</p>
+<h2 id="4-4-插入操作："><a href="#4-4-插入操作：" class="headerlink" title="4.4 插入操作："></a>4.4 插入操作：</h2><p>可在3个基本操作的基础上增加一个插入操作。插入操作将染色体中的某个随机的片段移位到另一个随机的位置。</p>
+<h1 id="五、GA算法特点"><a href="#五、GA算法特点" class="headerlink" title="五、GA算法特点"></a>五、GA算法特点</h1><h2 id="5-1-遗传算法的优点"><a href="#5-1-遗传算法的优点" class="headerlink" title="5.1 遗传算法的优点:"></a>5.1 遗传算法的优点:</h2><ul>
+<li><p>群体搜索，易于并行化处理；</p>
+</li>
+<li><p>不是盲目穷举，而是启发式搜索；</p>
+</li>
+<li><p>适应度函数不受连续、可微等条件的约束，适用范围很广。</p>
+</li>
+<li><p>容易实现。一旦有了一个遗传算法的程序，如果想解决一个新的问题，只需针对新的问题重新进行基因编码就行；如果编码方法也相同，那只需要改变一下适应度函数就可以了。</p>
+</li>
+</ul>
+<h2 id="5-2-遗传算法的缺点"><a href="#5-2-遗传算法的缺点" class="headerlink" title="5.2 遗传算法的缺点:"></a>5.2 遗传算法的缺点:</h2><ul>
+<li>全局搜索能力不强,很容易陷入局部最优解跳不出来；(可结合SA进行改进,因为SA在理率上是100%得到全局最优的,但搜索代价高)</li>
+</ul>
+<p>将遗传算法用于解决各种实际问题后，人们发现遣传算法也会由于各种原因过早向目标函数的局部最优解收敛，从而很难找到全局最优解。其中有些是由于目标函数的特性造成的，例如函数具有欺骗性，不满足构造模块假说等等；另外一些则是由于算法设计不当。为此，不断有人对遗传算法提出各种各样的改进方案。例如：针对原先的定长二进制编码方案；提出了动态编码、实数编码等改进方案；针对按比例的选择机制，提出了竞争选择、按续挑选等改进方案；针对原先的一点交<em>算子，提出了两点交</em>、多点交<em>、均匀交</em>等算子；针对原先遗传算法各控制参数在进化过程中不变的情况，提出了退化遗传算法、自适应遗传算法等。另外，针对不同问题还出现了分布式遗传算法、并行遗传算法等等。</p>
+<h1 id="六、遗传算法的实例"><a href="#六、遗传算法的实例" class="headerlink" title="六、遗传算法的实例"></a>六、遗传算法的实例</h1><h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><strong>参考文献都是干货！！！参考文献都是干货！！！参考文献都是干货！！！</strong></p>
+<ol>
+<li><a href="http://www.cnblogs.com/heaad/archive/2010/12/23/1914725.html" target="_blank" rel="noopener">遗传算法入门-博客园-苍梧</a><br>本文主要参考，推荐！感谢作者~</li>
+<li><a href="http://blog.csdn.net/v_JULY_v/article/details/6132775" target="_blank" rel="noopener">经典算法研究系列：七、深入浅出遗传算法</a><br>July大神写的，通俗易懂，推荐！！！</li>
+<li><a href="http://garfileo.is-programmer.com/2011/2/19/hello-ga.24563.html" target="_blank" rel="noopener">HELLO，遗传算法！</a><br>博主语言轻松，用python描述了遗传算法求解一个函数最大值的例子。</li>
+<li><a href="http://www.jlyblog.com/745.html" target="_blank" rel="noopener">遗传算法理论基础与简单应用实例</a><br>博主总结整理的内容，挺不错的，文中的链接有实例应用。</li>
+<li><a href="http://blog.csdn.net/emiyasstar__/article/details/6938608" target="_blank" rel="noopener">遗传算法入门到掌握（一）</a>    <a href="http://download.csdn.net/detail/emiyasstar__/3759299" target="_blank" rel="noopener">CSDN-GA代码下载</a><br>袋鼠跳的例子来描述了GA算法，帮助理解GA。</li>
+<li><a href="http://blog.csdn.net/b2b160/article/details/4680853" target="_blank" rel="noopener">非常好的理解遗传算法的例子</a><br>求下述二元函数的最大值的例子</li>
+<li><a href="http://wenku.baidu.com/link?url=AA6keLNbs-oDF8o1QUCIDhbbziMRcx_T5rALgEiDNBgdNynXvo5v3jnE5xp_Vr9GqVA3n_TBYI7CE_oK1fu5lA0qQ6JNWr1ZUnm4Ek8_8cm" target="_blank" rel="noopener">遗传算法学习心得</a></li>
+</ol>
+<hr>
+<p>本文由 <strong><a href="http://michaelxiang.me/" target="_blank" rel="noopener">Michael翔</a></strong> 创作，采用 <strong><a href="http://creativecommons.org/licenses/by/3.0/cn/" target="_blank" rel="noopener">知识共享署名 3.0 中国大陆许可协议</a> </strong>进行许可。<br>可自由转载、引用，但需署名作者且注明文章出处。</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2015/12/24/algorithm-GA-basic/" title="遗传算法GA(Genetic Algorithm)入门知识梳理">https://michael728.github.io/2015/12/24/algorithm-GA-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/23/python-pandas-basic/" rel="next" title="Python数据分析入门之pandas总结基础">
+                <i class="fa fa-chevron-left"></i> Python数据分析入门之pandas总结基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/28/tools-sougoupinyin/" rel="prev" title="搜狗输入法使用技巧整理">
+                搜狗输入法使用技巧整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、遗传算法进化论背景知识"><span class="nav-number">1.</span> <span class="nav-text">一、遗传算法进化论背景知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、遗传算法思想"><span class="nav-number">2.</span> <span class="nav-text">二、遗传算法思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-编码"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-适应度函数"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 适应度函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-选择"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-交叉"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 交叉</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-2条染色体交换部分基因，来构造下一代的2条新的染色体。例如："><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 2条染色体交换部分基因，来构造下一代的2条新的染色体。例如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-双交叉点法-（用于二进制编码）"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2 双交叉点法 （用于二进制编码）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-基于“-与-或-”交叉法-（用于二进制编码）"><span class="nav-number">2.4.3.</span> <span class="nav-text">2.4.3. 基于“ 与/或 ”交叉法 （用于二进制编码）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-变异"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 变异</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-基本位变异算子-（用于二进制编码）"><span class="nav-number">2.5.1.</span> <span class="nav-text">2.5.1. 基本位变异算子 （用于二进制编码）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-逆转变异算子（用于互换编码）"><span class="nav-number">2.5.2.</span> <span class="nav-text">2.5.2. 逆转变异算子（用于互换编码）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-运行参数"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 运行参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-交叉率"><span class="nav-number">2.6.1.</span> <span class="nav-text">2.6.1 交叉率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-变异率"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.6.2 变异率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-3-种群的规模"><span class="nav-number">2.6.3.</span> <span class="nav-text">2.6.3 种群的规模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-4-遗传运算的终止进化代数"><span class="nav-number">2.6.4.</span> <span class="nav-text">2.6.4 遗传运算的终止进化代数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、SGA（基本遗传算法）的伪代码"><span class="nav-number">3.</span> <span class="nav-text">三、SGA（基本遗传算法）的伪代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1算法流程图"><span class="nav-number">3.1.</span> <span class="nav-text">3.1算法流程图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、基本遗传算法的优化"><span class="nav-number">4.</span> <span class="nav-text">四、基本遗传算法的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-灾变"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 灾变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-精英主义-Elitist-Strategy-选择："><span class="nav-number">4.2.</span> <span class="nav-text">4.2 精英主义(Elitist Strategy)选择：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-矛盾"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 矛盾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-插入操作："><span class="nav-number">4.4.</span> <span class="nav-text">4.4 插入操作：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、GA算法特点"><span class="nav-number">5.</span> <span class="nav-text">五、GA算法特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-遗传算法的优点"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 遗传算法的优点:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-遗传算法的缺点"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 遗传算法的缺点:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、遗传算法的实例"><span class="nav-number">6.</span> <span class="nav-text">六、遗传算法的实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">7.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2015/12/24/algorithm-GA-basic/";
+    this.page.identifier = "2015/12/24/algorithm-GA-basic/";
+    this.page.title = '遗传算法GA(Genetic Algorithm)入门知识梳理';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

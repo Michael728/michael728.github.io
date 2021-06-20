@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Quartz 概念Quartz 是任务调度的开源项目。Quartz 就是基于 Java 实现的任务调度框架。  Quartz 官网地址：http://www.quartz-scheduler.org Quartz 官网 - Examples：http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/  Quartz 运">
+<meta name="keywords" content="Quartz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 定时任务框架 Quartz 入门篇">
+<meta property="og:url" content="https://michael728.github.io/2020/09/06/java-middleware-quartz-basic/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="Quartz 概念Quartz 是任务调度的开源项目。Quartz 就是基于 Java 实现的任务调度框架。  Quartz 官网地址：http://www.quartz-scheduler.org Quartz 官网 - Examples：http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/  Quartz 运">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/cpbdMt.png">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 定时任务框架 Quartz 入门篇">
+<meta name="twitter:description" content="Quartz 概念Quartz 是任务调度的开源项目。Quartz 就是基于 Java 实现的任务调度框架。  Quartz 官网地址：http://www.quartz-scheduler.org Quartz 官网 - Examples：http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/  Quartz 运">
+<meta name="twitter:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/cpbdMt.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2020/09/06/java-middleware-quartz-basic/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java 定时任务框架 Quartz 入门篇 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2020/09/06/java-middleware-quartz-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Java 定时任务框架 Quartz 入门篇
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-09-06 12:49:10" itemprop="dateCreated datePublished" datetime="2020-09-06T12:49:10+00:00">2020-09-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Quartz-概念"><a href="#Quartz-概念" class="headerlink" title="Quartz 概念"></a>Quartz 概念</h2><p>Quartz 是任务调度的开源项目。Quartz 就是基于 Java 实现的任务调度框架。</p>
+<ul>
+<li>Quartz 官网地址：<a href="http://www.quartz-scheduler.org" target="_blank" rel="noopener">http://www.quartz-scheduler.org</a></li>
+<li>Quartz 官网 - Examples：<a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/" target="_blank" rel="noopener">http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/</a></li>
+</ul>
+<h2 id="Quartz-运行环境"><a href="#Quartz-运行环境" class="headerlink" title="Quartz 运行环境"></a>Quartz 运行环境</h2><ul>
+<li>Quartz 可以运行嵌入在两一个独立式应用程序</li>
+<li>Quartz 可以在应用程序服务器（或 Sevelet 容器） 内被实例化，并参与事务</li>
+<li>Quartz 可以作为独立的程序运行（其自己的 Java 虚拟机内），可以通过 RMI 使用</li>
+<li>Quartz 可以被实例化，作为独立的项目集群（负载平衡和故障转移功能），用于作业的执行</li>
+</ul>
+<h2 id="Quartz-设计模式"><a href="#Quartz-设计模式" class="headerlink" title="Quartz 设计模式"></a>Quartz 设计模式</h2><ul>
+<li>Buider 模式</li>
+<li>Factory 模式</li>
+<li>组件模式</li>
+<li>链式编程</li>
+</ul>
+<blockquote>
+<p>这里说的设计模式，其实主要是针对 Quartz 使用过程中涉及的一些有用法。比如，通过 Factory 模式，生成调度器。比如，使用 Quartz 涉及了调度器、Job、触发器等组件。比如可通过 Build 方法创建出组件。</p>
+</blockquote>
+<h2 id="Quartz-核心概念"><a href="#Quartz-核心概念" class="headerlink" title="Quartz 核心概念"></a>Quartz 核心概念</h2><h3 id="任务-Job-和-JobDetail"><a href="#任务-Job-和-JobDetail" class="headerlink" title="任务 Job 和 JobDetail"></a>任务 Job 和 JobDetail</h3><p>Job 指的是你想要执行的任务类，每一个 Job 必须实现 <code>org.quartz.job</code> 接口，且只需要实现接口定义的 <code>execute()</code> 方法。在 <code>execute</code> 方法内编写任务的业务逻辑。</p>
+<p>Job 实例在 Quartz 中的生命周期：每次调度器执行 Job 时，它在调用 <code>execute</code> 方法前会创建一个新的 Job 实例，当调用完成之后，关联的 Job 对象实例会被释放，释放的实例会被垃圾回收机制回收。</p>
+<p>JobDetail: JobDetail 为 Job 实例提供许多设置属性，以及 jobDataMap 成员变量属性，它用来存储特定 Job 实例的状态信息，调度器需要借助 JobDetail 对象来添加 Job 实例。</p>
+<h3 id="触发器-Trigger"><a href="#触发器-Trigger" class="headerlink" title="触发器 Trigger"></a>触发器 Trigger</h3><p>Trigger 为你执行任务的触发器，比如你想每天定时 3 点发送一份统计邮件，Trigger 将会设置 3 点进行执行该任务。</p>
+<p>Trigger 主要包含两种：</p>
+<ul>
+<li><code>SimpleTrigger</code></li>
+<li><code>CronTrigger</code></li>
+</ul>
+<h3 id="调度器-Scheduler"><a href="#调度器-Scheduler" class="headerlink" title="调度器 Scheduler"></a>调度器 Scheduler</h3><p>Scheduler 为任务的调度器，它将任务 Job 及 触发器 Trigger 整合起来，负责基于 Trigger 设定的时间来执行 Job。</p>
+<h2 id="Quartz-的体系结构"><a href="#Quartz-的体系结构" class="headerlink" title="Quartz 的体系结构"></a>Quartz 的体系结构</h2><p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/cpbdMt.png" alt="cpbdMt"></p>
+<h2 id="Quartz-几个常用-API"><a href="#Quartz-几个常用-API" class="headerlink" title="Quartz 几个常用 API"></a>Quartz 几个常用 API</h2><p>以下是 Quartz 编程 API 几个重要接口，也是 Quartz 的重要组件。</p>
+<ul>
+<li>Scheduler 用于与调度程序交互的主程序接口</li>
+</ul>
+<p>Scheduler 调度程序-任务执行计划表，只有安排进执行计划的任务 Job（通过 schduler.scheduleJob 方法安排进执行计划），当它预先定义的执行时间到了（任务触发器 trigger），该任务才会执行。</p>
+<ul>
+<li>Job 我们预先定义的希望在未来时间能够被调度程序执行的任务类，我们可以自定义。</li>
+<li>JobDetail 使用 jobDetail 来定义定时任务的实例，jobDetail 实例是通过 JobBuilder 类创建的。</li>
+<li>JobDataMap 可以包含不限量的（序列化）的数据对象，在 job 实例执行的时候，可以使用其中的数据。JobDataMap 是 Java Map 接口的一个实现，额外增加了一些便于存取基本类型的数据方法。</li>
+<li>Trigger 触发器，Trigger 对象是用来触发执行 Job 的。当调度一个 Job 时，我们实例触发器然后调整它的属性来满足 Job 执行的条件。表明任务在什么时候会执行。定义了一个已经被安排的任务将会在什么时候执行的时间条件，比如每 2 秒执行一次。</li>
+<li>JobBuilder 用于声明一个任务实例，也可以定义关于该任务的详情，比如任务名、组名等。这个声明的实例将会作为一个实际执行的任务。</li>
+<li>TriggerBuilder 触发器创造器，用于创建触发器 trigger 实例。</li>
+<li>JobListener、TriggerListener、SchedulerListener 监听器，用于对组件的监听。</li>
+</ul>
+<blockquote>
+<p>注意 Job 和 JobDetail 的区分，Job 是指我们具体的「任务类」。JobDetail 指通过 JobBuilder 类创建出的一个实例，它和 Job 类进行了绑定。</p>
+</blockquote>
+<p>贴一个官网示例片段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// define the job and tie it to our HelloJob class</span></span><br><span class="line">JobDetail job = newJob(HelloJob.class)</span><br><span class="line">    .withIdentity(<span class="string">"job1"</span>, <span class="string">"group1"</span>)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Trigger the job to run now, and then repeat every 40 seconds</span></span><br><span class="line">Trigger trigger = newTrigger()</span><br><span class="line">    .withIdentity(<span class="string">"trigger1"</span>, <span class="string">"group1"</span>)</span><br><span class="line">    .startNow()</span><br><span class="line">          .withSchedule(simpleSchedule()</span><br><span class="line">            .withIntervalInSeconds(<span class="number">40</span>)</span><br><span class="line">            .repeatForever())</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Tell quartz to schedule the job using our trigger</span></span><br><span class="line">scheduler.scheduleJob(job, trigger);</span><br></pre></td></tr></table></figure>
+<h2 id="入门案例"><a href="#入门案例" class="headerlink" title="入门案例"></a>入门案例</h2><h3 id="引入-Maven-依赖"><a href="#引入-Maven-依赖" class="headerlink" title="引入 Maven 依赖"></a>引入 Maven 依赖</h3><p>在 <a href="https://mvnrepository.com" target="_blank" rel="noopener">https://mvnrepository.com</a> 官网搜索 quartz，选择了最新版本 <a href="https://mvnrepository.com/artifact/org.quartz-scheduler/quartz/2.3.2" target="_blank" rel="noopener">2.3.2</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 核心包 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.quartz-scheduler<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quartz<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 工具包 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.quartz-scheduler<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quartz-jobs<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>说明：核心依赖是 <code>quartz</code>，而 <code>quartz-jobs</code> 是一个可选依赖，它主要放置了一些 quartz 的工具代码、一些预定义的 job。</p>
+<h3 id="任务类"><a href="#任务类" class="headerlink" title="任务类"></a>任务类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzHelloJob</span> <span class="keyword">implements</span> <span class="title">Job</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(JobExecutionContext jobExecutionContext)</span> <span class="keyword">throws</span> JobExecutionException </span>&#123;</span><br><span class="line">        <span class="comment">// 当前时间</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        DateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd:HH:mm:ss"</span>);</span><br><span class="line">        String dateStr = dateFormat.format(date);</span><br><span class="line">        <span class="comment">// 工作内容</span></span><br><span class="line">        System.out.println(<span class="string">"正在进行数据备份任务的定时执行，执行时间："</span> + dateStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="主类"><a href="#主类" class="headerlink" title="主类"></a>主类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzHelloScheduler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 调度器 Schduler，从工厂中获取调度器实例</span></span><br><span class="line">        Scheduler stdScheduler = StdSchedulerFactory.getDefaultScheduler();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 任务实例 JobDetail</span></span><br><span class="line">        <span class="comment">// 参数 1：任务的名称；参数 2：任务组的名称</span></span><br><span class="line">        JobDetail jobDetail = JobBuilder.newJob(QuartzHelloJob.class)</span><br><span class="line">                .withIdentity(<span class="string">"job1"</span>, <span class="string">"jobGroup1"</span>)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 触发器 Trigger</span></span><br><span class="line">        <span class="comment">// 参数 1：触发器的名称；参数 2：触发器组的名称</span></span><br><span class="line">        Trigger trigger = TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(<span class="string">"trigger1"</span>, <span class="string">"triggerGroup1"</span>)</span><br><span class="line">                .withSchedule(SimpleScheduleBuilder.simpleSchedule().repeatSecondlyForever(<span class="number">5</span>))</span><br><span class="line">                .startNow()</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 通过调度器将触发器与任务实例关联，保证按照触发器定义的条件执行任务</span></span><br><span class="line">        stdScheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. 启动</span></span><br><span class="line">        stdScheduler.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行主类，结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在进行数据备份任务的定时执行，执行时间：2020-09-06:17:45:56</span><br><span class="line">正在进行数据备份任务的定时执行，执行时间：2020-09-06:17:46:01</span><br><span class="line">正在进行数据备份任务的定时执行，执行时间：2020-09-06:17:46:06</span><br><span class="line">正在进行数据备份任务的定时执行，执行时间：2020-09-06:17:46:11</span><br></pre></td></tr></table></figure>
+<p>可以看到控制台果然每隔 5 秒就会有输出内容。</p>
+<h2 id="概念扩展"><a href="#概念扩展" class="headerlink" title="概念扩展"></a>概念扩展</h2><p>上面介绍过一些核心概念，还有一些概念也比较重要。</p>
+<h3 id="JobExecutionContext-介绍"><a href="#JobExecutionContext-介绍" class="headerlink" title="JobExecutionContext 介绍"></a>JobExecutionContext 介绍</h3><p>当 Scheduler 调用一个 Job 时，会将 <code>JobExecutionContext</code> 传递给 Job 的 <code>execute()</code> 方法。<strong>Job 能通过 <code>JobExecutionContext</code> 对象访问到 Quartz 运行时的环境以及 Job 本身的详细数据。</strong></p>
+<h3 id="JobDataMap-介绍"><a href="#JobDataMap-介绍" class="headerlink" title="JobDataMap 介绍"></a>JobDataMap 介绍</h3><ul>
+<li>在进行任务调度时，JobDataMap 存储在 JobExecutionContext 中，非常方便获取；</li>
+<li>JobDataMap 可以用来装载任何可序列化的数据对象，当 Job 实例对象执行时，这些参数对象会传递给它；</li>
+<li>JobDataMap 实现了 JDK 的 Map 接口，并且添加了非常方便的方法用来存取基本数据类型；</li>
+</ul>
+<p>主类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2. 任务实例 JobDetail</span></span><br><span class="line"><span class="comment">// 参数 1：任务的名称；参数 2：任务组的名称</span></span><br><span class="line">JobDetail jobDetail = JobBuilder.newJob(QuartzHelloJob.class)</span><br><span class="line">        .withIdentity(<span class="string">"job1"</span>, <span class="string">"jobGroup1"</span>)</span><br><span class="line">        .usingJobData(<span class="string">"message"</span>, <span class="string">"job message"</span>) <span class="comment">// 传参</span></span><br><span class="line">        .build();</span><br></pre></td></tr></table></figure>
+<p>Job 实现类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JobDataMap 传值</span></span><br><span class="line">JobDataMap jobDataMap1 = jobExecutionContext.getJobDetail().getJobDataMap();</span><br><span class="line">System.out.println(<span class="string">"任务数据的参数值："</span> + jobDataMap1.get(<span class="string">"message"</span>));</span><br></pre></td></tr></table></figure>
+<p>还有一个用法，在 Job 实现类中添加 <code>setter</code> 方法对应 JobDataMap 的键，Quartz 框架默认的 jobFactory 实现类在初始化 Job 实例对象时会自动地调用这些 <code>setter</code> 方法。这样的好处是，你可以在 Job 实现类中方便地使用成员变量，而不用像上面那种方式去取值。</p>
+<div class="note warning no-icon">
+            <p>注意点：如果遇到同名的 key，Trigger 中的 key 对应的值会覆盖 JobDetail 中的值。</p>
+          </div>
+<h3 id="有状态-Job-和无状态的-Job"><a href="#有状态-Job-和无状态的-Job" class="headerlink" title="有状态 Job 和无状态的 Job"></a>有状态 Job 和无状态的 Job</h3><ul>
+<li>有状态 Job 可以理解为，多次 Job 调用期间可以持有一些状态信息，这些状态信息存储在 JobDataMap 中。</li>
+<li>默认的无状态的 Job 每次调用时都会创建一个新的 JobDataMap。</li>
+</ul>
+<p><code>@PersisJobDataAfterExecution</code> 注解的使用在 Job 任务类上，多次 Job 实例被调用期间，可以持有一些状态信息，比如可以实现 count 的累加。</p>
+<h2 id="Trigger-介绍"><a href="#Trigger-介绍" class="headerlink" title="Trigger 介绍"></a>Trigger 介绍</h2><p>Quartz 有一些不同的触发器类型，使用最多的是 <code>SimpleTrigger</code> 和 <code>CronTrigger</code></p>
+<ul>
+<li>jobKey：表示 job 实例的标识，触发器被触发时，该指定的 job 实例被执行（也就是说，除了通过 JobDetail 获取到 job 实例的内容，Trigger 对象也提供了方法获取）；</li>
+<li>startTime：表示触发器的时间表，第一次开始被触发的时间，数据类型是 <code>java.util.Date</code>；</li>
+<li>endTime：表示触发器终止被触发的时间，数据类型也是 <code>java.util.Date</code>；</li>
+</ul>
+<h3 id="SimpleTrigger-触发器"><a href="#SimpleTrigger-触发器" class="headerlink" title="SimpleTrigger 触发器"></a>SimpleTrigger 触发器</h3><p>5 秒重复执行，只执行 3 次，设置结束时间：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Trigger trigger = TriggerBuilder.newTrigger()</span><br><span class="line">        .withIdentity(<span class="string">"trigger1"</span>, <span class="string">"triggerGroup1"</span>)</span><br><span class="line">        .withSchedule(SimpleScheduleBuilder.simpleSchedule()</span><br><span class="line">                .repeatSecondlyForever(<span class="number">5</span>)</span><br><span class="line">                .withRepeatCount(<span class="number">2</span>))</span><br><span class="line">        .usingJobData(<span class="string">"message"</span>, <span class="string">"simple 触发器"</span>)</span><br><span class="line">        .startNow()</span><br><span class="line">        .endAt(endDate)</span><br><span class="line">        .build();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>SimpleTrigger 属性有开始时间、结束时间、重复次数和重复时间间隔等</li>
+<li>重复次数的属性值从 0 开始计数</li>
+<li>重复时间间隔属性值必须是长整型的正整数</li>
+<li>如果指定了结束时间属性值，那么，结束时间属性权重优于重复次数属性</li>
+</ul>
+<h3 id="CronTrigger-触发器"><a href="#CronTrigger-触发器" class="headerlink" title="CronTrigger 触发器"></a>CronTrigger 触发器</h3><p>CronTriggers 通常比 SimpleTrigger 更有用，因为它是基于日历的作业触发器。使用 CronTrigger，你可以指定诸如“每周五中午”或者“每个工作日的 9:30”这样的日程来触发 Job 执行。像 SimpleTrigger 一样，CronTrigger 也有一个 startTime 以指定日程从什么时候开始，也有一个（可选） endTime 以指定何时日程不再继续。</p>
+<h4 id="Cron-Expressions-——-Cron-表达式"><a href="#Cron-Expressions-——-Cron-表达式" class="headerlink" title="Cron Expressions —— Cron 表达式"></a>Cron Expressions —— Cron 表达式</h4><p>Cron 表达式被用来配置 <code>CronTrigger</code> 实例。Cron 表达式是一个由 7 个表达式组成的字符串。每个子表达式描述一个单独的日程细节。这些表达式用空格分隔：</p>
+<ol>
+<li>Seconds 秒</li>
+<li>Minutes 分</li>
+<li>Hours 小时</li>
+<li>Day-Of-Month 月中的天，日</li>
+<li>Month 月</li>
+<li>Day-Of-Week 周中的天，周几</li>
+<li>Year 年（可选）</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>是否必填</th>
+<th>允许值</th>
+<th>可以出现的运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>秒</td>
+<td>必填</td>
+<td>0 - 59</td>
+<td>/    *    ,   -</td>
+</tr>
+<tr>
+<td>分</td>
+<td>必填</td>
+<td>0 - 59</td>
+<td>/    *    ,   -</td>
+</tr>
+<tr>
+<td>时</td>
+<td>必填</td>
+<td>0 - 23</td>
+<td>/    *    ,   -</td>
+</tr>
+<tr>
+<td>月中的天</td>
+<td>必填</td>
+<td>1 - 31</td>
+<td>/    *    ,   -    ?  L    W    C</td>
+</tr>
+<tr>
+<td>月</td>
+<td>必填</td>
+<td>1 - 12， 也可以用JAN这些缩写</td>
+<td>/    *    ,   -</td>
+</tr>
+<tr>
+<td>星期中的天</td>
+<td>必填</td>
+<td>1 - 7 或者 SUN-SAT，7是星期六， 可以用 WED 这些缩写</td>
+<td>/    *    ,   -     ?  L    C    #</td>
+</tr>
+<tr>
+<td>年份</td>
+<td>非必填</td>
+<td>1970   -   2099</td>
+<td>/    *    ,   -</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>1 表示周日</p>
+</blockquote>
+<p>运算符的含义：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>表示这个字段的每一个值， 可以出现在所有字段中。 如”<em> </em> <em> </em> <em> ？</em>”表示每一秒钟。</td>
+</tr>
+<tr>
+<td>/</td>
+<td>表示值的增量，从一个值开始，<strong>每间隔</strong>多少时间后再次执行，可以出现在所有的字段。如在分钟字段上， 0/15表示从0分开始， 间隔15分钟执行一次， 相当于0,15,30,45</td>
+</tr>
+<tr>
+<td>,</td>
+<td>表示多个值， 可以出现在所有的字段。 如周一周三周五可表示为MON,WED,FRI。</td>
+</tr>
+<tr>
+<td>-</td>
+<td>表示一个区间。如周一到周三可表示为MON-WED。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>表示放弃这个字段设置， 可以出现在月中的天和周中的天这两个字段。如”<em> </em> <em> </em> <em> ？</em>”表示每一秒钟。</td>
+</tr>
+<tr>
+<td>L</td>
+<td>L是 Last 的缩写， 可以出现在月中的天和周中的天这两个字段, 当时含义不一样。 在月中的天这个字段中， L表示这个月的最后一天。 而在周中的天中， 如果L单独出现， 那么就表示7或者SAT即星期六， 如果出现在一个数字的后面， 那么就表示这个月的周几， 如“6L”, 表示这个月的最后一个周五</td>
+</tr>
+<tr>
+<td>W</td>
+<td>W是 week 的缩写， 可以出现在月中的天这个字段， 可以用来指定距离这个时间最近的周几， 周的天在Day of Week字段中指定。</td>
+</tr>
+<tr>
+<td>#</td>
+<td>表示这个月的第几个星期，可以出现在周中的天这个字段。 如 <code>1#3</code> 或 <code>SUN#3</code>， 表示这个月的第 3 个星期日。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>月中的天和周中的天<strong>互斥</strong>，只能出现一个问号，例如，不能保证每周二都是 1 号！</p>
+</blockquote>
+<div class="note success no-icon">
+            <ul><li><code>/</code> 这个符号还是挺常用的，比如在秒的位置，如果你直接 5，那么，就表示第 5 秒执行，但是如果是 <code>0/5</code> 则表示从 0 秒开始，每隔 5 秒！注意不要搞错！</li><li><code>L</code>  和 <code>W</code> 可以一起使用，比如每隔月最后一个周五结算工资</li><li>周字段的英文字母缩写不区分大小写，例如 <code>MON</code> 等价于 <code>mon</code></li><li>在线 Cron 表达式生成器：<a href="https://www.matools.com/cron" target="_blank" rel="noopener">https://www.matools.com/cron</a></li></ul>
+          </div>
+<p>Cron 表达式示例：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"0 0 10,14,16  * * ?" 每天 10 点、14 点、16 点执行</span><br><span class="line">"0 0/30 9-17 * * ?" 每天 9-17 点，每隔 30 分钟执行一次</span><br><span class="line">"0 0 12 ? * WED" 每周三的 12 点执行</span><br><span class="line">"0 15 10 L * ?" 每月的最后一天的 10 点 15 分执行</span><br><span class="line">"0 15 10 ? * 6#3" 每月的第三个周五 10 点 15 分执行</span><br></pre></td></tr></table></figure></p>
+<h4 id="CronTrigger-示例"><a href="#CronTrigger-示例" class="headerlink" title="CronTrigger 示例"></a>CronTrigger 示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JobDetail jobDetail = JobBuilder.newJob(QuartzHelloJob.class)</span><br><span class="line">        .withIdentity(<span class="string">"job1"</span>, <span class="string">"jobGroup1"</span>)</span><br><span class="line">        .usingJobData(<span class="string">"message"</span>, <span class="string">"job message"</span>)</span><br><span class="line">        .usingJobData(<span class="string">"param"</span>, <span class="string">"setter 传参"</span>)</span><br><span class="line">        .usingJobData(<span class="string">"count"</span>, <span class="number">1</span>)</span><br><span class="line">        .build();</span><br></pre></td></tr></table></figure>
+<h2 id="SchedulerFactory"><a href="#SchedulerFactory" class="headerlink" title="SchedulerFactory"></a>SchedulerFactory</h2><ul>
+<li>对于 Job 来说，Trigger 就类似于驱动器，没有触发器来定时驱动作业 Job，Job 就无法运行；</li>
+<li>对于 Job 而言，一个 Job 可以对应多个 Trigger；</li>
+<li>对于 Trigger 而言，一个 Trigger 只能对应一个 Job；</li>
+</ul>
+<blockquote>
+<p>Trigger 和 Job 因此就是「多对一」的关系</p>
+</blockquote>
+<p>Scheduler 的创建方式：<br>（1） StdSchdulerFactory：Quartz 默认的 SchdulerFactory</p>
+<ul>
+<li>使用一组参数（<code>java.util.Properties</code>）来创建和初始化 Quartz 调度器；</li>
+<li>配置参数一般存储在 <code>quartz.properties</code> 文件中；</li>
+<li>调用 <code>getScheduler</code> 方法就能创建和初始化调度器；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StdSchedulerFactory stdSchedulerFactory = <span class="keyword">new</span> StdSchedulerFactory();</span><br><span class="line">Scheduler stdScheduler = stdSchedulerFactory.getScheduler();</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line">Scheduler stdScheduler = StdSchedulerFactory.getDefaultScheduler();</span><br></pre></td></tr></table></figure>
+<h3 id="将任务和触发器关联"><a href="#将任务和触发器关联" class="headerlink" title="将任务和触发器关联"></a>将任务和触发器关联</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stdScheduler.scheduleJob(jobDetail, trigger);</span><br></pre></td></tr></table></figure>
+<h3 id="其他用法"><a href="#其他用法" class="headerlink" title="其他用法"></a>其他用法</h3><ul>
+<li>启动任务调度 <code>stdScheduler.start();</code></li>
+<li>调度挂起，即暂停（暂停后，需要再次调用 <code>start()</code> 方法才能启动）: <code>stdSchduler.standby();</code></li>
+<li>调度关闭（关闭之后，重新启动也不行）：<code>stdSchduler.shutdown();</code></li>
+</ul>
+<blockquote>
+<p>shutdown() 方法可以传入一个布尔值，<code>boolean waitForJobsToComplete</code>，用于表示是否等待 Job 执行完毕再结束！ture 表示等待所有正在执行的 Job 执行完毕之后，再关闭 Scheduler。false 表示直接关闭 Scheduler。</p>
+</blockquote>
+<h2 id="quartz-properties-配置"><a href="#quartz-properties-配置" class="headerlink" title="quartz.properties 配置"></a>quartz.properties 配置</h2><p>在项目中搜索该文件，可以在依赖的 Quartz 包下看到默认的配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Default Properties file for use by StdSchedulerFactory</span><br><span class="line"># to create a Quartz Scheduler Instance, if a different</span><br><span class="line"># properties file is not explicitly specified.</span><br><span class="line">#</span><br><span class="line"># 调度器属性</span><br><span class="line">## instanceName 用来区分特定调度器实例，可以按照功能用途来给调度器起名</span><br><span class="line">org.quartz.scheduler.instanceName: DefaultQuartzScheduler</span><br><span class="line">org.quartz.scheduler.rmi.export: false</span><br><span class="line">org.quartz.scheduler.rmi.proxy: false</span><br><span class="line">org.quartz.scheduler.wrapJobExecutionInUserTransaction: false</span><br><span class="line"></span><br><span class="line"># 线程池属性</span><br><span class="line">org.quartz.threadPool.class: org.quartz.simpl.SimpleThreadPool</span><br><span class="line">## 处理 Job 的线程数，至少为 1，并不是越大越好</span><br><span class="line">org.quartz.threadPool.threadCount: 10</span><br><span class="line">## 线程的优先级，优先级别高的线程比级别低的线程优先得到执行。最小为 1，最大为 10，默认 5</span><br><span class="line">org.quartz.threadPool.threadPriority: 5</span><br><span class="line">org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread: true</span><br><span class="line"></span><br><span class="line"># 作业存储设置</span><br><span class="line">org.quartz.jobStore.misfireThreshold: 60000</span><br><span class="line"></span><br><span class="line">org.quartz.jobStore.class: org.quartz.simpl.RAMJobStore</span><br></pre></td></tr></table></figure></p>
+<p>扩充：</p>
+<ul>
+<li><code>org.quartz.scheduler.instanceId: AUTO</code>  这个值必须所有调度器实例中唯一，作为集群的唯一 key。</li>
+<li><code>org.quartz.spi.ThreadPool.class</code> 一个实现了 <code>org.quartz.spi.ThreadPool</code> 接口的类，Quartz 自带的线程池实现类是 <code>org.quartz.smpl.SimpleThreadPool</code></li>
+</ul>
+<p>如果想自定义配置，那么只需要拷贝上面内容放在项目的 <code>resources</code> 目录下即可。也可以通过编写程序代码操作 <code>quartz.properties</code> 文件的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 通过代码方式配置 quartz</span><br><span class="line">Properties properties = new Properties();</span><br><span class="line">// 可以用工厂类中的常量</span><br><span class="line">properties.put(StdSchedulerFactory.PROP_THREAD_POOL_CLASS, &quot;org.quartz.simpl.SimpleThreadPool&quot;);</span><br><span class="line">properties.put(&quot;org.quartz.threadPool.threadCount&quot;, &quot;10&quot;);</span><br><span class="line"></span><br><span class="line">// 1. 调度器 Schduler，从工厂中获取调度器实例</span><br><span class="line">StdSchedulerFactory stdSchedulerFactory = new StdSchedulerFactory();</span><br><span class="line">stdSchedulerFactory.initialize(properties);</span><br><span class="line">Scheduler stdScheduler = stdSchedulerFactory.getScheduler();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过 Properties 设置工厂属性的缺点在用硬编码，例如需要修改线程数量，将不得不修改代码，然后又重新编译。因此，不推荐使用。还是使用 <code>quartz.properties</code> 的配置方式方便。</p>
+</blockquote>
+<h2 id="Quartz-监听器"><a href="#Quartz-监听器" class="headerlink" title="Quartz 监听器"></a>Quartz 监听器</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Quartz 监听器用于当任务调度你所关注的事件发生时，能够及时获取这一事件的通知。</p>
+<p>Quartz 监听器主要有 <code>JobListener</code>、<code>TriggerListener</code>、<code>SchedulerListener</code> 三种。先明确两个概念：全局监听器与非全局监听器。二者区别在于：</p>
+<ul>
+<li>全局监听器能够接收到所有的 Job/Trigger 的事件通知</li>
+<li>非全局监听器只能接收到在其上注册的 Job 或 Trigger 事件，不在其上注册的 Job 或 Trigger 则不会进行监听。 </li>
+</ul>
+<p>监听器的用法步骤大致如下：</p>
+<ul>
+<li>新建一个类，实现监听器接口 <code>xxxListener</code>；</li>
+<li>通过监听管理器创建并注册监听器</li>
+</ul>
+<h3 id="JobListener"><a href="#JobListener" class="headerlink" title="JobListener"></a>JobListener</h3><p>任务调度过程中，与任务 Job 相关事件包括：</p>
+<ul>
+<li>Job 开始要执行的提示；</li>
+<li>Job 执行完成的提示；</li>
+</ul>
+<p>JobListener 接口包含几个重要的方法声明：</p>
+<ul>
+<li><code>getName</code>：用于获取 JobListener 的名称；</li>
+<li><code>jobToBeExecuted</code> 方法：Scheduler 在 JobDetail 将要被执行时调用该方法；</li>
+<li><code>jobExecutedVetoed</code> 方法：Scheduler 在 JobDetail 即将被执行，但又被 TriggerListener 否决时调用该方法；</li>
+<li><code>jobWasExecuted</code> 方法：Scheduler 在 JobDetail 被执行之后调用该方法；</li>
+</ul>
+<h3 id="TriggerListener"><a href="#TriggerListener" class="headerlink" title="TriggerListener"></a>TriggerListener</h3><p>TriggerListener 包含几个方法：</p>
+<ul>
+<li><code>getName</code>：获取触发器的名称</li>
+<li><code>triggerFired</code> 方法：当与监听器相关联的 Trigger 被触发，Job 上的 <code>execute()</code> 方法将被执行时，Scheduler 就调用该方法；</li>
+<li><code>vetoJobExecution</code> 方法：在 Trigger 触发后，Job 将要被执行时由 Scheduler 调用这个方法。TriggerListener 给了一个选择去否决 Job 的执行。假如这个方法返回 true，这个 Job 将不会被此次 Trigger 触发而得到执行；</li>
+<li><code>triggerMisfired</code> 方法：Scheduler 调用这个方法是在 Trigger 错过触发时。</li>
+<li><code>triggerComplete</code> 方法：Trigger 被触发并且完成了 Job 的执行时，Scheduler 调用这个方法；</li>
+</ul>
+<h3 id="SchedulerListener"><a href="#SchedulerListener" class="headerlink" title="SchedulerListener"></a>SchedulerListener</h3><p>SchedulerListener 会在 Scheduler 的生命周期中关键事件发生时被调用。与 Scheduler 有关的时间包括：</p>
+<ul>
+<li>增加一个 Job/Trigger</li>
+<li>删除一个 Job/Trigger</li>
+<li>Scheduler 发生错误</li>
+<li>关闭 Scheduler 等</li>
+</ul>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>完整示例代码：<a href="https://github.com/Michael728/java-middleware-demos/tree/master/quartz-demos" target="_blank" rel="noopener">https://github.com/Michael728/java-middleware-demos/tree/master/quartz-demos</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.bilibili.com/video/BV1St411g72Z?p=5" target="_blank" rel="noopener">B 站/任务调度 Quartz 视频教程全集（21P）| 3 小时从入门到精通</a></li>
+<li><a href="https://www.cnblogs.com/zhanghaoliang/p/7886110.html" target="_blank" rel="noopener">博客园/Quartz的基本使用之入门（2.3.0版本）</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/08/07/java-basic-class-load/" rel="bookmark">Java 基础 —— 类加载</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/08/09/java-basic-class-reflect/" rel="bookmark">Java 基础 —— 反射</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/07/04/java-basic-annotation/" rel="bookmark">Java 基础 —— 注解 Annotation</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/07/13/java-basic-generic/" rel="bookmark">Java 泛型知识笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/07/04/java-basic-lambda/" rel="bookmark">Java 基础 —— Lambda 表达式</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2020/09/06/java-middleware-quartz-basic/" title="Java 定时任务框架 Quartz 入门篇">https://michael728.github.io/2020/09/06/java-middleware-quartz-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/定时任务/" rel="tag"># 定时任务</a>
+          
+            <a href="/tags/Quartz/" rel="tag"># Quartz</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/21/life-shopping-applicances-fridge/" rel="next" title="IT程序员的装修笔记——家电选购之冰箱篇">
+                <i class="fa fa-chevron-left"></i> IT程序员的装修笔记——家电选购之冰箱篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/23/tools-dev-mac-alfred/" rel="prev" title="Mac 效率工具必备神器 —— Alfred">
+                Mac 效率工具必备神器 —— Alfred <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-概念"><span class="nav-number">1.</span> <span class="nav-text">Quartz 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-运行环境"><span class="nav-number">2.</span> <span class="nav-text">Quartz 运行环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-设计模式"><span class="nav-number">3.</span> <span class="nav-text">Quartz 设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-核心概念"><span class="nav-number">4.</span> <span class="nav-text">Quartz 核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务-Job-和-JobDetail"><span class="nav-number">4.1.</span> <span class="nav-text">任务 Job 和 JobDetail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器-Trigger"><span class="nav-number">4.2.</span> <span class="nav-text">触发器 Trigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度器-Scheduler"><span class="nav-number">4.3.</span> <span class="nav-text">调度器 Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-的体系结构"><span class="nav-number">5.</span> <span class="nav-text">Quartz 的体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-几个常用-API"><span class="nav-number">6.</span> <span class="nav-text">Quartz 几个常用 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门案例"><span class="nav-number">7.</span> <span class="nav-text">入门案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入-Maven-依赖"><span class="nav-number">7.1.</span> <span class="nav-text">引入 Maven 依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务类"><span class="nav-number">7.2.</span> <span class="nav-text">任务类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主类"><span class="nav-number">7.3.</span> <span class="nav-text">主类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念扩展"><span class="nav-number">8.</span> <span class="nav-text">概念扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JobExecutionContext-介绍"><span class="nav-number">8.1.</span> <span class="nav-text">JobExecutionContext 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JobDataMap-介绍"><span class="nav-number">8.2.</span> <span class="nav-text">JobDataMap 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有状态-Job-和无状态的-Job"><span class="nav-number">8.3.</span> <span class="nav-text">有状态 Job 和无状态的 Job</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trigger-介绍"><span class="nav-number">9.</span> <span class="nav-text">Trigger 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SimpleTrigger-触发器"><span class="nav-number">9.1.</span> <span class="nav-text">SimpleTrigger 触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CronTrigger-触发器"><span class="nav-number">9.2.</span> <span class="nav-text">CronTrigger 触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cron-Expressions-——-Cron-表达式"><span class="nav-number">9.2.1.</span> <span class="nav-text">Cron Expressions —— Cron 表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CronTrigger-示例"><span class="nav-number">9.2.2.</span> <span class="nav-text">CronTrigger 示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SchedulerFactory"><span class="nav-number">10.</span> <span class="nav-text">SchedulerFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将任务和触发器关联"><span class="nav-number">10.1.</span> <span class="nav-text">将任务和触发器关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他用法"><span class="nav-number">10.2.</span> <span class="nav-text">其他用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quartz-properties-配置"><span class="nav-number">11.</span> <span class="nav-text">quartz.properties 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-监听器"><span class="nav-number">12.</span> <span class="nav-text">Quartz 监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">12.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JobListener"><span class="nav-number">12.2.</span> <span class="nav-text">JobListener</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TriggerListener"><span class="nav-number">12.3.</span> <span class="nav-text">TriggerListener</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SchedulerListener"><span class="nav-number">12.4.</span> <span class="nav-text">SchedulerListener</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例代码"><span class="nav-number">13.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">14.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2020/09/06/java-middleware-quartz-basic/";
+    this.page.identifier = "2020/09/06/java-middleware-quartz-basic/";
+    this.page.title = 'Java 定时任务框架 Quartz 入门篇';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

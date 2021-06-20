@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Pandas–“大熊猫”基础SeriesSeries: pandas的长枪(数据表中的一列或一行,观测向量,一维数组…) 12345678Series1 = pd.Series(np.random.randn(4))print Series1,type(Series1) print Series1.indexprint Series1.values">
+<meta name="keywords" content="Python,Pandas,数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python数据分析入门之pandas总结基础">
+<meta property="og:url" content="https://michael728.github.io/2015/12/23/python-pandas-basic/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="Pandas–“大熊猫”基础SeriesSeries: pandas的长枪(数据表中的一列或一行,观测向量,一维数组…) 12345678Series1 = pd.Series(np.random.randn(4))print Series1,type(Series1) print Series1.indexprint Series1.values">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez8nly6izyj209w05b74r.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez8obdrmi6j20ob0aqgn0.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9lm7fzejj20em09pq4t.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9lmxnonvj20ix0a3jtj.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9mm97wqqj20if07egn7.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9mxf9uulj20he09pwg0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6d9475f6jw1ez9mzcvkabj20g104dt9s.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9n2n6czpj20g904ejs9.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6d9475f6jw1ez9nnizyfkj20lq05d0tu.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9ns3fprvj20dy03ljs3.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9o299de1j20nd05bgmp.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9o3xykzej20dj04et98.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9o77u4oej20de04jt97.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6d9475f6jw1ez9oa7xelij20dx04k0sy.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9oh1x2a8j20d209n3zp.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9ojdw89tj20f70dtwg4.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9oqvhpvoj20lz0jggqk.jpg">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python数据分析入门之pandas总结基础">
+<meta name="twitter:description" content="Pandas–“大熊猫”基础SeriesSeries: pandas的长枪(数据表中的一列或一行,观测向量,一维数组…) 12345678Series1 = pd.Series(np.random.randn(4))print Series1,type(Series1) print Series1.indexprint Series1.values">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/6d9475f6jw1ez8nly6izyj209w05b74r.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2015/12/23/python-pandas-basic/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python数据分析入门之pandas总结基础 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2015/12/23/python-pandas-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Python数据分析入门之pandas总结基础
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-12-23 18:44:29" itemprop="dateCreated datePublished" datetime="2015-12-23T18:44:29+00:00">2015-12-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Pandas–“大熊猫”基础"><a href="#Pandas–“大熊猫”基础" class="headerlink" title="Pandas–“大熊猫”基础"></a>Pandas–“大熊猫”基础</h1><h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>Series: pandas的长枪(数据表中的一列或一行,观测向量,一维数组…)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Series1 = pd.Series(np.random.randn(4))</span><br><span class="line"></span><br><span class="line">print Series1,type(Series1) </span><br><span class="line"></span><br><span class="line">print Series1.index</span><br><span class="line"></span><br><span class="line">print Series1.values</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">0   -0.676256</span><br><span class="line"></span><br><span class="line">1    0.533014</span><br><span class="line"></span><br><span class="line">2   -0.935212</span><br><span class="line"></span><br><span class="line">3   -0.940822</span><br><span class="line"></span><br><span class="line">dtype: float64 &lt;class &apos;pandas.core.series.Series&apos;&gt;</span><br><span class="line"></span><br><span class="line">Int64Index([0, 1, 2, 3], dtype=&apos;int64&apos;)</span><br><span class="line"></span><br><span class="line">[-0.67625578  0.53301431 -0.93521212 -0.94082195]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>np.random.randn()   正态分布相关。<a href="http://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.random.rand.html#numpy.random.rand" target="_blank" rel="noopener">函数说明</a></li>
+</ul>
+<h3 id="Series⽀持过滤的原理就如同NumPy"><a href="#Series⽀持过滤的原理就如同NumPy" class="headerlink" title="Series⽀持过滤的原理就如同NumPy"></a>Series⽀持过滤的原理就如同NumPy</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print Series1&gt;0 </span><br><span class="line"></span><br><span class="line">print Series1[Series1&gt;0]</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">0 0.030480</span><br><span class="line"></span><br><span class="line">1 0.072746</span><br><span class="line"></span><br><span class="line">2 -0.186607</span><br><span class="line"></span><br><span class="line">3 -1.412244</span><br><span class="line"></span><br><span class="line">dtype: float64 &lt;class &apos;pandas.core.series.Series&apos;&gt;</span><br><span class="line"></span><br><span class="line">Int64Index([0, 1, 2, 3], dtype=&apos;int64&apos;)</span><br><span class="line"></span><br><span class="line">[ 0.03048042 0.07274621 -0.18660749 -1.41224432]</span><br></pre></td></tr></table></figure>
+<p>我发现，逻辑表达式，获得的值就是True或者False。要先取得值，还是要X[y]的形式。</p>
+<h3 id="当然也支持广播Broadcasting"><a href="#当然也支持广播Broadcasting" class="headerlink" title="当然也支持广播Broadcasting"></a>当然也支持广播Broadcasting</h3><p>什么是<code>broadcasting</code>,暂时我也不太清楚，看个栗子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print Series1*2 </span><br><span class="line"></span><br><span class="line">print Series1+5</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">0 0.06096</span><br><span class="line"></span><br><span class="line">1 1 0.145492 </span><br><span class="line"></span><br><span class="line">2 -0.373215 </span><br><span class="line"></span><br><span class="line">3 -2.824489 </span><br><span class="line"></span><br><span class="line">dtype: float64 </span><br><span class="line"></span><br><span class="line">0 5.030480 </span><br><span class="line"></span><br><span class="line">1 5.072746 </span><br><span class="line"></span><br><span class="line">2 4.813393 </span><br><span class="line"></span><br><span class="line">3 3.587756 </span><br><span class="line"></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+<h3 id="以及Universal-Function"><a href="#以及Universal-Function" class="headerlink" title="以及Universal Function"></a>以及Universal Function</h3><p>numpy.frompyfunc(out,nin,nout)    返回的是一个函数，nin是输入的参数个数，nout是函数返回的对象的个数<a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.frompyfunc.html#numpy.frompyfunc" target="_blank" rel="noopener">函数说明</a></p>
+<h3 id="在序列上就使用行标，而不是创建1个2列的数据表，能够轻松辨别哪是数据，哪是元数据"><a href="#在序列上就使用行标，而不是创建1个2列的数据表，能够轻松辨别哪是数据，哪是元数据" class="headerlink" title="在序列上就使用行标，而不是创建1个2列的数据表，能够轻松辨别哪是数据，哪是元数据"></a>在序列上就使用行标，而不是创建1个2列的数据表，能够轻松辨别哪是数据，哪是元数据</h3><p>这句话的意思，我的理解是序列尽量是一列，不用去创建2列，这样子，使用index就能指定数据了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Series2 = pd.Series(Series1.values,index=[&apos;norm_&apos;+unicode(i) for i in xrange(4)])</span><br><span class="line"></span><br><span class="line">print Series2,type(Series2)</span><br><span class="line"></span><br><span class="line">print Series2.index</span><br><span class="line"></span><br><span class="line">print type(Series2.index)</span><br><span class="line"></span><br><span class="line">print Series2.values</span><br></pre></td></tr></table></figure>
+<p>输出结果如下，可以看到，它是通过修改了<code>index</code>值的样式，并没有创建2列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">norm_0   -0.676256</span><br><span class="line"></span><br><span class="line">norm_1    0.533014</span><br><span class="line"></span><br><span class="line">norm_2   -0.935212</span><br><span class="line"></span><br><span class="line">norm_3   -0.940822</span><br><span class="line"></span><br><span class="line">dtype: float64 &lt;class &apos;pandas.core.series.Series&apos;&gt;</span><br><span class="line"></span><br><span class="line">Index([u&apos;norm_0&apos;, u&apos;norm_1&apos;, u&apos;norm_2&apos;, u&apos;norm_3&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">&lt;class &apos;pandas.core.index.Index&apos;&gt;</span><br><span class="line"></span><br><span class="line">[-0.67625578  0.53301431 -0.93521212 -0.94082195]</span><br></pre></td></tr></table></figure>
+<p>虽然行是有顺序的，但是仍然能够通过行级的index来访问到数据：</p>
+<p>（当然也不尽然像Ordered Dict，因为⾏索引甚⾄可以重复，不推荐重复的行索引不代表不能用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print Series2[[&apos;norm_0&apos;,&apos;norm_3&apos;]]</span><br></pre></td></tr></table></figure>
+<p>可以看到，读取数据时，确实要采用X[y]的格式。这里X[[y]]是因为，它要读取两个数据，指定的是这两个数据的<code>index</code>值，将<code>index</code>值存放进<code>list</code>中，然后读取。输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">norm_0   -0.676256</span><br><span class="line"></span><br><span class="line">norm_3   -0.940822</span><br><span class="line"></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+<p>再比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print &apos;norm_0&apos; in Series2</span><br><span class="line"></span><br><span class="line">print &apos;norm_6&apos; in Series2</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">True</span><br><span class="line"></span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+<p>逻辑表达式的输出结果，布尔型值。</p>
+<h3 id="从Key不重复的Ordered-Dict或者从Dict来定义Series就不需要担心行索引重复："><a href="#从Key不重复的Ordered-Dict或者从Dict来定义Series就不需要担心行索引重复：" class="headerlink" title="从Key不重复的Ordered Dict或者从Dict来定义Series就不需要担心行索引重复："></a>从Key不重复的Ordered Dict或者从Dict来定义Series就不需要担心行索引重复：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Series3_Dict = &#123;&quot;Japan&quot;:&quot;Tokyo&quot;,&quot;S.Korea&quot;:&quot;Seoul&quot;,&quot;China&quot;:&quot;Beijing&quot;&#125;</span><br><span class="line"></span><br><span class="line">Series3_pdSeries = pd.Series(Series3_Dict)</span><br><span class="line"></span><br><span class="line">print Series3_pdSeries</span><br><span class="line"></span><br><span class="line">print Series3_pdSeries.values</span><br><span class="line"></span><br><span class="line">print Series3_pdSeries.index</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">China Beijing</span><br><span class="line"></span><br><span class="line">Japan Tokyo</span><br><span class="line"></span><br><span class="line">S.Korea Seoul</span><br><span class="line"></span><br><span class="line">dtype: object</span><br><span class="line"></span><br><span class="line">[&apos;Beijing&apos; &apos;Tokyo&apos; &apos;Seoul&apos;]</span><br><span class="line"></span><br><span class="line">Index([u&apos;China&apos;, u&apos;Japan&apos;, u&apos;S.Korea&apos;], dtype=&apos;object&apos;)</span><br></pre></td></tr></table></figure>
+<p>通过上面的输出结果就知道了，输出结果是无序的，和输入顺序无关。 </p>
+<p>想让序列按你的排序⽅式保存？就算有缺失值都毫无问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Series4_IndexList = [&quot;Japan&quot;,&quot;China&quot;,&quot;Singapore&quot;,&quot;S.Korea&quot;]</span><br><span class="line"></span><br><span class="line">Series4_pdSeries = pd.Series( Series3_Dict ,index = Series4_IndexList)</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries.values</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries.index</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries.isnull()</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries.notnull()</span><br></pre></td></tr></table></figure>
+<p>上面这样的输出就会按照<code>list</code>中定义的顺序输出结果。</p>
+<blockquote>
+<p>整个序列级别的元数据信息：name</p>
+</blockquote>
+<blockquote>
+<p>当数据序列以及index本身有了名字，就可以更方便的进行后续的数据关联啦！</p>
+</blockquote>
+<p>这里我感觉就是列名的作用。下面举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print Series4_pdSeries.name</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries.index.name</span><br></pre></td></tr></table></figure>
+<p>很显然，输出的结果都是<code>None</code>，因为我们还没指定<code>name</code>嘛！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Series4_pdSeries.name = &quot;Capital Series&quot;</span><br><span class="line"></span><br><span class="line">Series4_pdSeries.index.name = &quot;Nation&quot;</span><br><span class="line"></span><br><span class="line">print Series4_pdSeries</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Nation</span><br><span class="line"></span><br><span class="line">Japan Tokyo</span><br><span class="line"></span><br><span class="line">China Beijing</span><br><span class="line"></span><br><span class="line">Singapore NaN</span><br><span class="line"></span><br><span class="line">S.Korea Seoul</span><br><span class="line"></span><br><span class="line">Name: Capital Series, dtype: object</span><br></pre></td></tr></table></figure>
+<p>“字典”？不是的，⾏index可以重复，尽管不推荐。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Series5_IndexList = [&apos;A&apos;,&apos;B&apos;,&apos;B&apos;,&apos;C&apos;]</span><br><span class="line"></span><br><span class="line">Series5 = pd.Series(Series1.values,index = Series5_IndexList)</span><br><span class="line"></span><br><span class="line">print Series5</span><br><span class="line"></span><br><span class="line">print Series5[[&apos;B&apos;,&apos;A&apos;]]</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">A 0.030480</span><br><span class="line"></span><br><span class="line">B 0.072746</span><br><span class="line"></span><br><span class="line">B -0.186607</span><br><span class="line"></span><br><span class="line">C -1.412244</span><br><span class="line"></span><br><span class="line">dtype: float64</span><br><span class="line"></span><br><span class="line">B 0.072746</span><br><span class="line"></span><br><span class="line">B -0.186607</span><br><span class="line"></span><br><span class="line">A 0.030480</span><br><span class="line"></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+<p>我们可以看出，Series[‘B’]输出了两个值，所以index值尽量不要重复呀！</p>
+<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><p>DataFrame：pandas的战锤(数据表，⼆维数组)</p>
+<p>Series的有序集合，就像R的DataFrame一样方便。</p>
+<p>仔细想想，绝大部分的数据形式都可以表现为DataFrame。</p>
+<h3 id="从NumPy二维数组、从文件或者从数据库定义：数据虽好，勿忘列名"><a href="#从NumPy二维数组、从文件或者从数据库定义：数据虽好，勿忘列名" class="headerlink" title="从NumPy二维数组、从文件或者从数据库定义：数据虽好，勿忘列名"></a>从NumPy二维数组、从文件或者从数据库定义：数据虽好，勿忘列名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dataNumPy = np.asarray([(&apos;Japan&apos;,&apos;Tokyo&apos;,4000),(&apos;S.Korea&apos;,&apos;Seoul&apos;,1300),(&apos;China&apos;,&apos;Beijing&apos;,9100)])</span><br><span class="line"></span><br><span class="line">DF1 = pd.DataFrame(dataNumPy,columns=[&apos;nation&apos;,&apos;capital&apos;,&apos;GDP&apos;])</span><br><span class="line"></span><br><span class="line">DF1</span><br></pre></td></tr></table></figure>
+<p>这里DataFrame中的<code>columns</code>应该就是列名的意思。现在看<code>print</code>的结果，是不是很舒服啊！Excel的样式嘛</p>
+<h3 id="等长的列数据保存在一个字典里（JSON）：很不幸，字典key是无序的"><a href="#等长的列数据保存在一个字典里（JSON）：很不幸，字典key是无序的" class="headerlink" title="等长的列数据保存在一个字典里（JSON）：很不幸，字典key是无序的"></a>等长的列数据保存在一个字典里（JSON）：很不幸，字典key是无序的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dataDict = &#123;&apos;nation&apos;:[&apos;Japan&apos;,&apos;S.Korea&apos;,&apos;China&apos;],&apos;capital&apos;:[&apos;Tokyo&apos;,&apos;Seoul&apos;,&apos;Beijing&apos;],&apos;GDP&apos;:[4900,1300,9100]&#125;</span><br><span class="line"></span><br><span class="line">DF2 = pd.DataFrame(dataDict)</span><br><span class="line"></span><br><span class="line">DF2</span><br></pre></td></tr></table></figure>
+<p>输出结果可以发现，<strong>无序的！</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    GDP capital nation</span><br><span class="line"></span><br><span class="line">0   4900    Tokyo   Japan</span><br><span class="line"></span><br><span class="line">1   1300    Seoul   S.Korea</span><br><span class="line"></span><br><span class="line">2   9100    Beijing China</span><br></pre></td></tr></table></figure>
+<p>PS:由于懒得截图放过来，这里没有了边框线。</p>
+<h3 id="从另一个DataFrame定义DataFrame：啊，强迫症犯了！"><a href="#从另一个DataFrame定义DataFrame：啊，强迫症犯了！" class="headerlink" title="从另一个DataFrame定义DataFrame：啊，强迫症犯了！"></a>从另一个DataFrame定义DataFrame：啊，强迫症犯了！</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF21 = pd.DataFrame(DF2,columns=[&apos;nation&apos;,&apos;capital&apos;,&apos;GDP&apos;])</span><br><span class="line"></span><br><span class="line">DF21</span><br></pre></td></tr></table></figure>
+<p>很明显，这里是利用<code>DF2</code>定义DF21，还通过指定<code>cloumns</code>改变了列名的顺序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF22 = pd.DataFrame(DF2,columns=[&apos;nation&apos;,&apos;capital&apos;,&apos;GDP&apos;],index = [2,0,1])</span><br><span class="line"></span><br><span class="line">DF22</span><br></pre></td></tr></table></figure>
+<p>很明显，这里定义了<code>columns</code>的顺序，还定义了<code>index</code>的顺序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nation capital GDP</span><br><span class="line"></span><br><span class="line">2 China Beijing 9100</span><br><span class="line"></span><br><span class="line">0 Japan Tokyo 4900</span><br><span class="line"></span><br><span class="line">1 S.Korea Seoul 1300</span><br></pre></td></tr></table></figure>
+<h3 id="从DataFrame中取出列？两种方法（与JavaScript完全一致！）"><a href="#从DataFrame中取出列？两种方法（与JavaScript完全一致！）" class="headerlink" title="从DataFrame中取出列？两种方法（与JavaScript完全一致！）"></a>从DataFrame中取出列？两种方法（与JavaScript完全一致！）</h3><p>OMG，囧，我竟然都快忘了js语法了，现在想起了，但是对象的属性既可以<code>obj.x</code>也可以<code>obj[x]</code>。</p>
+<ul>
+<li><p>‘.’的写法容易与其他预留关键字产生冲突</p>
+</li>
+<li><p>‘[ ]’的写法最安全。</p>
+</li>
+</ul>
+<h3 id="从DataFrame中取出行？（至少）两种⽅法："><a href="#从DataFrame中取出行？（至少）两种⽅法：" class="headerlink" title="从DataFrame中取出行？（至少）两种⽅法："></a>从DataFrame中取出行？（至少）两种⽅法：</h3><ul>
+<li>方法1和方法2：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print DF22[0:1] #给出的实际是DataFrame</span><br><span class="line"></span><br><span class="line">print DF22.ix[0] #通过对应Index给出⾏,**ix**好爽。</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> nation  capital   GDP</span><br><span class="line"></span><br><span class="line">2  China  Beijing  9100</span><br><span class="line"></span><br><span class="line">nation     Japan</span><br><span class="line"></span><br><span class="line">capital    Tokyo</span><br><span class="line"></span><br><span class="line">GDP         4900</span><br><span class="line"></span><br><span class="line">Name: 0, dtype: object</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法3 <strong>像NumPy切片一样的终极招式：iloc </strong> ：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print DF22.iloc[0,:]    #第一个参数是第几行，第二个参数是列。这里呢，就是第0行，全部列</span><br><span class="line"></span><br><span class="line">print DF22.iloc[:,0]    #根据上面的描述，这里是全部行，第0列</span><br></pre></td></tr></table></figure>
+<p>输出结果，验证一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nation       China</span><br><span class="line"></span><br><span class="line">capital    Beijing</span><br><span class="line"></span><br><span class="line">GDP           9100</span><br><span class="line"></span><br><span class="line">Name: 2, dtype: object</span><br><span class="line"></span><br><span class="line">2      China</span><br><span class="line"></span><br><span class="line">0      Japan</span><br><span class="line"></span><br><span class="line">1    S.Korea</span><br><span class="line"></span><br><span class="line">Name: nation, dtype: object</span><br></pre></td></tr></table></figure>
+<h3 id="动态增加列列，但是无法用”-”的方式，只能用”-”"><a href="#动态增加列列，但是无法用”-”的方式，只能用”-”" class="headerlink" title="动态增加列列，但是无法用”.”的方式，只能用”[]”"></a>动态增加列列，但是无法用”.”的方式，只能用”[]”</h3><p>举个栗子说明一下就明白了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF22[&apos;population&apos;] = [1600,130,55]</span><br><span class="line"></span><br><span class="line">DF22</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">nation  capital GDP population</span><br><span class="line"></span><br><span class="line">2   China   Beijing 9100    1600</span><br><span class="line"></span><br><span class="line">0   Japan   Tokyo   4900    130</span><br><span class="line"></span><br><span class="line">1   S.Korea Seoul   1300    55</span><br></pre></td></tr></table></figure>
+<h2 id="Index：行级索引"><a href="#Index：行级索引" class="headerlink" title="Index：行级索引"></a>Index：行级索引</h2><p>Index：pandas进⾏数据操纵的鬼牌（行级索引）</p>
+<p>⾏级索引是：</p>
+<ul>
+<li><p>元数据</p>
+</li>
+<li><p>可能由真实数据产生，因此可以视作数据</p>
+</li>
+<li><p>可以由多重索引也就是多个列组合而成</p>
+</li>
+<li><p>可以和列名进行交换，也可以进行堆叠和展开，达到Excel透视表效果</p>
+</li>
+</ul>
+<p>Index有四种…哦不，很多种写法，⼀些重要的索引类型包括：</p>
+<ul>
+<li><p>pd.Index（普通）</p>
+</li>
+<li><p>Int64Index（数值型索引）</p>
+</li>
+<li><p>MultiIndex（多重索引，在数据操纵中更详细描述）</p>
+</li>
+<li><p>DatetimeIndex（以时间格式作为索引）</p>
+</li>
+<li><p>PeriodIndex （含周期的时间格式作为索引）</p>
+</li>
+</ul>
+<h3 id="直接定义普通索引，长得就和普通的Series⼀样"><a href="#直接定义普通索引，长得就和普通的Series⼀样" class="headerlink" title="直接定义普通索引，长得就和普通的Series⼀样"></a>直接定义普通索引，长得就和普通的Series⼀样</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">index_names = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]</span><br><span class="line"></span><br><span class="line">Series_for_Index = pd.Series(index_names)</span><br><span class="line"></span><br><span class="line">print pd.Index(index_names)</span><br><span class="line"></span><br><span class="line">print pd.Index(Series_for_Index)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Index([u&apos;a&apos;, u&apos;b&apos;, u&apos;c&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">Index([u&apos;a&apos;, u&apos;b&apos;, u&apos;c&apos;], dtype=&apos;object&apos;)</span><br></pre></td></tr></table></figure>
+<p><strong>可惜Immutable，牢记！</strong>  不可变！举例如下：此处挖坑啊。不明白……</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">index_names = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;] </span><br><span class="line"></span><br><span class="line">index0 = pd.Index(index_names) </span><br><span class="line"></span><br><span class="line">print index0.get_values() </span><br><span class="line"></span><br><span class="line">index0[2] = &apos;d&apos;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[&apos;a&apos; &apos;b&apos; &apos;c&apos;]</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">TypeError                                 Traceback (most recent call last)</span><br><span class="line"></span><br><span class="line">&lt;ipython-input-36-f34da0a8623c&gt; in &lt;module&gt;()</span><br><span class="line"></span><br><span class="line">      2 index0 = pd.Index(index_names)</span><br><span class="line"></span><br><span class="line">      3 print index0.get_values()</span><br><span class="line"></span><br><span class="line">----&gt; 4 index0[2] = &apos;d&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Anaconda\lib\site-packages\pandas\core\index.pyc in __setitem__(self, key, value)</span><br><span class="line"></span><br><span class="line">   1055 </span><br><span class="line"></span><br><span class="line">   1056     def __setitem__(self, key, value):</span><br><span class="line"></span><br><span class="line">-&gt; 1057         raise TypeError(&quot;Indexes does not support mutable operations&quot;)</span><br><span class="line"></span><br><span class="line">   1058 </span><br><span class="line"></span><br><span class="line">   1059     def __getitem__(self, key):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TypeError: Indexes does not support mutable operations</span><br></pre></td></tr></table></figure>
+<h3 id="扔进去一个含有多元组的List，就有了MultiIndex"><a href="#扔进去一个含有多元组的List，就有了MultiIndex" class="headerlink" title="扔进去一个含有多元组的List，就有了MultiIndex"></a>扔进去一个含有多元组的List，就有了MultiIndex</h3><p>可惜，如果这个List Comprehension改成小括号，就不对了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">multi1 = pd.Index([(&apos;Row_&apos;+str(x+1),&apos;Col_&apos;+str(y+1)) for x in xrange(4) for y in xrange(4)])</span><br><span class="line"></span><br><span class="line">multi1.name = [&apos;index1&apos;,&apos;index2&apos;]</span><br><span class="line"></span><br><span class="line">print multi1</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">MultiIndex(levels=[[u&apos;Row_1&apos;, u&apos;Row_2&apos;, u&apos;Row_3&apos;, u&apos;Row_4&apos;], [u&apos;Col_1&apos;, u&apos;Col_2&apos;, u&apos;Col_3&apos;, u&apos;Col_4&apos;]],</span><br><span class="line"></span><br><span class="line">           labels=[[0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3], [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]])</span><br></pre></td></tr></table></figure>
+<h3 id="对于Series来说，如果拥有了多重Index，数据，变形！"><a href="#对于Series来说，如果拥有了多重Index，数据，变形！" class="headerlink" title="对于Series来说，如果拥有了多重Index，数据，变形！"></a>对于Series来说，如果拥有了多重Index，数据，变形！</h3><p>下列代码说明：</p>
+<ul>
+<li><p>二重MultiIndex的Series可以unstack()成DataFrame</p>
+</li>
+<li><p>DataFrame可以stack成拥有⼆重MultiIndex的Series</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data_for_multi1 = pd.Series(xrange(0,16),index=multi1)</span><br><span class="line"></span><br><span class="line">data_for_multi1</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Row_1  Col_1     0</span><br><span class="line">       Col_2     1</span><br><span class="line"></span><br><span class="line">       Col_3     2</span><br><span class="line"></span><br><span class="line">       Col_4     3</span><br><span class="line">Row_2  Col_1     4</span><br><span class="line"></span><br><span class="line">       Col_2     5</span><br><span class="line"></span><br><span class="line">       Col_3     6</span><br><span class="line"></span><br><span class="line">       Col_4     7</span><br><span class="line">Row_3  Col_1     8</span><br><span class="line"></span><br><span class="line">       Col_2     9</span><br><span class="line"></span><br><span class="line">       Col_3    10</span><br><span class="line"></span><br><span class="line">       Col_4    11</span><br><span class="line"></span><br><span class="line">Row_4  Col_1    12</span><br><span class="line">       Col_2    13</span><br><span class="line"></span><br><span class="line">       Col_3    14</span><br><span class="line"></span><br><span class="line">       Col_4    15</span><br><span class="line"></span><br><span class="line">dtype: int32</span><br></pre></td></tr></table></figure>
+<p>看到输出结果，好像明白了点，有点类似Excel汇总一样。不过，日后还得查点<a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Index.html#pandas.Index" target="_blank" rel="noopener">资料</a></p>
+<h4 id="二重MultiIndex的Series可以unstack-成DataFrame"><a href="#二重MultiIndex的Series可以unstack-成DataFrame" class="headerlink" title="二重MultiIndex的Series可以unstack()成DataFrame"></a>二重MultiIndex的Series可以unstack()成DataFrame</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data_for_multi1.unstack()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1ez8nly6izyj209w05b74r.jpg" alt="unstack结果"></p>
+<h4 id="DataFrame可以stack成拥有⼆重MultiIndex的Series"><a href="#DataFrame可以stack成拥有⼆重MultiIndex的Series" class="headerlink" title="DataFrame可以stack成拥有⼆重MultiIndex的Series"></a>DataFrame可以stack成拥有⼆重MultiIndex的Series</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data_for_multi1.unstack().stack()</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Row_1  Col_1     0</span><br><span class="line"></span><br><span class="line">       Col_2     1</span><br><span class="line"></span><br><span class="line">       Col_3     2</span><br><span class="line"></span><br><span class="line">       Col_4     3</span><br><span class="line"></span><br><span class="line">Row_2  Col_1     4</span><br><span class="line"></span><br><span class="line">       Col_2     5</span><br><span class="line"></span><br><span class="line">       Col_3     6</span><br><span class="line"></span><br><span class="line">       Col_4     7</span><br><span class="line"></span><br><span class="line">Row_3  Col_1     8</span><br><span class="line"></span><br><span class="line">       Col_2     9</span><br><span class="line"></span><br><span class="line">       Col_3    10</span><br><span class="line"></span><br><span class="line">       Col_4    11</span><br><span class="line"></span><br><span class="line">Row_4  Col_1    12</span><br><span class="line"></span><br><span class="line">       Col_2    13</span><br><span class="line"></span><br><span class="line">       Col_3    14</span><br><span class="line"></span><br><span class="line">       Col_4    15</span><br><span class="line"></span><br><span class="line">dtype: int32</span><br></pre></td></tr></table></figure>
+<h3 id="非平衡数据的例子："><a href="#非平衡数据的例子：" class="headerlink" title="非平衡数据的例子："></a>非平衡数据的例子：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">multi2 = pd.Index([(&apos;Row_&apos;+str(x+1),&apos;Col_&apos;+str(y+1)) for x in xrange(5) for y in xrange(x)])</span><br><span class="line"></span><br><span class="line">multi2</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">MultiIndex(levels=[[u&apos;Row_2&apos;, u&apos;Row_3&apos;, u&apos;Row_4&apos;, u&apos;Row_5&apos;], [u&apos;Col_1&apos;, u&apos;Col_2&apos;, u&apos;Col_3&apos;, u&apos;Col_4&apos;]],</span><br><span class="line"></span><br><span class="line">           labels=[[0, 1, 1, 2, 2, 2, 3, 3, 3, 3], [0, 0, 1, 0, 1, 2, 0, 1, 2, 3]])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data_for_multi2 = pd.Series(np.arange(10),index = multi2) data_for_multi2</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Row_2  Col_1    0</span><br><span class="line"></span><br><span class="line">Row_3  Col_1    1</span><br><span class="line"></span><br><span class="line">       Col_2    2</span><br><span class="line"></span><br><span class="line">Row_4  Col_1    3</span><br><span class="line"></span><br><span class="line">       Col_2    4</span><br><span class="line"></span><br><span class="line">       Col_3    5</span><br><span class="line"></span><br><span class="line">Row_5  Col_1    6</span><br><span class="line"></span><br><span class="line">       Col_2    7</span><br><span class="line"></span><br><span class="line">       Col_3    8</span><br><span class="line"></span><br><span class="line">       Col_4    9</span><br><span class="line"></span><br><span class="line">dtype: int32</span><br></pre></td></tr></table></figure>
+<h3 id="DateTime标准库如此好⽤，你值得拥有"><a href="#DateTime标准库如此好⽤，你值得拥有" class="headerlink" title="DateTime标准库如此好⽤，你值得拥有"></a>DateTime标准库如此好⽤，你值得拥有</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import datetime</span><br><span class="line"></span><br><span class="line">dates = [datetime.datetime(2015,1,1),datetime.datetime(2015,1,8),datetime.datetime(2015,1,30)]</span><br><span class="line"></span><br><span class="line">pd.DatetimeIndex(dates)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DatetimeIndex([&apos;2015-01-01&apos;, &apos;2015-01-08&apos;, &apos;2015-01-30&apos;], dtype=&apos;datetime64[ns]&apos;, freq=None, tz=None)</span><br></pre></td></tr></table></figure>
+<h4 id="如果你不仅需要时间格式统一，时间频率也要统一的话"><a href="#如果你不仅需要时间格式统一，时间频率也要统一的话" class="headerlink" title="如果你不仅需要时间格式统一，时间频率也要统一的话"></a>如果你不仅需要时间格式统一，时间频率也要统一的话</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">periodindex1 = pd.period_range(&apos;2015-01&apos;,&apos;2015-04&apos;,freq=&apos;M&apos;)</span><br><span class="line"></span><br><span class="line">print periodindex1</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PeriodIndex([&apos;2015-01&apos;, &apos;2015-02&apos;, &apos;2015-03&apos;, &apos;2015-04&apos;], dtype=&apos;int64&apos;, freq=&apos;M&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="月级精度和日级精度如何转换？"><a href="#月级精度和日级精度如何转换？" class="headerlink" title="月级精度和日级精度如何转换？"></a>月级精度和日级精度如何转换？</h4><p>有的公司统⼀以1号代表当月，有的公司统一以最后1天代表当⽉，转化起来很麻烦，可以<code>asfreq</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">print periodindex1.asfreq(&apos;D&apos;,how=&apos;start&apos;)</span><br><span class="line"></span><br><span class="line">print periodindex1.asfreq(&apos;D&apos;,how=&apos;end&apos;)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PeriodIndex([&apos;2015-01-01&apos;, &apos;2015-02-01&apos;, &apos;2015-03-01&apos;, &apos;2015-04-01&apos;], dtype=&apos;int64&apos;, freq=&apos;D&apos;)</span><br><span class="line"></span><br><span class="line">PeriodIndex([&apos;2015-01-31&apos;, &apos;2015-02-28&apos;, &apos;2015-03-31&apos;, &apos;2015-04-30&apos;], dtype=&apos;int64&apos;, freq=&apos;D&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="最后的最后，我要真正把两种频率的时间精度匹配上？"><a href="#最后的最后，我要真正把两种频率的时间精度匹配上？" class="headerlink" title="最后的最后，我要真正把两种频率的时间精度匹配上？"></a>最后的最后，我要真正把两种频率的时间精度匹配上？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">periodindex_mon = pd.period_range(&apos;2015-01&apos;,&apos;2015-03&apos;,freq=&apos;M&apos;).asfreq(&apos;D&apos;,how=&apos;start&apos;)</span><br><span class="line"></span><br><span class="line">periodindex_day = pd.period_range(&apos;2015-01-01&apos;,&apos;2015-03-31&apos;,freq=&apos;D&apos;)</span><br><span class="line"></span><br><span class="line">print periodindex_mon</span><br><span class="line"></span><br><span class="line">print periodindex_day</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PeriodIndex([&apos;2015-01-01&apos;, &apos;2015-02-01&apos;, &apos;2015-03-01&apos;], dtype=&apos;int64&apos;, freq=&apos;D&apos;)</span><br><span class="line"></span><br><span class="line">PeriodIndex([&apos;2015-01-01&apos;, &apos;2015-01-02&apos;, &apos;2015-01-03&apos;, &apos;2015-01-04&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-05&apos;, &apos;2015-01-06&apos;, &apos;2015-01-07&apos;, &apos;2015-01-08&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-09&apos;, &apos;2015-01-10&apos;, &apos;2015-01-11&apos;, &apos;2015-01-12&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-13&apos;, &apos;2015-01-14&apos;, &apos;2015-01-15&apos;, &apos;2015-01-16&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-17&apos;, &apos;2015-01-18&apos;, &apos;2015-01-19&apos;, &apos;2015-01-20&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-21&apos;, &apos;2015-01-22&apos;, &apos;2015-01-23&apos;, &apos;2015-01-24&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-25&apos;, &apos;2015-01-26&apos;, &apos;2015-01-27&apos;, &apos;2015-01-28&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-01-29&apos;, &apos;2015-01-30&apos;, &apos;2015-01-31&apos;, &apos;2015-02-01&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-02&apos;, &apos;2015-02-03&apos;, &apos;2015-02-04&apos;, &apos;2015-02-05&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-06&apos;, &apos;2015-02-07&apos;, &apos;2015-02-08&apos;, &apos;2015-02-09&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-10&apos;, &apos;2015-02-11&apos;, &apos;2015-02-12&apos;, &apos;2015-02-13&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-14&apos;, &apos;2015-02-15&apos;, &apos;2015-02-16&apos;, &apos;2015-02-17&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-18&apos;, &apos;2015-02-19&apos;, &apos;2015-02-20&apos;, &apos;2015-02-21&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-22&apos;, &apos;2015-02-23&apos;, &apos;2015-02-24&apos;, &apos;2015-02-25&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-02-26&apos;, &apos;2015-02-27&apos;, &apos;2015-02-28&apos;, &apos;2015-03-01&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-02&apos;, &apos;2015-03-03&apos;, &apos;2015-03-04&apos;, &apos;2015-03-05&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-06&apos;, &apos;2015-03-07&apos;, &apos;2015-03-08&apos;, &apos;2015-03-09&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-10&apos;, &apos;2015-03-11&apos;, &apos;2015-03-12&apos;, &apos;2015-03-13&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-14&apos;, &apos;2015-03-15&apos;, &apos;2015-03-16&apos;, &apos;2015-03-17&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-18&apos;, &apos;2015-03-19&apos;, &apos;2015-03-20&apos;, &apos;2015-03-21&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-22&apos;, &apos;2015-03-23&apos;, &apos;2015-03-24&apos;, &apos;2015-03-25&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-26&apos;, &apos;2015-03-27&apos;, &apos;2015-03-28&apos;, &apos;2015-03-29&apos;,</span><br><span class="line"></span><br><span class="line">             &apos;2015-03-30&apos;, &apos;2015-03-31&apos;],</span><br><span class="line"></span><br><span class="line">            dtype=&apos;int64&apos;, freq=&apos;D&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="粗粒度数据＋reindex＋ffill-bfill"><a href="#粗粒度数据＋reindex＋ffill-bfill" class="headerlink" title="粗粒度数据＋reindex＋ffill/bfill"></a>粗粒度数据＋<code>reindex</code>＋<code>ffill/bfill</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">full_ts = pd.Series(periodindex_mon,index=periodindex_mon).reindex(periodindex_day,method=&apos;ffill&apos;)</span><br><span class="line"></span><br><span class="line">full_ts</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1ez8obdrmi6j20ob0aqgn0.jpg" alt="粒度数据"></p>
+<h3 id="关于索引，⽅便的操作有？"><a href="#关于索引，⽅便的操作有？" class="headerlink" title="关于索引，⽅便的操作有？"></a>关于索引，⽅便的操作有？</h3><p>前⾯描述过了，索引有序，重复，但⼀定程度上⼜能通过key来访问，也就是说，某些集合操作都是可以⽀持的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">index1 = pd.Index([&apos;A&apos;,&apos;B&apos;,&apos;B&apos;,&apos;C&apos;,&apos;C&apos;])</span><br><span class="line"></span><br><span class="line">index2 = pd.Index([&apos;C&apos;,&apos;D&apos;,&apos;E&apos;,&apos;E&apos;,&apos;F&apos;])</span><br><span class="line"></span><br><span class="line">index3 = pd.Index([&apos;B&apos;,&apos;C&apos;,&apos;A&apos;])</span><br><span class="line"></span><br><span class="line">print index1.append(index2)</span><br><span class="line"></span><br><span class="line">print index1.difference(index2)</span><br><span class="line"></span><br><span class="line">print index1.intersection(index2)</span><br><span class="line"></span><br><span class="line">print index1.union(index2) # Support unique-value Index well</span><br><span class="line"></span><br><span class="line">print index1.isin(index2)</span><br><span class="line"></span><br><span class="line">print index1.delete(2)</span><br><span class="line"></span><br><span class="line">print index1.insert(0,&apos;K&apos;) # Not suggested</span><br><span class="line"></span><br><span class="line">print index3.drop(&apos;A&apos;) # Support unique-value Index well</span><br><span class="line"></span><br><span class="line">print index1.is_monotonic,index2.is_monotonic,index3.is_monotonic</span><br><span class="line"></span><br><span class="line">print index1.is_unique,index2.is_unique,index3.is_unique</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Index([u&apos;A&apos;, u&apos;B&apos;, u&apos;B&apos;, u&apos;C&apos;, u&apos;C&apos;, u&apos;C&apos;, u&apos;D&apos;, u&apos;E&apos;, u&apos;E&apos;, u&apos;F&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">Index([u&apos;A&apos;, u&apos;B&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">Index([u&apos;C&apos;, u&apos;C&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">Index([u&apos;A&apos;, u&apos;B&apos;, u&apos;B&apos;, u&apos;C&apos;, u&apos;C&apos;, u&apos;D&apos;, u&apos;E&apos;, u&apos;E&apos;, u&apos;F&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">[False False False  True  True]</span><br><span class="line"></span><br><span class="line">Index([u&apos;A&apos;, u&apos;B&apos;, u&apos;C&apos;, u&apos;C&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">Index([u&apos;K&apos;, u&apos;A&apos;, u&apos;B&apos;, u&apos;B&apos;, u&apos;C&apos;, u&apos;C&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">Index([u&apos;B&apos;, u&apos;C&apos;], dtype=&apos;object&apos;)</span><br><span class="line"></span><br><span class="line">True True False</span><br><span class="line"></span><br><span class="line">False False True</span><br></pre></td></tr></table></figure>
+<h1 id="大熊猫世界来去自如：Pandas的I-O"><a href="#大熊猫世界来去自如：Pandas的I-O" class="headerlink" title="大熊猫世界来去自如：Pandas的I/O"></a>大熊猫世界来去自如：Pandas的I/O</h1><p>老生常谈，从基础来看，我们仍然关心pandas对于与外部数据是如何交互的。</p>
+<h2 id="结构化数据输入输出"><a href="#结构化数据输入输出" class="headerlink" title="结构化数据输入输出"></a>结构化数据输入输出</h2><ul>
+<li><p>read_csv与to_csv 是⼀对输⼊输出的⼯具，read_csv直接返回pandas.DataFrame，⽽to_csv只要执行命令即可写文件</p>
+<ul>
+<li><p>read_table：功能类似</p>
+</li>
+<li><p>read_fwf：操作fixed width file</p>
+</li>
+</ul>
+</li>
+<li><p>read_excel与to_excel方便的与excel交互</p>
+</li>
+<li><p>header 表⽰数据中是否存在列名，如果在第0行就写就写0，并且开始读数据时跳过相应的行数，不存在可以写none</p>
+</li>
+<li><p>names 表示要用给定的列名来作为最终的列名</p>
+</li>
+<li><p>encoding 表⽰数据集的字符编码，通常而言一份数据为了⽅便的进⾏⽂件传输都以utf-8作为标准</p>
+</li>
+</ul>
+<p>这里用的是自己的一个<code>csv</code>数据，因为找不到参考的这个pdf中的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cnames=[&apos;经度&apos;,&apos;纬度&apos;]</span><br><span class="line"></span><br><span class="line">taxidata2 = pd.read_csv(&apos;20140401.csv&apos;,header = 4,names=cnames,encoding=&apos;utf-8&apos;)</span><br><span class="line"></span><br><span class="line">taxidata2</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9lm7fzejj20em09pq4t.jpg" alt="header=0"></p>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9lmxnonvj20ix0a3jtj.jpg" alt="header=4"></p>
+<p>全部参数的请移步API：</p>
+<p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html#pandas.read_csv" target="_blank" rel="noopener">http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html#pandas.read_csv</a></p>
+<p>这里介绍一些常用的参数：</p>
+<p>读取处理：</p>
+<ul>
+<li><p>skiprows：跳过⼀定的⾏数</p>
+</li>
+<li><p>nrows：仅读取⼀定的⾏数</p>
+</li>
+<li><p>skipfooter：尾部有固定的⾏数永不读取</p>
+</li>
+<li><p>skip_blank_lines：空⾏跳过</p>
+</li>
+</ul>
+<p>内容处理：</p>
+<ul>
+<li><p>sep/delimiter：分隔符很重要，常⻅的有逗号，空格和Tab(‘\t’)</p>
+</li>
+<li><p>na_values：指定应该被当作na_values的数值</p>
+</li>
+<li><p>thousands：处理数值类型时，每千位分隔符并不统⼀ (1.234.567,89或者1,234,567.89都可能)，此时要把字符串转化为</p>
+</li>
+</ul>
+<p>数字需要指明千位分隔符</p>
+<p>收尾处理：</p>
+<ul>
+<li><p>index_col：将真实的某列（列的数⺫，甚⾄列名）当作index</p>
+</li>
+<li><p>squeeze：仅读到⼀列时，不再保存为pandas.DataFrame⽽是pandas.Series</p>
+</li>
+</ul>
+<h2 id="Excel-…"><a href="#Excel-…" class="headerlink" title="Excel … ?"></a>Excel … ?</h2><p>对于存储着极为规整数据的Excel而言，其实是没必要一定用Excel来存，尽管Pandas也十分友好的提供了I/O接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">taxidata.to_excel(&apos;t0401.xlsx&apos;,encoding=&apos;utf-8&apos;)</span><br><span class="line"></span><br><span class="line">taxidata_from_excel = pd.read_excel(&apos;t0401.xlsx&apos;,header=0, encoding=&apos;utf-8&apos;)</span><br><span class="line"></span><br><span class="line">taxidata_from_excel</span><br></pre></td></tr></table></figure>
+<p>注意：当你的xls文件行数很多超过65536时，就会遇到错误，解决办法是将写入的格式变为<code>xlsx</code>。<a href="http://stackoverflow.com/questions/17879805/xlwt-limiting-the-number-of-rows" target="_blank" rel="noopener">excel函数受限制问题</a></p>
+<p>唯一重要的参数：sheetname=k，标志着一个excel的第k个sheet页将会被取出。（从0开始）</p>
+<h2 id="半结构化数据"><a href="#半结构化数据" class="headerlink" title="半结构化数据"></a>半结构化数据</h2><p>JSON：网络传输中常⽤的⼀种数据格式。</p>
+<p>仔细看一下，实际上这就是我们平时收集到异源数据的风格是一致的：</p>
+<ul>
+<li><p>列名不能完全匹配</p>
+</li>
+<li><p>key可能并不唯一</p>
+</li>
+<li><p>元数据被保存在数据里</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line">json_data = [&#123;&apos;name&apos;:&apos;Wang&apos;,&apos;sal&apos;:50000,&apos;job&apos;:&apos;VP&apos;&#125;,\</span><br><span class="line"></span><br><span class="line"> &#123;&apos;name&apos;:&apos;Zhang&apos;,&apos;job&apos;:&apos;Manager&apos;,&apos;report&apos;:&apos;VP&apos;&#125;,\</span><br><span class="line"></span><br><span class="line"> &#123;&apos;name&apos;:&apos;Li&apos;,&apos;sal&apos;:5000,&apos;report&apos;:&apos;IT&apos;&#125;]</span><br><span class="line"></span><br><span class="line">data_employee = pd.read_json(json.dumps(json_data))</span><br><span class="line"></span><br><span class="line">data_employee_ri = data_employee.reindex(columns=[&apos;name&apos;,&apos;job&apos;,&apos;sal&apos;,&apos;report&apos;])</span><br><span class="line"></span><br><span class="line">data_employee_ri</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9mm97wqqj20if07egn7.jpg" alt></p>
+<h1 id="深入Pandas数据操纵"><a href="#深入Pandas数据操纵" class="headerlink" title="深入Pandas数据操纵"></a>深入Pandas数据操纵</h1><p>在前面部分的基础上，数据会有更多种操纵方式：</p>
+<ul>
+<li><p>通过列名、行index来取数据，结合ix、iloc灵活的获取数据的一个子集（第一部分已经介绍）</p>
+</li>
+<li><p>按记录拼接（就像Union All）或者关联（join）</p>
+</li>
+<li><p>方便的统计函数与⾃定义函数映射</p>
+</li>
+<li><p>排序</p>
+</li>
+<li><p>缺失值处理</p>
+</li>
+<li><p>与Excel一样灵活的数据透视表（在第四部分更详细介绍）</p>
+</li>
+</ul>
+<h2 id="数据集整合"><a href="#数据集整合" class="headerlink" title="数据集整合"></a>数据集整合</h2><h3 id="横向拼接：直接DataFrame"><a href="#横向拼接：直接DataFrame" class="headerlink" title="横向拼接：直接DataFrame"></a>横向拼接：直接DataFrame</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pd.DataFrame([np.random.rand(2),np.random.rand(2),np.random.rand(2)],columns=[&apos;C1&apos;,&apos;C2&apos;])</span><br></pre></td></tr></table></figure>
+<h3 id="横向拼接：Concatenate"><a href="#横向拼接：Concatenate" class="headerlink" title="横向拼接：Concatenate"></a>横向拼接：Concatenate</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pd.concat([data_employee_ri,data_employee_ri,data_employee_ri])</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9mxf9uulj20he09pwg0.jpg" alt></p>
+<h3 id="纵向拼接：Merge"><a href="#纵向拼接：Merge" class="headerlink" title="纵向拼接：Merge"></a>纵向拼接：Merge</h3><p>根据数据列关联，使用on关键字</p>
+<ul>
+<li><p>可以指定一列或多列</p>
+</li>
+<li><p>可以使⽤left_on和right_on</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pd.merge(data_employee_ri,data_employee_ri,on=&apos;name&apos;)</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6d9475f6jw1ez9mzcvkabj20g104dt9s.jpg" alt></p>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9n2n6czpj20g904ejs9.jpg" alt></p>
+<p>根据index关联，可以直接使用left_index和right_index</p>
+<p>TIPS: 增加how关键字，并指定</p>
+<ul>
+<li><p>how = ‘inner’</p>
+</li>
+<li><p>how = ‘left’</p>
+</li>
+<li><p>how = ‘right’</p>
+</li>
+<li><p>how = ‘outer’</p>
+</li>
+</ul>
+<p>结合how，可以看到merge基本再现了SQL应有的功能，并保持代码整洁</p>
+<h2 id="自定义函数映射"><a href="#自定义函数映射" class="headerlink" title="自定义函数映射"></a>自定义函数映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dataNumPy32 = np.asarray([(&apos;Japan&apos;,&apos;Tokyo&apos;,4000),(&apos;S.Korea&apos;,&apos;Seoul&apos;,1300),(&apos;China&apos;,&apos;Beijing&apos;,9100)])</span><br><span class="line"></span><br><span class="line">DF32 = pd.DataFrame(dataNumPy32,columns=[&apos;nation&apos;,&apos;capital&apos;,&apos;GDP&apos;])</span><br><span class="line"></span><br><span class="line">DF32</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/large/6d9475f6jw1ez9nnizyfkj20lq05d0tu.jpg" alt></p>
+<h3 id="map-以相同规则将1列数据作1个映射，也就是进行相同函数的处理"><a href="#map-以相同规则将1列数据作1个映射，也就是进行相同函数的处理" class="headerlink" title="map: 以相同规则将1列数据作1个映射，也就是进行相同函数的处理"></a>map: 以相同规则将1列数据作1个映射，也就是进行相同函数的处理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def GDP_Factorize(v):</span><br><span class="line"></span><br><span class="line">    fv = np.float64(v)</span><br><span class="line"></span><br><span class="line">    if fv &gt; 6000.0:</span><br><span class="line"></span><br><span class="line">         return &apos;High&apos;</span><br><span class="line"></span><br><span class="line">    elif fv &lt; 2000.0:</span><br><span class="line"></span><br><span class="line">         return &apos;Low&apos;</span><br><span class="line"></span><br><span class="line">    else:</span><br><span class="line"></span><br><span class="line">         return &apos;Medium&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DF32[&apos;GDP_Level&apos;] = DF32[&apos;GDP&apos;].map(GDP_Factorize)</span><br><span class="line"></span><br><span class="line">DF32[&apos;NATION&apos;] = DF32.nation.map(str.upper)</span><br><span class="line"></span><br><span class="line">DF32</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9ns3fprvj20dy03ljs3.jpg" alt="map"></p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li><p>sort: 按⼀列或者多列的值进行行级排序</p>
+</li>
+<li><p>sort_index: 根据index⾥的取值进行排序，而且可以根据axis决定是重排行还是列</p>
+</li>
+</ul>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dataNumPy33 = np.asarray([(&apos;Japan&apos;,&apos;Tokyo&apos;,4000),(&apos;S.Korea&apos;,&apos;Seoul&apos;,1300),(&apos;China&apos;,&apos;Beijing&apos;,9100)])</span><br><span class="line"></span><br><span class="line">DF33 = pd.DataFrame(dataNumPy33,columns=[&apos;nation&apos;,&apos;capital&apos;,&apos;GDP&apos;])</span><br><span class="line"></span><br><span class="line">DF33</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9o299de1j20nd05bgmp.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF33.sort([&apos;capital&apos;,&apos;nation&apos;],ascending=False)</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9o3xykzej20dj04et98.jpg" alt></p>
+<p><code>ascending</code>是降序的意思。</p>
+<h3 id="sort-index"><a href="#sort-index" class="headerlink" title="sort_index"></a>sort_index</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF33.sort_index(axis=1,ascending=True)</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9o77u4oej20de04jt97.jpg" alt></p>
+<h3 id="一个好用的功能：Rank"><a href="#一个好用的功能：Rank" class="headerlink" title="一个好用的功能：Rank"></a>一个好用的功能：Rank</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF33.rank()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/large/6d9475f6jw1ez9oa7xelij20dx04k0sy.jpg" alt></p>
+<h2 id="缺失数据处理"><a href="#缺失数据处理" class="headerlink" title="缺失数据处理"></a>缺失数据处理</h2><p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9oh1x2a8j20d209n3zp.jpg" alt></p>
+<h3 id="忽略缺失值："><a href="#忽略缺失值：" class="headerlink" title="忽略缺失值："></a>忽略缺失值：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DF34.mean(skipna=True)</span><br></pre></td></tr></table></figure>
+<p>不忽略缺失值的话，估计就不能计算均值了吧。</p>
+<p>如果不想忽略缺失值的话，就需要祭出fillna了：</p>
+<p><img src="http://ww2.sinaimg.cn/large/6d9475f6jw1ez9ojdw89tj20f70dtwg4.jpg" alt></p>
+<p>注：这里我在猜想，<code>axis=1</code>是不是就代表从<code>行</code>的角度呢？还是得多读书查资料呀。</p>
+<h1 id="“一组”大熊猫：Pandas的groupby"><a href="#“一组”大熊猫：Pandas的groupby" class="headerlink" title="“一组”大熊猫：Pandas的groupby"></a>“一组”大熊猫：Pandas的groupby</h1><p>groupby的功能类似SQL的group by关键字：</p>
+<p>Split-Apply-Combine</p>
+<ul>
+<li><p>Split，就是按照规则分组</p>
+</li>
+<li><p>Apply，通过⼀定的agg函数来获得输⼊pd.Series返回⼀个值的效果</p>
+</li>
+<li><p>Combine，把结果收集起来</p>
+</li>
+</ul>
+<p>Pandas的groupby的灵活性：</p>
+<ul>
+<li><p>分组的关键字可以来⾃于index，也可以来⾃于真实的列数据</p>
+</li>
+<li><p>分组规则可以通过⼀列或者多列</p>
+</li>
+</ul>
+<p>没有具体数据，截图看一下吧，方便日后回忆。</p>
+<p><img src="http://ww4.sinaimg.cn/large/6d9475f6jw1ez9oqvhpvoj20lz0jggqk.jpg" alt></p>
+<p>分组可以快速实现<code>MapReduce</code>的逻辑</p>
+<ul>
+<li><p>Map: 指定分组的列标签，不同的值就会被扔到不同的分组处理</p>
+</li>
+<li><p>Reduce: 输入多个值，返回1个值，一般可以通过agg实现，agg能接受1个函数</p>
+</li>
+</ul>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><ul>
+<li><strong>S1EP3_Pandas.pdf</strong> 不知道什么时候存到电脑里的资料，今天发现了它。感谢作者的资料。</li>
+</ul>
+<hr>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/12/09/python-argparse-note/" rel="bookmark">Python 标准库 argparse 的用法</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2015/12/02/python-files-list/" rel="bookmark">Python入门资料大全(更新ing)</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/12/15/python-debug-ipdb/" rel="bookmark">Python 调试模块 ipdb</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/09/07/python-effective-tips/" rel="bookmark">Python 实用技巧总结</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2015/12/16/python-machine-learning-list/" rel="bookmark">Python机器学习入门资料梳理</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2015/12/23/python-pandas-basic/" title="Python数据分析入门之pandas总结基础">https://michael728.github.io/2015/12/23/python-pandas-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/20/life-20151220/" rel="next" title="杂文-2015/12/20">
+                <i class="fa fa-chevron-left"></i> 杂文-2015/12/20
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/24/algorithm-GA-basic/" rel="prev" title="遗传算法GA(Genetic Algorithm)入门知识梳理">
+                遗传算法GA(Genetic Algorithm)入门知识梳理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas–“大熊猫”基础"><span class="nav-number">1.</span> <span class="nav-text">Pandas–“大熊猫”基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Series"><span class="nav-number">1.1.</span> <span class="nav-text">Series</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Series⽀持过滤的原理就如同NumPy"><span class="nav-number">1.1.1.</span> <span class="nav-text">Series⽀持过滤的原理就如同NumPy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当然也支持广播Broadcasting"><span class="nav-number">1.1.2.</span> <span class="nav-text">当然也支持广播Broadcasting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以及Universal-Function"><span class="nav-number">1.1.3.</span> <span class="nav-text">以及Universal Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在序列上就使用行标，而不是创建1个2列的数据表，能够轻松辨别哪是数据，哪是元数据"><span class="nav-number">1.1.4.</span> <span class="nav-text">在序列上就使用行标，而不是创建1个2列的数据表，能够轻松辨别哪是数据，哪是元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从Key不重复的Ordered-Dict或者从Dict来定义Series就不需要担心行索引重复："><span class="nav-number">1.1.5.</span> <span class="nav-text">从Key不重复的Ordered Dict或者从Dict来定义Series就不需要担心行索引重复：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.2.</span> <span class="nav-text">DataFrame</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从NumPy二维数组、从文件或者从数据库定义：数据虽好，勿忘列名"><span class="nav-number">1.2.1.</span> <span class="nav-text">从NumPy二维数组、从文件或者从数据库定义：数据虽好，勿忘列名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等长的列数据保存在一个字典里（JSON）：很不幸，字典key是无序的"><span class="nav-number">1.2.2.</span> <span class="nav-text">等长的列数据保存在一个字典里（JSON）：很不幸，字典key是无序的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从另一个DataFrame定义DataFrame：啊，强迫症犯了！"><span class="nav-number">1.2.3.</span> <span class="nav-text">从另一个DataFrame定义DataFrame：啊，强迫症犯了！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从DataFrame中取出列？两种方法（与JavaScript完全一致！）"><span class="nav-number">1.2.4.</span> <span class="nav-text">从DataFrame中取出列？两种方法（与JavaScript完全一致！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从DataFrame中取出行？（至少）两种⽅法："><span class="nav-number">1.2.5.</span> <span class="nav-text">从DataFrame中取出行？（至少）两种⽅法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态增加列列，但是无法用”-”的方式，只能用”-”"><span class="nav-number">1.2.6.</span> <span class="nav-text">动态增加列列，但是无法用”.”的方式，只能用”[]”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index：行级索引"><span class="nav-number">1.3.</span> <span class="nav-text">Index：行级索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接定义普通索引，长得就和普通的Series⼀样"><span class="nav-number">1.3.1.</span> <span class="nav-text">直接定义普通索引，长得就和普通的Series⼀样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扔进去一个含有多元组的List，就有了MultiIndex"><span class="nav-number">1.3.2.</span> <span class="nav-text">扔进去一个含有多元组的List，就有了MultiIndex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于Series来说，如果拥有了多重Index，数据，变形！"><span class="nav-number">1.3.3.</span> <span class="nav-text">对于Series来说，如果拥有了多重Index，数据，变形！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二重MultiIndex的Series可以unstack-成DataFrame"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">二重MultiIndex的Series可以unstack()成DataFrame</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DataFrame可以stack成拥有⼆重MultiIndex的Series"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">DataFrame可以stack成拥有⼆重MultiIndex的Series</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非平衡数据的例子："><span class="nav-number">1.3.4.</span> <span class="nav-text">非平衡数据的例子：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DateTime标准库如此好⽤，你值得拥有"><span class="nav-number">1.3.5.</span> <span class="nav-text">DateTime标准库如此好⽤，你值得拥有</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果你不仅需要时间格式统一，时间频率也要统一的话"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">如果你不仅需要时间格式统一，时间频率也要统一的话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#月级精度和日级精度如何转换？"><span class="nav-number">1.3.5.2.</span> <span class="nav-text">月级精度和日级精度如何转换？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后的最后，我要真正把两种频率的时间精度匹配上？"><span class="nav-number">1.3.5.3.</span> <span class="nav-text">最后的最后，我要真正把两种频率的时间精度匹配上？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#粗粒度数据＋reindex＋ffill-bfill"><span class="nav-number">1.3.5.4.</span> <span class="nav-text">粗粒度数据＋reindex＋ffill/bfill</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于索引，⽅便的操作有？"><span class="nav-number">1.3.6.</span> <span class="nav-text">关于索引，⽅便的操作有？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大熊猫世界来去自如：Pandas的I-O"><span class="nav-number">2.</span> <span class="nav-text">大熊猫世界来去自如：Pandas的I/O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化数据输入输出"><span class="nav-number">2.1.</span> <span class="nav-text">结构化数据输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-…"><span class="nav-number">2.2.</span> <span class="nav-text">Excel … ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#半结构化数据"><span class="nav-number">2.3.</span> <span class="nav-text">半结构化数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入Pandas数据操纵"><span class="nav-number">3.</span> <span class="nav-text">深入Pandas数据操纵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据集整合"><span class="nav-number">3.1.</span> <span class="nav-text">数据集整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#横向拼接：直接DataFrame"><span class="nav-number">3.1.1.</span> <span class="nav-text">横向拼接：直接DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#横向拼接：Concatenate"><span class="nav-number">3.1.2.</span> <span class="nav-text">横向拼接：Concatenate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纵向拼接：Merge"><span class="nav-number">3.1.3.</span> <span class="nav-text">纵向拼接：Merge</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数映射"><span class="nav-number">3.2.</span> <span class="nav-text">自定义函数映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map-以相同规则将1列数据作1个映射，也就是进行相同函数的处理"><span class="nav-number">3.2.1.</span> <span class="nav-text">map: 以相同规则将1列数据作1个映射，也就是进行相同函数的处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">3.3.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">3.3.1.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-index"><span class="nav-number">3.3.2.</span> <span class="nav-text">sort_index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个好用的功能：Rank"><span class="nav-number">3.3.3.</span> <span class="nav-text">一个好用的功能：Rank</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失数据处理"><span class="nav-number">3.4.</span> <span class="nav-text">缺失数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略缺失值："><span class="nav-number">3.4.1.</span> <span class="nav-text">忽略缺失值：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#“一组”大熊猫：Pandas的groupby"><span class="nav-number">4.</span> <span class="nav-text">“一组”大熊猫：Pandas的groupby</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">5.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2015/12/23/python-pandas-basic/";
+    this.page.identifier = "2015/12/23/python-pandas-basic/";
+    this.page.title = 'Python数据分析入门之pandas总结基础';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

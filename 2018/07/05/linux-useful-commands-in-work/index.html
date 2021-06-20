@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="awk示例： env变量值如下，需要获得pkg_url的链接值： 1&amp;#123;&amp;quot;name&amp;quot;: &amp;quot;michael&amp;quot;, &amp;quot;sex&amp;quot;: &amp;quot;male&amp;quot;, &amp;quot;pkg_url&amp;quot;: &amp;quot;www.github.com&amp;quot;, &amp;quot;number&amp;quot;: &amp;quot;888&amp;quot;&amp;#">
+<meta name="keywords" content="Linux,Shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作中常用的 Linux 命令">
+<meta property="og:url" content="https://michael728.github.io/2018/07/05/linux-useful-commands-in-work/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="awk示例： env变量值如下，需要获得pkg_url的链接值： 1&amp;#123;&amp;quot;name&amp;quot;: &amp;quot;michael&amp;quot;, &amp;quot;sex&amp;quot;: &amp;quot;male&amp;quot;, &amp;quot;pkg_url&amp;quot;: &amp;quot;www.github.com&amp;quot;, &amp;quot;number&amp;quot;: &amp;quot;888&amp;quot;&amp;#">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181122165329818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI1OTMyOTA=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="工作中常用的 Linux 命令">
+<meta name="twitter:description" content="awk示例： env变量值如下，需要获得pkg_url的链接值： 1&amp;#123;&amp;quot;name&amp;quot;: &amp;quot;michael&amp;quot;, &amp;quot;sex&amp;quot;: &amp;quot;male&amp;quot;, &amp;quot;pkg_url&amp;quot;: &amp;quot;www.github.com&amp;quot;, &amp;quot;number&amp;quot;: &amp;quot;888&amp;quot;&amp;#">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181122165329818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI1OTMyOTA=,size_16,color_FFFFFF,t_70">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2018/07/05/linux-useful-commands-in-work/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>工作中常用的 Linux 命令 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2018/07/05/linux-useful-commands-in-work/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">工作中常用的 Linux 命令
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-05 19:31:27" itemprop="dateCreated datePublished" datetime="2018-07-05T19:31:27+00:00">2018-07-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>示例：</p>
+<p>env变量值如下，需要获得pkg_url的链接值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;name&quot;: &quot;michael&quot;, &quot;sex&quot;: &quot;male&quot;, &quot;pkg_url&quot;: &quot;www.github.com&quot;, &quot;number&quot;: &quot;888&quot;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkg_url=$(echo $env | awk -F &quot;pkg_url\&quot;: \&quot;&quot; &apos;&#123;print $2&#125;&apos; | awk -F &quot;\&quot;,&quot; &apos;&#123;print $1&#125;&apos;)</span><br><span class="line">echo $pkg_url</span><br><span class="line">www.github.com</span><br></pre></td></tr></table></figure>
+<p>-F 指定分隔规则，因为分隔规则中包含了双引号，所以需要用转义符号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 格式</span><br><span class="line">$ awk 动作 文件名</span><br><span class="line"></span><br><span class="line"># 示例</span><br><span class="line">$ awk &apos;&#123;print $0&#125;&apos; demo.txt</span><br><span class="line"></span><br><span class="line">echo &apos;hello:michael:xiang&apos;|awk -F &apos;:&apos; &apos;&#123;print $1&#125;&apos;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li><a href="https://blog.csdn.net/xiyangyang052/article/details/44926793" target="_blank" rel="noopener">awk print函数</a></li>
+<li><a href="http://blog.51cto.com/cfwlxf/1309242" target="_blank" rel="noopener">printf+awk完美结合</a></li>
+<li><a href="https://coolshell.cn/articles/9070.html" target="_blank" rel="noopener">AWK 简明教程</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2018/11/awk.html#comment-text" target="_blank" rel="noopener">awk 入门教程</a></li>
+</ul>
+<h2 id="basename"><a href="#basename" class="headerlink" title="basename"></a>basename</h2><p>basename命令用于打印目录或者文件的基本名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@HGH1000059721 test]# basename a.tar .tar  #后缀：可选参数，指定要去除的文件后缀字符串。</span><br><span class="line">a</span><br><span class="line">[root@HGH1000059721 test]# basename /tmp/test/a.tar  #不带后缀，获取文件名</span><br><span class="line">a.tar</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="http://man.linuxde.net/basename" target="_blank" rel="noopener">basename</a></li>
+</ul>
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>将目录<code>src</code>复制到<code>dest</code>目录下，复制好后，<code>dest/src</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r src dest</span><br></pre></td></tr></table></figure>
+<p>将目录<code>src</code>下的内容复制到<code>dest</code>目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r src/* dest</span><br></pre></td></tr></table></figure>
+<p>复制文件，覆盖不询问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -nrf a.txt b.txt</span><br></pre></td></tr></table></figure>
+<p>系统默认给<code>cp</code>命令设置了别名<code>cp -i</code>，所以，复制时有冲突需要确认，使用如下方式实现默认覆盖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/cp xx yy</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.linuxdaxue.com/linux-command-intro-cp.html" target="_blank" rel="noopener">Linux命令详解之—cp命令</a></li>
+<li><a href="http://man.linuxde.net/cp" target="_blank" rel="noopener">Linux命令命令大全-cp命令</a></li>
+<li><a href="https://blog.csdn.net/xinluke/article/details/52229431" target="_blank" rel="noopener">Linux 使用 cp 命令强制覆盖功能</a></li>
+</ul>
+<h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><p>发出 Get 请求，服务器返回的内容会在命令行输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://www.example.com</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-o</code> 将服务器的回应保存成文件，等同于 wget 命令；</li>
+<li><code>-O</code> 将服务器的回应保存成文件，并将 URL 的最后部分当作文件名；</li>
+<li><code>-i</code> 显示 HTTP Response 的头信息，连同网页代码一起；</li>
+<li><code>-A</code> 指定 User-Agent；</li>
+<li><code>-H</code> 添加 HTTP 请求的标头；</li>
+<li><code>-d</code> 发送 POST 请求的数据体；</li>
+<li><code>-F</code> 用来向服务器上传二进制文件；</li>
+<li><code>-k</code> 指定跳过 SSL 检测；</li>
+<li><code>-u</code> 指定服务器认证的用户名和密码；</li>
+<li><code>-x</code> 指定 HTTP 请求的代理；</li>
+<li><code>-X</code> 支持其他动词，比如 POST，发送表单信息，<code>curl -X POST --data &quot;data=xxx&quot; example.com/form.cgi</code></li>
+<li><code>-v</code> 显示一次 HTTP 通信的整个过程，包括端口连接和 HTTP Request 头信息；</li>
+</ul>
+<p>Tips:</p>
+<ul>
+<li>FireFox/Chrome的Dev Tools可以直接把请求复制成 curl 的命令，然后可以直接在 shell 里运行</li>
+<li>Postman 也可以把保存的请求复制成 curl 命令，方便在服务器中调试；</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2019/09/curl-reference.html" target="_blank" rel="noopener">阮一峰 - curl 的用法指南</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/09/curl.html" target="_blank" rel="noopener">阮一峰 - curl网站开发指南</a></li>
+</ul>
+<h2 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># For details see man 4 crontabs</span><br><span class="line"></span><br><span class="line"># Example of job definition:</span><br><span class="line"># .---------------- minute (0 - 59)</span><br><span class="line"># |  .------------- hour (0 - 23)</span><br><span class="line"># |  |  .---------- day of month (1 - 31)</span><br><span class="line"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span><br><span class="line"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span><br><span class="line"># |  |  |  |  |</span><br><span class="line"># *  *  *  *  * user-name  command to be executed</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20181122165329818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI1OTMyOTA=,size_16,color_FFFFFF,t_70" alt="!\[图片描述\]\[1\]"></p>
+<p>在以上各个字段中，还可以使用以下特殊字符：</p>
+<ul>
+<li>星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</li>
+<li>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</li>
+<li>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</li>
+</ul>
+<p>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</p>
+<p>任务执行文件所在位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/spool/cron/crontabs</span><br></pre></td></tr></table></figure></p>
+<p>命令参数：</p>
+<ul>
+<li><code>-u</code> user：用来设定某个用户的crontab服务；<br>file：file是命令文件的名字,表示将file做为crontab的任务列表文件并载入</li>
+<li><code>-e</code>：编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。</li>
+<li><code>-l</code>：显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。</li>
+<li><code>-r</code>：从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</li>
+<li><code>-i</code>：在删除用户的crontab文件时给确认提示</li>
+</ul>
+<p>推荐一个有趣的网站，可以查看 crontab 语法含义：</p>
+<ul>
+<li><a href="https://crontab.guru/" target="_blank" rel="noopener">https://crontab.guru/</a></li>
+</ul>
+<p>每隔2分钟执行<code>/tmp/test.sh</code>脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab -e # 使用crontab -e命令，编辑的是/var/spool/cron下对应用户的 cron 文件</span><br><span class="line">*/2 * * * * /tmp/test.sh</span><br></pre></td></tr></table></figure></p>
+<p>第星期六、星期日的时10分重启smb-也就是每周六、周日：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart &gt;&gt;  /tmp/run.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>实例4：每隔两天的上午8点到11点的第3和第15分钟执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2  *  * myCommand</span><br></pre></td></tr></table></figure></p>
+<p>实例5：清理httpd服务日志超过3天的内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 5 * * * /usr/bin/find /var/log/httpd/ -type f -mtime +3 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+<p>实例6：通过正则清理指定文件夹的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#update-20181122: clean dir +120 days</span><br><span class="line">0 6 * * * find /data/michael -maxdepth 7 -type d -mtime +120 -regextype posix-egrep -regex &apos;.*/[0-9]&#123;2&#125;/[0-9]&#123;6&#125;$&apos; -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+<p>启动 / 停止 / 重启 crontab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/crond start</span><br><span class="line">$ /etc/init.d/crond stop</span><br><span class="line">$ /etc/init.d/crond restart</span><br></pre></td></tr></table></figure>
+<p>查看日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f /var/log/cron</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="http://blog.51cto.com/461205160/1736383" target="_blank" rel="noopener">如何查看crontab的日志记录</a></li>
+<li><a href="http://www.runoob.com/w3cnote/linux-crontab-tasks.html" target="_blank" rel="noopener">runoob-Linux Crontab 定时任务</a></li>
+<li><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html" target="_blank" rel="noopener">LinuxTools-crontab 定时任务</a> 推荐</li>
+<li><a href="http://www.cnblogs.com/peida/archive/2013/01/08/2850483.html" target="_blank" rel="noopener">每天一个linux命令（50）：crontab命令</a></li>
+</ul>
+<h2 id="date"><a href="#date" class="headerlink" title="date"></a>date</h2><p>选项：<br>不加: 显示当前的时间.<br>-d &lt;字符串&gt;：显示字符串所指的日期与时间。字符串前后必须加上双引号；<br>-s &lt;字符串&gt;：根据字符串来设置日期与时间。字符串前后必须加上双引号；<br>-u：显示GMT；<br>–help：在线帮助；<br>–version：显示版本信息。</p>
+<p>参数 &lt;+时间日期格式&gt;：指定显示时使用的日期时间格式。<br>就是格式化字符串处理.当需要用到空格时要使用双引号,如<code>&quot;+%Y-%m-%d %H:%M:%S&quot;</code>.</p>
+<p>一般,<code>%Y %m %d %H %M %S</code> 是最基本的. 使用星期月份时也会用到<code>%a %b</code></p>
+<p>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">VERSION=$(date +%Y%m%d%H%M%S) #20180410192702 #date后面有空格</span><br><span class="line">time=$(date &quot;+%Y-%m-%d %H:%M:%S&quot;) #时间格式中有空格，需要加引号</span><br><span class="line">» date &quot;+%Y-%m-%d %T %a %A&quot;</span><br><span class="line">2018-06-04 11:31:25 Mon Monday</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="http://gohom.win/2015/06/07/bash-date-usage/" target="_blank" rel="noopener">Shell中date命令用法</a></li>
+</ul>
+<h2 id="df"><a href="#df" class="headerlink" title="df"></a>df</h2><p>通过<code>df</code>命令很容易发现那个磁盘的存储空间快没了。查看挂载状态和硬盘使用量信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -hT</span><br></pre></td></tr></table></figure></p>
+<h2 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h2><p>dig 和 nslookup 作用有些类似，都是DNS查询工具。dig，其实是一个缩写，即 <code>Domain Information Groper</code>。</p>
+<p>查看域名的信息。一般一个域名都会绑定到多个 IP 上，ping 命令只能一次看到一个 ip，这个可以看到域名解析的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig baidu.com</span><br></pre></td></tr></table></figure></p>
+<p>可能机器上没有这个命令，可以如下<a href="https://unix.stackexchange.com/questions/121874/how-to-install-dig-on-centos" target="_blank" rel="noopener">方式</a>安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y bind-utils</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="http://roclinux.cn/?p=2449" target="_blank" rel="noopener">《dig挖出DNS的秘密》-linux命令五分钟系列之三十四</a> Linux 大棚</li>
+<li><a href="https://blog.csdn.net/xindoo/article/details/85193744" target="_blank" rel="noopener">xindoo-csdn-我常用的一些linux命令</a></li>
+</ul>
+<h2 id="du"><a href="#du" class="headerlink" title="du"></a>du</h2><p><code>du</code>命令可以显示某个特定目录（默认情况下是当前目录）的磁盘使用情况。这一方法可以判断系统上某个目录下是不是有超大的文件。</p>
+<p>查看当前文件夹的文件大小：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">du -sh *</span><br><span class="line">du -sh /usr/* | sort -rn # 按M大小排序</span><br></pre></td></tr></table></figure></p>
+<h2 id="env"><a href="#env" class="headerlink" title="env"></a>env</h2><p>查看环境变量值，例：<br>查看带有SVN的环境变量值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env|grep SVN</span><br></pre></td></tr></table></figure></p>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>实例：定时清理httpd服务日志超过3天的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 5 * * * /usr/bin/find /var/log/httpd/ -type f -mtime +3 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<p>实例： 通过正则清理指定文件夹的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#update-20181122: clean dir +120 days</span><br><span class="line">0 6 * * * find /data/michael -maxdepth 7 -type d -mtime +120 -regextype posix-egrep -regex &apos;.*/[0-9]&#123;2&#125;/[0-9]&#123;6&#125;$&apos; -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+<p>实例：搜索/etc目录下第一层的conf配置文件，文件夹下层的不需要<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /etc/ -maxdepth 1 -name &quot;*.conf&quot; # 最好加上引号</span><br></pre></td></tr></table></figure></p>
+<p>实例：只搜索当前目录，但是不包括.git目录，统计目录数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -maxdepth 1 -mindepth 1 -type d | grep -v .git |wc -l</span><br></pre></td></tr></table></figure></p>
+<p>实例：仅列出目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type d -maxdepth 1</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/wanqieddy/archive/2011/06/09/2076785.html" target="_blank" rel="noopener">Linux中find常见用法示例
+</a></li>
+<li><a href="http://smilejay.com/2011/12/find_regular_expression/" target="_blank" rel="noopener">FIND中正则表达式的使用</a><br>-<a href="https://blog.csdn.net/weixin_43314056/article/details/84074998" target="_blank" rel="noopener">Linux中find命令基本使用方法</a></li>
+</ul>
+<h2 id="fdisk"><a href="#fdisk" class="headerlink" title="fdisk"></a>fdisk</h2><p><code>fdisk -l</code>看到目前系统中所有分区的信息<br><a href="https://blog.csdn.net/cc_net/article/details/2894510" target="_blank" rel="noopener">https://blog.csdn.net/cc_net/article/details/2894510</a></p>
+<h2 id="free"><a href="#free" class="headerlink" title="free"></a>free</h2><p>free命令可以显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer。在Linux系统监控的工具中，free命令是最经常使用的命令之一。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h -s 2 -t</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-h</code> 单位会更人性化</li>
+<li><code>-s</code> 每2秒，显示内存使用信息</li>
+<li><code>-t</code> 显示内存总和</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 结果</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           7.6G        935M        6.1G        9.7M        631M        6.4G</span><br><span class="line">Swap:          7.5G          0B        7.5G</span><br><span class="line">Total:          15G        935M         13G</span><br></pre></td></tr></table></figure>
+<ul>
+<li>total:总计物理内存的大小。</li>
+<li>used:已使用多大。</li>
+<li>free:可用有多少。</li>
+<li>Shared:多个进程共享的内存总额。</li>
+<li>Buffers/cached:磁盘缓存的大小</li>
+<li>交换分区SWAP，也就是我们通常所说的虚拟内存</li>
+</ul>
+<p>从应用程序角度来看，对于应用程序来说，buffers/cached 是等于可用的，因为buffer/cached 是为了提高文件读取的性能，当应用程序需在用到内存的时候，buffer/cached 会很快地被回收。</p>
+<p>所以从应用程序的角度来说 <code>可用内存=系统free memory+buffers+cached</code></p>
+<p>我们看linux,只要不用swap的交换空间,就不用担心自己的内存太少.如果常常swap用很多,可能你就要考虑加物理内存了.这也是linux看内存是否够用的标准.</p>
+<p>+buffers/cache,即对应用程序来说free的内存太少了，也是该考虑优化程序或加内存了</p>
+<p>参考：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/peida/archive/2012/12/25/2831814.html" target="_blank" rel="noopener">每天一个linux命令（45）：free 命令</a></li>
+</ul>
+<h2 id="fuser"><a href="#fuser" class="headerlink" title="fuser"></a>fuser</h2><p>fuser通常被用在诊断系统的“resource busy”问题，通常是在你希望umount指定的挂载点得时候遇到。 如果你希望kill所有正在使用某一指定的file, file system or sockets的进程的时候，你可以使用 <code>-k option</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser –k –i /path/to/your/filename # 加上-i 表示杀死之前，需确认</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://man.linuxde.net/fuser" target="_blank" rel="noopener">fuser命令</a></li>
+<li><a href="https://www.cnblogs.com/yuboyue/archive/2011/07/18/2109838.html" target="_blank" rel="noopener">fuser 命令小结</a></li>
+</ul>
+<h2 id="groups"><a href="#groups" class="headerlink" title="groups"></a>groups</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">whoami # 查看用户名</span><br><span class="line">groups # 查看当前用户所属组</span><br></pre></td></tr></table></figure>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [options] pattern [file]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 递归、显示行号、忽略大小写、显示搜到的匹配内容上下2行 搜索范围是当前目录下</span><br><span class="line">grep -rni 'github.com'  -C 2 .</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep 'shopbase' /home/admin -r -n --include *.&#123;vm,java&#125; #指定文件后缀</span><br><span class="line">grep 'shopbase' /home/admin -r -n --exclude *.&#123;vm,java&#125; #反匹配</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://man.cx/grep" target="_blank" rel="noopener">man-grep</a></li>
+<li><a href="https://www.eguidedog.net/linux-tutorial/05-grep.php" target="_blank" rel="noopener">Linux查找文件内容（grep）</a></li>
+<li><a href="http://www.cnblogs.com/peida/archive/2012/12/17/2821195.html" target="_blank" rel="noopener">每天一个linux命令（39）：grep 命令</a></li>
+<li><a href="https://yq.aliyun.com/articles/69520?utm_content=m_10360" target="_blank" rel="noopener">我的java问题排查工具单</a></li>
+</ul>
+<h2 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h2><p>gzip是GNU项目的产物。这个软件下买呢含有下面的工具：</p>
+<ul>
+<li>gzip ：用来压缩文件</li>
+<li>gzcat：用来查看压缩过的文本文件的内容</li>
+<li>gunzip:用来解压文件。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gzip xxx</span><br><span class="line">gzip -l &lt;filename&gt; # list compressed file contents</span><br></pre></td></tr></table></figure>
+<h2 id="head"><a href="#head" class="headerlink" title="head"></a>head</h2><p>显示前n行内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.linuxdaxue.com/linux-command-intro-head.html" target="_blank" rel="noopener">https://www.linuxdaxue.com/linux-command-intro-head.html</a></p>
+<h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><p>在<code>more</code>的时候，我们并没有办法向前面翻，只能往后面看，但若使用了<code>less</code>时，就可以使用 <code>[pageup] [pagedown]</code> 等按键的功能来往前往后翻看文件。</p>
+<h2 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">locate  GPG-KEY</span><br><span class="line"># find /etc -name &apos;*GPG-KEY*&apos; 等同</span><br></pre></td></tr></table></figure>
+<p>可能系统没有自带<code>locate</code>命令，可以使用<code>yum install mlocate -y</code>安装，安装结束执行<code>updatedb</code>命令。</p>
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>仅显示目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll -d</span><br></pre></td></tr></table></figure>
+<p>ls命令显示文件大小，会根据文件大小自己决定单位，M或者Kb或者G</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll -h</span><br></pre></td></tr></table></figure>
+<h2 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h2><p><code>mount</code>可以显示全部挂载情况。</p>
+<p>将分区挂载到目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/xvde /data</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://www.runoob.com/linux/linux-comm-mount.html" target="_blank" rel="noopener">Linux mount命令</a></li>
+</ul>
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p><code>mkdir sysadmin/admim_{1,2,3,4,5}</code></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/robertsong2004/article/details/46437681" target="_blank" rel="noopener">在Linux中用chattr和lsattr命令管理文件和目录属性</a></li>
+</ul>
+<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>检查端口占用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp|grep 80</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://blog.csdn.net/cuiyong_xu/article/details/42556925" target="_blank" rel="noopener">linux(redhat,centos)释放被占用端口</a></li>
+</ul>
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p><code>ping baidu.com</code></p>
+<ul>
+<li><a href="http://www.on0926.com/?p=901" target="_blank" rel="noopener">生活在宁静的角落——PING命令的各类反馈信息</a></li>
+</ul>
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>只删除当前文件夹下的隐藏文件和隐藏文件夹：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .*</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://blog.csdn.net/ficksong/article/details/52447729" target="_blank" rel="noopener">https://blog.csdn.net/ficksong/article/details/52447729</a></p>
+<h2 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h2><p>我的系统中安装了那些rpm软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa</span><br></pre></td></tr></table></figure></p>
+<p>如果要查找所有安装过的包含某个字符串sql的软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep sql</span><br></pre></td></tr></table></figure></p>
+<p>一个rpm包中的文件安装到那里去了？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ql 包名</span><br></pre></td></tr></table></figure></p>
+<p>软件包的卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://man.linuxde.net/rpm" target="_blank" rel="noopener">http://man.linuxde.net/rpm</a></p>
+<h2 id="rpm2cpio"><a href="#rpm2cpio" class="headerlink" title="rpm2cpio"></a>rpm2cpio</h2><p>RPM 包解压缩：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 注意，要加上 cpio -div，否则终端会打印多余的内容出来</span><br><span class="line">rpm2cpio xxxx.rpm | cpio -div</span><br></pre></td></tr></table></figure></p>
+<p>你的 Linux 下可能没有rpm2cpio这个命令，用过简单指令安装即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install  rpm2cpio</span><br><span class="line">sudo yum install rpm2cpio</span><br></pre></td></tr></table></figure>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>eg1：截取日志中的两行之间的内容，同时去掉匹配的首尾行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat mock.log |sed -n &apos;/tee/,/find/p&apos; mock.log|sed -n &apos;1!p&apos;|sed -n &apos;$!p&apos;|awk &apos;&#123;print $2,$3&#125;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>eg2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl passwd|sed &quot;1d;10d&quot; #删除第1行，第10行</span><br></pre></td></tr></table></figure></p>
+<p>eg3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i -e &quot;1i%define upstream_version $UPSTREAMVERSION\\&quot; *.spec #第一行插入</span><br><span class="line">sed -i -e &quot;s/UPSTREAMVERSION/$UPSTREAMVERSION/g&quot; *.spec #替换</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://coolshell.cn/articles/9104.html" target="_blank" rel="noopener">SED 简明教程</a></li>
+<li><a href="https://my.oschina.net/u/3422445/blog/1816311" target="_blank" rel="noopener">sed、awk——运维必须掌握的两个工具</a></li>
+<li><a href="http://qinghua.github.io/sed/" target="_blank" rel="noopener">看例子学sed</a></li>
+<li><a href="https://github.com/mylxsw/growing-up/blob/master/doc/%E4%B8%89%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9ASED.md" target="_blank" rel="noopener">三十分钟学会SED</a></li>
+<li><a href="https://www.oschina.net/question/1375377_127871" target="_blank" rel="noopener">sed命令筛选指定字符串之间的行</a></li>
+</ul>
+<h2 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sestatus [-v] # 查看selinux开启状态</span><br><span class="line">getenforce # 查看当前selinux的状态</span><br></pre></td></tr></table></figure>
+<p>selinux开启常常影响其他一些服务，比如httpd等，所以，运维往往一般拿到机器就会默认将其关闭。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setenforce 1 # 设置SELinux 成为enforcing模式</span><br><span class="line">setenforce 0 # 设置SELinux 成为permissive模式 不重启关闭selinux的解决办法</span><br></pre></td></tr></table></figure>
+<p>开机重启后，上面利用<code>setenforce</code>方式修改的值会失效，所以，开机重启也有效的话，需要修改如下文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/selinux/config # 文件的软链接是/etc/sysconfig/selinux 是</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://wiki.centos.org/zh/HowTos/SELinux" target="_blank" rel="noopener">wiki-SELinux</a></li>
+<li><a href="https://www.zhihu.com/question/20559538" target="_blank" rel="noopener">Linux 下为何要关闭 SELinux？</a></li>
+<li><a href="https://www.cnblogs.com/lidp/archive/2009/05/12/1697984.html" target="_blank" rel="noopener">如何开启或关闭SELinux</a></li>
+<li><a href="http://www.upvup.com/html/SELinux/2014-06-11/4.html" target="_blank" rel="noopener">SELinux开启与关闭各参数说明</a></li>
+</ul>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>对之前提到的密码文件<code>/etc/passwd</code>根据用户ID进行数值排序。<code>-k</code>和<code>-t</code>参数在对安字段分割的数据进行排序时非常有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort -t &quot;:&quot; -k 3 -n /etc/passwd</span><br></pre></td></tr></table></figure>
+<h2 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h2><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>旧指令</th>
+<th>新指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使某服务自动启动</td>
+<td>chkconfig –level 3 httpd on</td>
+<td>systemctl enable httpd.service</td>
+</tr>
+<tr>
+<td>使某服务不自动启动</td>
+<td>chkconfig –level 3 httpd off</td>
+<td>systemctl disable httpd.service</td>
+</tr>
+<tr>
+<td>检查服务状态</td>
+<td>service httpd status</td>
+<td>systemctl status httpd.service</td>
+</tr>
+<tr>
+<td>显示所有已启动的服务</td>
+<td>chkconfig –list</td>
+<td>systemctl list-units –type=service</td>
+</tr>
+<tr>
+<td>启动某服务</td>
+<td>service httpd start</td>
+<td>systemctl start httpd.service</td>
+</tr>
+<tr>
+<td>停止某服务</td>
+<td>service httpd stop</td>
+<td>systemctl stop httpd.service</td>
+</tr>
+<tr>
+<td>重启某服务</td>
+<td>service httpd restart</td>
+<td>systemctl restart httpd.service</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://blog.csdn.net/kenhins/article/details/74518978" target="_blank" rel="noopener">Linux 设置程序开机自启动 （命令systemctl 和 chkconfig用法区别比较）</a></li>
+</ul>
+<h2 id="sha256sum"><a href="#sha256sum" class="headerlink" title="sha256sum"></a>sha256sum</h2><p>生成文件对应的sha256值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sha256sum FusionSphere_Upgrade_6.2.50.4001.tar.gz &gt; a.sha256sum # 校验</span><br><span class="line">sha256sum -c &lt;(grep FusionSphere_Upgrade_6.2.50.4001.tar.gz a.sha256sum) # 校验</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/qq_28082757/article/details/78541581" target="_blank" rel="noopener">linux下生成sha256校验文件、使用sha256校验某个文件</a></li>
+</ul>
+<h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><p>目前Unix和Linux上最广泛使用的归档工具是 tar 命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar function [options] object1 object2 ……</span><br></pre></td></tr></table></figure>
+<p>首先，创建一个归档文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf test.tar test/ test2/</span><br></pre></td></tr></table></figure>
+<p>创建了名为test.tar归档文件，含有 test 和 test2 目录内容。</p>
+<p>接着，列出 tar 文件 test.tar 内容（但并不提取文件）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -tf test.tar</span><br></pre></td></tr></table></figure>
+<p>最后用命令提取文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf test.tar</span><br></pre></td></tr></table></figure>
+<p><strong>tar命令是给整个目录创建归档文件的简便方法</strong></p>
+<blockquote>
+<p>窍门：下载开源软件之后，经常会看到文件名以.tgz结尾。这些事gzip压缩过的tar文件，可以用tar -zxvf filename.tgz来解压</p>
+</blockquote>
+<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>tee命令用于将数据重定向到文件，另一方面还可以提供一份重定向数据的副本作为后续命令的stdin。简单的说就是把数据重定向到给定文件和屏幕上。</p>
+<p>eg1 在终端打印stdout同时重定向到文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | tee out.txt | cat -n</span><br></pre></td></tr></table></figure>
+<p>eg2 创建daemon.json文件，EOF之间内容作为stdin：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tee /etc/docker/daemon.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;insecure-registries&quot; : [ &quot;&quot;, &quot;&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p><code>&lt;&lt; EOF …… EOF</code>的作用是在命令执行过程中用户自定义输入，它类似于起到一个临时文件的作用，只是比使用文件更方便灵活。</p>
+<p>EOF妙用：</p>
+<p>它的作用就是将两个<code>delimiter</code>之间的内容(Here Document Content 部分) 传递给<code>cmd</code> 作为输入参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd &lt;&lt; delimiter</span><br><span class="line">  Here Document Content</span><br><span class="line">delimiter</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-6b86 tmp]# cat &lt;&lt; EOF &gt;tt.sh</span><br><span class="line">123123123</span><br><span class="line">345345</span><br><span class="line">asdfasds</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>自定义EOF，比如自定义为michael<br>[root@slave-server opt]# cat &lt;&lt; michael &gt; haha.txt</p>
+<blockquote>
+<p>ggggggg<br>4444444<br>6666666<br>michael</p>
+</blockquote>
+<p><code>&lt;&lt;</code> 变为 <code>&lt;&lt;-</code>。 使用 <code>&lt;&lt;-</code> 的唯一变化就是Here Document 的内容部分每行前面的 <code>tab</code> (制表符)将会被删除掉，这种用法是为了编写Here Document的时候可以将内容部分进行缩进，方便阅读代码。</p>
+<p>有时脚本内容里变量不想被系统环境变量替换掉，可以通过在起始的 delimiter的前后添加 “ 来实现</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://my.oschina.net/u/1032146/blog/146941" target="_blank" rel="noopener">linux shell 的here document 用法 (cat &lt;&lt; EOF)</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/11/eof.html" target="_blank" rel="noopener">EOF是什么？</a></li>
+<li><a href="https://blog.csdn.net/zongshi1992/article/details/71693045" target="_blank" rel="noopener">linux shell脚本EOF妙用</a></li>
+</ul>
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tree -FCL 2 FusionUpgrade</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://blog.csdn.net/u011729865/article/details/53368446#tree-l-2" target="_blank" rel="noopener">linux tree命令–显示目录的树形结构</a></li>
+</ul>
+<h2 id="time"><a href="#time" class="headerlink" title="time"></a>time</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">time nslookup michael.com</span><br><span class="line">nslookup: can&apos;t resolve &apos;(null)&apos;: Name does not resolve</span><br><span class="line"></span><br><span class="line">Name:      micahel.com</span><br><span class="line">Address 1: 10.248.250.158</span><br><span class="line">real    0m 5.00s</span><br><span class="line">user    0m 0.00s</span><br><span class="line">sys     0m 0.00s</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://man.linuxde.net/time" target="_blank" rel="noopener">time</a></li>
+</ul>
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><ul>
+<li>判断字符串是否为空，可以通过<code>help test</code>查看</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-z STRING      True if string is empty.</span><br><span class="line"></span><br><span class="line">-n STRING</span><br><span class="line">   STRING      True if string is not empty.</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">STRING=&quot;&quot;</span><br><span class="line"># -z</span><br><span class="line">if [ -z &quot;$STRING&quot; ]; then</span><br><span class="line">    echo &quot;STRING is empty&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ -n &quot;$STRING&quot; ]; then</span><br><span class="line">    echo &quot;STRING is not empty&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># STRING is empty</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://www.cnblogs.com/cute/archive/2011/08/26/2154137.html#commentform" target="_blank" rel="noopener">linux shell 中判断字符串为空的正确方法</a>：有趣的示例，强调了需要加引号的重要性</li>
+<li><a href="https://www.zhihu.com/question/22539151" target="_blank" rel="noopener">Linux shell 编程 字符串null值 的 条件判断?</a>：解释了，为何加引号，bash的内建命令test在只有一个参数的情况下，只要参数不为空就返回真</li>
+</ul>
+<h2 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h2><p>首先，先用 <code>tcpdump -D</code> 命令列出可以抓包的网络接口：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tcpdump -D</span><br><span class="line">1.virbr0</span><br><span class="line">2.docker0</span><br><span class="line">3.bluetooth0 (Bluetooth adapter number 0)</span><br><span class="line">4.nflog (Linux netfilter log (NFLOG) interface)</span><br><span class="line">5.nfqueue (Linux netfilter queue (NFQUEUE) interface)</span><br><span class="line">6.usbmon1 (USB bus number 1)</span><br><span class="line">7.usbmon2 (USB bus number 2)</span><br><span class="line">8.wlp3s0</span><br><span class="line">9.enp5s0</span><br><span class="line">10.any (Pseudo-device that captures on all interfaces)</span><br><span class="line">11.lo [Loopback]</span><br></pre></td></tr></table></figure>
+<p>其中， <code>lo</code> 就是 <code>localhost</code> 。其中特殊接口 any 可用于抓取所有活动的网络接口的数据包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ sudo tcpdump -i any -c5 -nn icmp port 80 -A -w webserver.pcap</span><br><span class="line"></span><br><span class="line">tcpdump: verbose output suppressed, use -v or -vv for full protocol decode</span><br><span class="line">listening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes</span><br><span class="line">22:10:51.809330 IP 192.168.3.43.22 &gt; 192.168.3.66.50051: Flags [P.], seq 2040167007:2040167203, ack 59350146, win 1432, options [nop,nop,TS val 89942170 ecr 111122685], length 196</span><br><span class="line">22:10:51.812472 IP 192.168.3.43.22 &gt; 192.168.3.66.50051: Flags [P.], seq 196:416, ack 1, win 1432, options [nop,nop,TS val 89942173 ecr 111122685], length 220</span><br><span class="line">22:10:51.833093 IP 192.168.3.66.50051 &gt; 192.168.3.43.22: Flags [.], ack 0, win 23490, options [nop,nop,TS val 111123121 ecr 89942122], length 0</span><br><span class="line">22:10:51.833193 IP 192.168.3.43.22 &gt; 192.168.3.66.50051: Flags [P.], seq 416:612, ack 1, win 1432, options [nop,nop,TS val 89942194 ecr 111123121], length 196</span><br><span class="line">22:10:51.835541 IP 192.168.3.66.50051 &gt; 192.168.3.43.22: Flags [.], ack 196, win 23487, options [nop,nop,TS val 111123121 ecr 89942170], length 0</span><br><span class="line">5 packets captured</span><br><span class="line">7 packets received by filter</span><br><span class="line">0 packets dropped by kernel</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-c</code> 选项可以用于限制 tcpdump 抓包的数量</li>
+<li>用 <code>-n</code> 选项显示 IP 地址，<code>-nn</code> 选项显示端口号</li>
+<li><code>icmp</code> 这里用作过滤条件，只要抓取 <code>ICMP</code> 报文</li>
+<li><code>port</code> 指定端口号，根据端口号来筛选数据包</li>
+<li>tcpdump 提供了两个选项可以查看数据包内容，<code>-X</code> 以十六进制打印出数据报文内容，<code>-A</code> 打印数据报文的 ASCII 值</li>
+<li>使用 <code>-w</code> 选项来保存数据包而不是在屏幕上显示出抓取的数据包</li>
+</ul>
+<p>tcpdump 将数据包保存在二进制文件中，所以不能简单的用文本编辑器去打开它。使用 <code>-r</code> 选项参数来阅读该文件中的报文内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -nn -r webserver.pcap</span><br></pre></td></tr></table></figure></p>
+<p>用 host 参数只抓取和特定主机相关的数据包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any -c5 -nn host 54.204.39.132</span><br></pre></td></tr></table></figure></p>
+<p>可以使用括号来创建更为复杂的过滤规则，但在 shell 中请用引号包含你的过滤规则以防止被识别为 shell 表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo tcpdump -i any -c5 -nn &quot;port 80 and (src 192.168.122.98 or src 54.204.39.132)&quot;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>src</code> 抓取源 IP 地址</li>
+<li>使用 <code>dst</code> 就是按目的 IP/主机名来筛选数据包</li>
+<li>使用 <code>and</code> 以及 <code>or</code> 逻辑操作符来创建过滤规则</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://blog.jobbole.com/114505/#comment-162685" target="_blank" rel="noopener">伯乐在线-在 Linux 命令行中使用 tcpdump 抓包</a></li>
+<li><a href="http://www.361way.com/nas-netcap-analysis/5882.html" target="_blank" rel="noopener">运维之路-NAS存储抓包分析</a></li>
+<li><a href="https://mozillazg.com/2018/01/tcpdump-common-useful-examples-cookbook.html" target="_blank" rel="noopener">Huang-tcpdump 常用操作</a></li>
+<li><a href="https://liyang85.com/tcpdump-tutorial-with-examples" target="_blank" rel="noopener">Tcpdump入门教程示例</a></li>
+<li><a href="http://www.cnblogs.com/bangerlee/articles/2545612.html" target="_blank" rel="noopener">9个tcpdump使用实例</a></li>
+</ul>
+<h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>top 命令是 Linux 下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况。</p>
+<ul>
+<li><code>load average: 0.02, 0.04, 0.00</code>： 系统1分钟、5分钟、15分钟的CPU负载信息</li>
+</ul>
+<p>top 默认按 cpu 占用排序，这也是可以修改的，按 F(大写)即可选择相应排序，之后任意键退出即可。</p>
+<p>进程信息：</p>
+<ul>
+<li>PID：进程的ID</li>
+<li>USER：进程所有者</li>
+<li>PR：进程的优先级别，越小越优先被执行</li>
+<li>NInice：值</li>
+<li>VIRT：进程占用的虚拟内存</li>
+<li>RES：进程占用的物理内存</li>
+<li>SHR：进程使用的共享内存</li>
+<li>S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数</li>
+<li>%CPU：进程占用CPU的使用率</li>
+<li>%MEM：进程使用的物理内存和总内存的百分比</li>
+<li>TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。</li>
+<li>COMMAND：进程启动命令名称</li>
+</ul>
+<p>交互操作：</p>
+<ul>
+<li>c:显示进程命令的全路径与参数</li>
+<li>f:可以指定top显示的内容，如ppid、swap等都可以选择显示</li>
+<li>k:输入k之后可以kill掉指定的进程</li>
+<li>A:分类显示各种系统资源高的进程。可用于快速识别系统上的性能要求极高的任务，推荐使用</li>
+<li>h:获取top的命令帮助</li>
+<li>H:显示线程，默认只显示进程</li>
+<li>W[大写]:将当前设置写入~/.toprc文件中。这是写top配置文件的推荐方法</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a href="http://kumu-linux.github.io/blog/2013/06/07/top-hacks/" target="_blank" rel="noopener">Top实践小技巧</a></li>
+</ul>
+<h2 id="useradd-groupadd"><a href="#useradd-groupadd" class="headerlink" title="useradd/groupadd"></a>useradd/groupadd</h2><p>Linux 系统的用户、群组添加、管理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加一个用户为 michael，属于基本组(主组) root。如果不加 -g，则默认会属于和用户名同名的主组</span><br><span class="line">useradd -g root michael</span><br><span class="line"><span class="meta">#</span> 修改密码</span><br><span class="line">passwd michael</span><br><span class="line"><span class="meta">#</span> 新增一个 michael 的组</span><br><span class="line">groupadd michael</span><br><span class="line"><span class="meta">#</span> 修改用户名的主组为 michael</span><br><span class="line">usermod -g michael michael</span><br><span class="line"><span class="meta">#</span> 删除用户 michael</span><br><span class="line">userdel michael</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/woshimrf/p/linux-user-group-command.html#commentform" target="_blank" rel="noopener">博客园-Linux用户和组管理，添加修改用户，添加修改组，加入组，移除组</a></li>
+</ul>
+<h2 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -l demo1-0.1-py2.7.egg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -o -d /home/sunny myfile.zip</span><br></pre></td></tr></table></figure>
+<p>把myfile.zip文件解压到 <code>/home/sunny/</code><br><code>-o</code>:不提示的情况下覆盖文件；<br><code>-d</code>:-d /home/sunny 指明将文件解压缩到/home/sunny目录下；</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/shenyunsese/article/details/17556089" target="_blank" rel="noopener">Linux下的压缩（zip）解压(unzip)缩命令</a></li>
+<li><a href="http://man.linuxde.net/unzip" target="_blank" rel="noopener">unzip命令</a></li>
+</ul>
+<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc [-clw][--help][--version][文件...]</span><br></pre></td></tr></table></figure>
+<p>参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-c或--bytes或--chars 只显示Bytes数。</span><br><span class="line">-l或--lines 只显示行数。</span><br><span class="line">-w或--words 只显示字数。</span><br><span class="line">--help 在线帮助。</span><br><span class="line">--version 显示版本信息。</span><br></pre></td></tr></table></figure></p>
+<h2 id="who"><a href="#who" class="headerlink" title="who"></a>who</h2><p>who  //显示当前登录系统的用户<br>显示标题栏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># who -H</span><br></pre></td></tr></table></figure></p>
+<p>只显示当前用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># who -m -H</span><br></pre></td></tr></table></figure></p>
+<h2 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h2><p>将远程目录下的全部内容下载到<code>save目录下</code>。<code>-nd</code>参数表示，如果远程目录下也有子目录，会将子目录中的文件下载下来而不创建多余目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -r -np -nd -R &quot;index.html*&quot; -P test http://xxx/FusionUpgrade/master/euler/20181101130551/ # 注意，URL末尾需要有/，否则会递归下载的</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-r：递归下载，下载指定网页某一目录下（包括子目录）的所有文件</li>
+<li>-nd:–-no-directories 不创建目录</li>
+<li>-np：–-no-parent 不要追溯到父目录</li>
+<li>P:指定下载下来的存放目录，没有会自动创建</li>
+<li>-nH:–-no-host-directories 不创建主机目录</li>
+</ul>
+<p>示例2：</p>
+<p>将远程文件夹原封不动下载下来，并且下载下来的本地路径也是远程目录，而不会创建多级目录。<code>-nH</code>表示不会创建<br><code>xxx.com</code>目录，<code>--cut-dirs</code>将其余多余层级目录不下载，实现效果下载到本地就只是<code>DLRN_RPMS</code>目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -r -p -k -np -nH --cut-dirs=4 http://xxx.com/cps/FusionNetwork-for-fc/master/suse/DLRN_RPMS/</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/wget.html" target="_blank" rel="noopener">wget 文件下载</a></li>
+<li><a href="https://github.com/jaywcjlove/linux-command/blob/master/command/wget.md" target="_blank" rel="noopener">wget</a></li>
+<li><a href="https://www.cnblogs.com/include/archive/2011/10/17/2215607.html" target="_blank" rel="noopener">wget递归下载文件</a></li>
+</ul>
+<h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">watch -d &apos;ls -l|grep scf&apos;       # 监测当前目录中 scf&apos; 的文件的变化</span><br><span class="line">watch -n 10 &apos;cat /proc/loadavg&apos; # 10秒一次输出系统的平均负载</span><br><span class="line">watch -n 1 -d netstat -ant       # 命令：每隔一秒高亮显示网络链接数的变化情况</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://wangchujiang.com/linux-command/c/watch.html" target="_blank" rel="noopener">watch-命令</a></li>
+</ul>
+<h2 id="systemd-service服务"><a href="#systemd-service服务" class="headerlink" title="systemd service服务"></a>systemd service服务</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Systemd 入门教程：命令篇</a></li>
+</ul>
+<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p>为了快速修改后缀名字</p>
+<p>源文件夹下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CentOS-base.repo.repo.bak</span><br><span class="line">epel.repo.repo.bak</span><br></pre></td></tr></table></figure>
+<p>方法一：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls *.bak|awk -F. '&#123;print $1&#125;'|xargs -t -i mv &#123;&#125;.repo.repo.bak &#123;&#125;.repo</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2019/08/xargs-tutorial.html" target="_blank" rel="noopener">阮一峰——xargs 命令教程</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/04/14/linux-useful-shell-commands-in-work/" rel="bookmark">工作中常用的 Shell 命令及技巧</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/08/03/linux-manjaro-install/" rel="bookmark">Manjaro 安装体验小结</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/02/18/linux-command-sed/" rel="bookmark">Linux 必备命令利器 —— sed</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/04/23/linux-lvm-partion/" rel="bookmark">Linux lvm 分区知识笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/11/18/note-linux-basic-system/" rel="bookmark">【笔记】快速上手 Linux，玩转典型应用</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2018/07/05/linux-useful-commands-in-work/" title="工作中常用的 Linux 命令">https://michael728.github.io/2018/07/05/linux-useful-commands-in-work/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Shell/" rel="tag"># Shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/tools-zsh-tutorial/" rel="next" title="zsh+on-my-zsh配置教程指南（程序员必备）">
+                <i class="fa fa-chevron-left"></i> zsh+on-my-zsh配置教程指南（程序员必备）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/08/tools-gitbook-hackpythonista-notebook/" rel="prev" title="使用GitBook+Github编写文档书籍">
+                使用GitBook+Github编写文档书籍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#awk"><span class="nav-number">1.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basename"><span class="nav-number">2.</span> <span class="nav-text">basename</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp"><span class="nav-number">3.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl"><span class="nav-number">4.</span> <span class="nav-text">curl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crontab"><span class="nav-number">5.</span> <span class="nav-text">crontab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date"><span class="nav-number">6.</span> <span class="nav-text">date</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#df"><span class="nav-number">7.</span> <span class="nav-text">df</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dig"><span class="nav-number">8.</span> <span class="nav-text">dig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du"><span class="nav-number">9.</span> <span class="nav-text">du</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#env"><span class="nav-number">10.</span> <span class="nav-text">env</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">11.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fdisk"><span class="nav-number">12.</span> <span class="nav-text">fdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free"><span class="nav-number">13.</span> <span class="nav-text">free</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fuser"><span class="nav-number">14.</span> <span class="nav-text">fuser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groups"><span class="nav-number">15.</span> <span class="nav-text">groups</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-number">16.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gzip"><span class="nav-number">17.</span> <span class="nav-text">gzip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head"><span class="nav-number">18.</span> <span class="nav-text">head</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less"><span class="nav-number">19.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#locate"><span class="nav-number">20.</span> <span class="nav-text">locate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ls"><span class="nav-number">21.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mount"><span class="nav-number">22.</span> <span class="nav-text">mount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkdir"><span class="nav-number">23.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#netstat"><span class="nav-number">24.</span> <span class="nav-text">netstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ping"><span class="nav-number">25.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm"><span class="nav-number">26.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpm"><span class="nav-number">27.</span> <span class="nav-text">rpm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpm2cpio"><span class="nav-number">28.</span> <span class="nav-text">rpm2cpio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sed"><span class="nav-number">29.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SELinux"><span class="nav-number">30.</span> <span class="nav-text">SELinux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort"><span class="nav-number">31.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl"><span class="nav-number">32.</span> <span class="nav-text">systemctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sha256sum"><span class="nav-number">33.</span> <span class="nav-text">sha256sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">34.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tee"><span class="nav-number">35.</span> <span class="nav-text">tee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree"><span class="nav-number">36.</span> <span class="nav-text">tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time"><span class="nav-number">37.</span> <span class="nav-text">time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">38.</span> <span class="nav-text">test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcpdump"><span class="nav-number">39.</span> <span class="nav-text">tcpdump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">40.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd-groupadd"><span class="nav-number">41.</span> <span class="nav-text">useradd/groupadd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unzip"><span class="nav-number">42.</span> <span class="nav-text">unzip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wc"><span class="nav-number">43.</span> <span class="nav-text">wc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#who"><span class="nav-number">44.</span> <span class="nav-text">who</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget"><span class="nav-number">45.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch"><span class="nav-number">46.</span> <span class="nav-text">watch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemd-service服务"><span class="nav-number">47.</span> <span class="nav-text">systemd service服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xargs"><span class="nav-number">48.</span> <span class="nav-text">xargs</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2018/07/05/linux-useful-commands-in-work/";
+    this.page.identifier = "2018/07/05/linux-useful-commands-in-work/";
+    this.page.title = '工作中常用的 Linux 命令';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

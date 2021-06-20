@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="虽然Chrome浏览器是个吃内存的怪兽，但是，它却因为启动速度、调试功能等成为了程序猿的必备浏览器！今天有时间，整理一下自己最常用的一些Chrome扩展吧： 常用网页浏览非开发类扩展：Tampermonkey推荐指数：★★★★★">
+<meta name="keywords" content="Chrome,扩展,效率软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="那些离不开的 Chrome 扩展插件">
+<meta property="og:url" content="https://michael728.github.io/2015/11/26/tools-chrome-extentions/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="虽然Chrome浏览器是个吃内存的怪兽，但是，它却因为启动速度、调试功能等成为了程序猿的必备浏览器！今天有时间，整理一下自己最常用的一些Chrome扩展吧： 常用网页浏览非开发类扩展：Tampermonkey推荐指数：★★★★★">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6d9475f6jw1eylq9xfywaj20g407rweg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/mw690/6d9475f6ly1g0povswtroj20sk04swf7.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/mw690/6d9475f6ly1g0poq04iemj20kf0d6jso.jpg">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="那些离不开的 Chrome 扩展插件">
+<meta name="twitter:description" content="虽然Chrome浏览器是个吃内存的怪兽，但是，它却因为启动速度、调试功能等成为了程序猿的必备浏览器！今天有时间，整理一下自己最常用的一些Chrome扩展吧： 常用网页浏览非开发类扩展：Tampermonkey推荐指数：★★★★★">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/6d9475f6jw1eylq9xfywaj20g407rweg.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2015/11/26/tools-chrome-extentions/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>那些离不开的 Chrome 扩展插件 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2015/11/26/tools-chrome-extentions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">那些离不开的 Chrome 扩展插件
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-11-26 16:22:29" itemprop="dateCreated datePublished" datetime="2015-11-26T16:22:29+00:00">2015-11-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ToolsDaily/" itemprop="url" rel="index"><span itemprop="name">ToolsDaily</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://ww3.sinaimg.cn/large/6d9475f6jw1eylq9xfywaj20g407rweg.jpg" alt></p>
+<p>虽然Chrome浏览器是个吃内存的怪兽，但是，它却因为启动速度、调试功能等成为了程序猿的必备浏览器！今天有时间，整理一下自己最常用的一些Chrome扩展吧：</p>
+<h1 id="常用网页浏览非开发类扩展："><a href="#常用网页浏览非开发类扩展：" class="headerlink" title="常用网页浏览非开发类扩展："></a>常用网页浏览非开发类扩展：</h1><h2 id="Tampermonkey"><a href="#Tampermonkey" class="headerlink" title="Tampermonkey"></a><a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank" rel="noopener">Tampermonkey</a></h2><p>推荐指数：★★★★★<br><a id="more"></a><br>最近发现的神器啊，哈哈，很喜欢，利用脚本比安装扩展少用内存啊！速度还快！用法也很简单–<code>20151202</code>更新<br>用法简要记录下：</p>
+<ol>
+<li><a href="https://greasyfork.org/zh-CN" target="_blank" rel="noopener">Greasy Fork</a>国内油猴脚本的下载地，常用的<code>百度网盘助手</code>,<code>去除贴吧列表里面的广告</code>，<code>CSDN去广告自动展开文章</code>等脚本都有</li>
+<li>当找到脚本之后，点击安装即可，然后在相关网站，就会有效果了。例如，在百度网盘下载页面，就会有百度助手下载按钮出现。</li>
+<li>在相应页面点击油猴扩展，可以查看脚本，可以禁用。也可以卸载安装过的脚本。</li>
+</ol>
+<p>两个可以发现好用的脚本的网站：</p>
+<ul>
+<li><a href="https://greasyfork.org/zh-CN" target="_blank" rel="noopener">https://greasyfork.org/zh-CN</a></li>
+<li><a href="https://openuserjs.org/" target="_blank" rel="noopener">https://openuserjs.org/</a></li>
+</ul>
+<p>下图是我目前在用的几个脚本：</p>
+<ul>
+<li><a href="https://greasyfork.org/zh-CN/scripts/25718-%E8%A7%A3%E9%99%A4b%E7%AB%99%E5%8C%BA%E5%9F%9F%E9%99%90%E5%88%B6" target="_blank" rel="noopener">解除B站区域限制</a><a href="https://www.bilibili.com/bangumi/play/ep234658" target="_blank" rel="noopener">解锁B站其他区域的视频</a></li>
+<li><a href="https://greasyfork.org/zh-CN/scripts/372452-csdn%E8%87%AA%E5%8A%A8%E5%B1%95%E5%BC%80-%E5%8E%BB%E5%B9%BF%E5%91%8A-%E5%87%80%E5%8C%96%E5%89%AA%E8%B4%B4%E6%9D%BF-%E5%85%8D%E7%99%BB%E9%99%86" target="_blank" rel="noopener">CSDN自动展开+去广告+净化剪贴板+免登陆</a></li>
+<li><a href="https://greasyfork.org/zh-CN/scripts/26638-ex-%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98" target="_blank" rel="noopener">EX-百度云盘</a></li>
+<li><a href="https://greasyfork.org/zh-CN/scripts/4233-miniblogimgpop-%E5%BE%AE%E5%8D%9A%E6%B5%AE%E5%9B%BE" target="_blank" rel="noopener">MiniblogImgPop - 微博浮图</a></li>
+<li><a href="https://greasyfork.org/zh-CN/scripts/7687-moremovieratings" target="_blank" rel="noopener">MoreMovieRatings</a> 豆瓣查看电影时，会有烂番茄的评价</li>
+<li><a href="https://greasyfork.org/zh-CN/scripts/3249-yet-another-weibo-filter" target="_blank" rel="noopener">Yet Another Weibo Filter 看真正想看的微博</a> 还你一个清爽的微博</li>
+<li><a href="https://greasyfork.org/zh-CN/scripts/39504-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B-%E7%9B%B4%E9%93%BE%E5%8A%A0%E9%80%9F%E7%89%88" target="_blank" rel="noopener">百度网盘直接下载助手 直链加速版</a></li>
+<li><a href="https://greasyfork.org/scripts/27530-%E7%A0%B4%E8%A7%A3vip%E4%BC%9A%E5%91%98%E8%A7%86%E9%A2%91%E9%9B%86%E5%90%88" target="_blank" rel="noopener">破解VIP会员视频集合</a> 观看 VIP 视频时，左侧会有可播放列表</li>
+</ul>
+<h2 id="OneTab"><a href="#OneTab" class="headerlink" title="OneTab"></a><a href="https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall" target="_blank" rel="noopener">OneTab</a></h2><p>推荐指数：★★★★★</p>
+<p>Chrome是个吃内存的怪兽啊！有了这个神器，网页打开再多都不怕啦！必装！推荐！</p>
+<h2 id="Markdown-Here"><a href="#Markdown-Here" class="headerlink" title="Markdown Here"></a><a href="https://chrome.google.com/webstore/detail/markdown-here/elifhakcjgalahccnjkneoccemfahfoa?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">Markdown Here</a></h2><p>推荐指数：★★★★★</p>
+<p>这个扩展简直是Markdown的福音啊！！！在写邮件、印象|为知笔记（命名不需要.md)在线版编辑文字时,遵循Markdown语法编辑文字，然后点击Markdown Here扩展就可以可以一键渲染！渲染效果可以在该扩展选项里进行设置，多个主题可以选择！没钱入手马克飞象的同志们，可以考虑用这个<strong>神器</strong>啊！！！从此，邮件也可以回复的有逼格啦!</p>
+<h2 id="新浪微博图床"><a href="#新浪微博图床" class="headerlink" title="新浪微博图床"></a><a href="https://chrome.google.com/webstore/detail/%E6%96%B0%E6%B5%AA%E5%BE%AE%E5%8D%9A%E5%9B%BE%E5%BA%8A/fdfdnfpdplfbbnemmmoklbfjbhecpnhf?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">新浪微博图床</a></h2><p>推荐指数：★★★★★</p>
+<p>简单好用的新浪微博图床,支持选择/拖拽/粘贴上传图片,并生成图片地址,HTML,UBB和Markdown等格式,支持浏览和删除历史记录。</p>
+<h2 id="扩展管理器"><a href="#扩展管理器" class="headerlink" title="扩展管理器"></a><a href="https://chrome.google.com/webstore/detail/extension-manager/gjldcdngmdknpinoemndlidpcabkggco/related?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">扩展管理器</a></h2><p>推荐指数：★★★★★</p>
+<p>对于经常折腾扩展的同志们，就不用担心扩展安装多了，chrome就卡的问题！有了它，轻松管理扩展，暂时不用却又舍不得卸载的扩展，就可以左击一键禁用和启用，右击卸载。必装！这个插件是最新（20190303）发现的，比之前的 <a href="https://chrome.google.com/webstore/detail/simpleextmanager/kniehgiejgnnpgojkdhhjbgbllnfkfdk" target="_blank" rel="noopener">SimpleExtManager</a> 好用点</p>
+<h2 id="右键搜"><a href="#右键搜" class="headerlink" title="右键搜"></a><a href="https://chrome.google.com/webstore/detail/context-menus/phlfmkfpmphogkomddckmggcfpmfchpn/reviews?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">右键搜</a></h2><p>推荐指数：★★★★</p>
+<p>看到扩展这么多设置选项，就知道它的功能是有多强大了！<br>功能就是如它的扩展名一样，对于浏览网页时的图片，链接等，右键点击，提供很多扩展功能，例如：</p>
+<ul>
+<li>对图片右击，可以选择去谷歌搜索相似图片|解析图片的网址|提取图片二维码</li>
+<li>对页面右击，可以定制进入浏览器扩展程序菜单|查看内存|生成当前网址二维码<br>更关键的是，它还支持自定义很多功能，例如，你可以设置对选中文字，进行在<strong>知乎</strong>里搜索！可以通过方法，自定义搜索引擎！必装<strong>神器</strong>！</li>
+</ul>
+<h2 id="眼不见心不烦（新浪微博）"><a href="#眼不见心不烦（新浪微博）" class="headerlink" title="眼不见心不烦（新浪微博）"></a><a href="https://chrome.google.com/webstore/detail/%E7%9C%BC%E4%B8%8D%E8%A7%81%E5%BF%83%E4%B8%8D%E7%83%A6%EF%BC%88%E6%96%B0%E6%B5%AA%E5%BE%AE%E5%8D%9A%EF%BC%89/aognaapdfnnldnjglanfbbklaakbpejm/reviews?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">眼不见心不烦（新浪微博）</a></h2><p>推荐指数：★★★★★</p>
+<p>Chrome就是满分评价，可见这扩展真是良心扩展啊！微博党的福音！在浏览器端，自己通过这个插件进行设置，可以将热门微博、会员推广等等内容窗口都给屏蔽了！还我们一个干净、舒服的微博环境！推荐！！！</p>
+<h2 id="LastPass-Free-Password-Manager"><a href="#LastPass-Free-Password-Manager" class="headerlink" title="LastPass: Free Password Manager"></a><a href="https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">LastPass: Free Password Manager</a></h2><p>推荐指数：★★★★★</p>
+<p>LastPass,屡获殊荣的密码管理器,保存你的密码,让你安全访问任何计算机和移动设备。多平台同步，离不开的密码神器！安全可靠~</p>
+<h2 id="Chrono下载管理器"><a href="#Chrono下载管理器" class="headerlink" title="Chrono下载管理器"></a><a href="https://chrome.google.com/webstore/detail/chrono-download-manager/mciiogijehkdemklbdcbfkefimifhecn" target="_blank" rel="noopener">Chrono下载管理器</a></h2><p>推荐指数：★★★★</p>
+<p>这是个下载扩展，好用！之前在下载百度网盘文件时，点击下载，需要一堆操作，登录网盘，保存到网盘……为啥就不能直接下载呢？！直到我发现了它！点击下载就立马启动Chrome自带的下载器下载了！个人觉得离不开，必装！</p>
+<h2 id="网页截图-注释-amp-批注"><a href="#网页截图-注释-amp-批注" class="headerlink" title="网页截图:注释&amp;批注"></a><a href="https://chrome.google.com/webstore/detail/awesome-screenshot-screen/nlipoenfbbikpbjkfpfillcgkoblgpmj" target="_blank" rel="noopener">网页截图:注释&amp;批注</a></h2><p>推荐指数：★★★★</p>
+<p>在安装了一堆截图扩展之后，最后剩下了它，满足了截图所有的需求，截取可见网页，选择区域，整个网页，另外，还有对截图的标记。</p>
+<h2 id="印象笔记·剪藏"><a href="#印象笔记·剪藏" class="headerlink" title="印象笔记·剪藏"></a><a href="https://chrome.google.com/webstore/detail/evernote-web-clipper/pioclpoplcdbaefihamjohnefbikjilc" target="_blank" rel="noopener">印象笔记·剪藏</a></h2><p>推荐指数：★★★★★</p>
+<p>作为一名大象用户，这个扩展肯定是必装！这里必须稍微介绍一下它的使用：</p>
+<ul>
+<li>收藏网页</li>
+<li>截图</li>
+<li>在百度，google搜索内容时，提供搜索笔记相关内容的功能，出现在搜索结果第一行</li>
+</ul>
+<h2 id="uBlock-Origin"><a href="#uBlock-Origin" class="headerlink" title="uBlock Origin"></a><a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm" target="_blank" rel="noopener">uBlock Origin</a></h2><p>推荐指数：★★★★★</p>
+<p>发现这一款效果也很好！</p>
+<h2 id="Save-to-Pocket"><a href="#Save-to-Pocket" class="headerlink" title="Save to Pocket"></a><a href="https://chrome.google.com/webstore/detail/save-to-pocket/niloccemoadcdkdjlinkgdfekeahmflj" target="_blank" rel="noopener">Save to Pocket</a></h2><p>推荐指数：★★★★</p>
+<p>看到感兴趣的先收藏着，然后走哪儿都能看，因为它提供了全平台的APP，方便管理。Pocket也是手机端我必装的APP之一。</p>
+<h2 id="Imagus"><a href="#Imagus" class="headerlink" title="Imagus"></a><a href="https://chrome.google.com/webstore/detail/imagus/immpkjjlgappgfkkfieppnmlhakdmaab?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">Imagus</a></h2><p>推荐指数：★★★★</p>
+<p>图片放大镜的功能！在体验了360浏览器、猎豹浏览器之后，特地去找的扩展！微博党的利器！这个不管能鼠标悬停放大图片，同时，对链接等也有预览。提供很多功能选项进行设置。</p>
+<h3 id="crxMouse-Chrome-Gestures"><a href="#crxMouse-Chrome-Gestures" class="headerlink" title="crxMouse Chrome Gestures"></a><a href="https://chrome.google.com/webstore/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">crxMouse Chrome Gestures</a></h3><p>推荐指数：★★★★</p>
+<p>对于国产浏览器自带鼠标手势的功能，真觉得很方便！这款扩展也是必装啊！</p>
+<h2 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h2><h3 id="Infinity新标签页"><a href="#Infinity新标签页" class="headerlink" title="Infinity新标签页"></a><a href="https://chrome.google.com/webstore/detail/infinity-new-tab/dbfmnekepjoapopniengjbcpnbljalfg?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">Infinity新标签页</a></h3><p>推荐指数：★★★★</p>
+<p>功能强大的新建标签页扩展！做的界面很美，每日壁纸质量也很高！有同步笔记、代办事项等，同时，喜欢它的网页图标，提供了很多常用网站的图标，自定义书签时很好看~唯一的缺点，就是感觉启动比较慢~</p>
+<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a><a href="https://chrome.google.com/webstore/detail/momentum/laookkfknpbbblfpciffpaejjkokdgca?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">Momentum</a></h3><p>推荐指数：★★★★</p>
+<p>现在在用的标签页扩展，挺简洁的，壁纸很美！</p>
+<h2 id="RSSHub-Radar"><a href="#RSSHub-Radar" class="headerlink" title="RSSHub Radar"></a><a href="https://chrome.google.com/webstore/search/rsshub?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">RSSHub Radar</a></h2><p>今天经过<a href="https://mp.weixin.qq.com/s?__biz=MzI5MDM4NTYwOA==&amp;mid=2247488671&amp;idx=1&amp;sn=2c5d7a459e8dbf3345481f982ed37e0e&amp;chksm=ec21ef38db56662eb0755a9ab0cb34adbf155ead565822e83f9b2a7307f37e440dc9d9d00d6a&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1566260194390&amp;sharer_shareid=ae8eb1508a08c1b134df82bb484ea38d#rd" target="_blank" rel="noopener">公众号的推荐</a>发现的一个 RSS 利器，对于喜欢订阅 RSS 的用户来说，真是方便！可以发现你访问的网站上的 RSS 源地址。</p>
+<h2 id="惠惠购物助手"><a href="#惠惠购物助手" class="headerlink" title="惠惠购物助手"></a><a href="https://chrome.google.com/webstore/detail/%E6%83%A0%E6%83%A0%E8%B4%AD%E7%89%A9%E5%8A%A9%E6%89%8B/ohjkicjidmohhfcjjlahfppkdblibkkb?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">惠惠购物助手</a></h2><p>推荐指数：★★★</p>
+<p>剁手党的神器！本来想给五星的，但是，双十一期间，竟然对淘宝不能查价了！减了两个★！还有，安装它之后，必须要进入扩展选项设置，不然这货会弹出广告！</p>
+<hr>
+<h1 id="程序猿开发相关扩展："><a href="#程序猿开发相关扩展：" class="headerlink" title="程序猿开发相关扩展："></a>程序猿开发相关扩展：</h1><h2 id="Vimium"><a href="#Vimium" class="headerlink" title="Vimium"></a><a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">Vimium</a></h2><p>推荐指数：★★★★★</p>
+<ul>
+<li><code>shift+b</code> 搜索你书签中的链接，所以，保存书签的时候，设置点关键字吧</li>
+<li><code>x</code> 快速关闭标签</li>
+<li><code>shift+x</code> 快速恢复你之前关闭的标签</li>
+<li><code>gg</code> 回到页首</li>
+<li><code>G</code> 回到页尾</li>
+</ul>
+<p>VIM党的利器。今天特地录制了一个小视频，介绍它的使用方法：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/av56598067" target="_blank" rel="noopener">https://www.bilibili.com/video/av56598067</a></li>
+</ul>
+<h2 id="API-测试工具"><a href="#API-测试工具" class="headerlink" title="API 测试工具"></a>API 测试工具</h2><ul>
+<li><a href="https://chrome.google.com/webstore/detail/aejoelaoggembcahagimdiliamlcdmfm" target="_blank" rel="noopener">Restlet Client - REST API Testing</a></li>
+</ul>
+<p>颜值比较高，另外，Postman 已经提供独立的软件了，推荐</p>
+<h2 id="Clear-Cache"><a href="#Clear-Cache" class="headerlink" title="Clear Cache"></a><a href="https://chrome.google.com/webstore/detail/clear-cache/cppjkneekbjaeellbfkmgnhonkkjfpdn?utm_source=chrome-app-launcher-info-dialog" target="_blank" rel="noopener">Clear Cache</a></h2><p>推荐指数：★★★★★</p>
+<p>点击图标即可清除缓存、cookie等，开发必备！</p>
+<h2 id="JSON-Viewer-Awesome"><a href="#JSON-Viewer-Awesome" class="headerlink" title="JSON Viewer Awesome"></a><a href="https://chrome.google.com/webstore/detail/json-viewer-awesome/iemadiahhbebdklepanmkjenfdebfpfe/related" target="_blank" rel="noopener">JSON Viewer Awesome</a></h2><p>推荐指数：★★★★★</p>
+<p>看到同事用的，颜值超高的JSON文件渲染，比之前用的<a href="https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh" target="_blank" rel="noopener">JSON Viewer</a>颜值还要高，更方便！</p>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>这里列几个和 Git 相关的</p>
+<h3 id="octotree"><a href="#octotree" class="headerlink" title="octotree"></a><a href="https://github.com/ovity/octotree" target="_blank" rel="noopener">octotree</a></h3><p>推荐指数：★★★★★</p>
+<p>Web浏览Github项目时必备的插键，快速查看项目结构</p>
+<h3 id="sourcegraph"><a href="#sourcegraph" class="headerlink" title="sourcegraph"></a><a href="https://chrome.google.com/webstore/detail/sourcegraph/dgjhfomjieaadpoljlnidmbgkdffpack" target="_blank" rel="noopener">sourcegraph</a></h3><p>推荐指数：★★★★★</p>
+<p><a href="https://sourcegraph.com/welcome#github-integration" target="_blank" rel="noopener">sourcegraph</a>配合 Github 使用，真是利器，有点 WebIDE 的感觉</p>
+<p><img src="https://ws1.sinaimg.cn/mw690/6d9475f6ly1g0povswtroj20sk04swf7.jpg" alt></p>
+<h3 id="Git-History-Browser-Extension"><a href="#Git-History-Browser-Extension" class="headerlink" title="Git History Browser Extension"></a><a href="https://chrome.google.com/webstore/detail/git-history-browser-exten/laghnmifffncfonaoffcndocllegejnf/related" target="_blank" rel="noopener">Git History Browser Extension</a></h3><p>推荐指数：★★★★★</p>
+<p>官网<a href="https://github.com/pomber/git-history" target="_blank" rel="noopener">Git History</a>介绍只需要将 GitHub 仓库的 『github.com』网址替换为『github.githistory.xyz』，则可以动态显示文件的提交历史</p>
+<h3 id="Isometric-Contributions"><a href="#Isometric-Contributions" class="headerlink" title="Isometric Contributions"></a><a href="https://chrome.google.com/webstore/detail/isometric-contributions/mjoedlfflcchnleknnceiplgaeoegien/related?utm_source=chrome-ntp-icon" target="_blank" rel="noopener">Isometric Contributions</a></h3><p>推荐指数：★★★</p>
+<p>3D 展示你 Github 上的提交活动，酷炫的</p>
+<p><img src="https://ws1.sinaimg.cn/mw690/6d9475f6ly1g0poq04iemj20kf0d6jso.jpg" alt></p>
+<h2 id="WhatRuns"><a href="#WhatRuns" class="headerlink" title="WhatRuns"></a><a href="https://chrome.google.com/webstore/detail/whatruns/cmkdbmfndkfgebldhnkbfhlneefdaaip/related" target="_blank" rel="noopener">WhatRuns</a></h2><p>推荐指数：★★★★★</p>
+<p>查看访问的网页主要采用了什么技术框架，之前有个类似的插键 <a href="https://www.wappalyzer.com/" target="_blank" rel="noopener">wappalyzer</a>，没这个全</p>
+<h2 id="Code-Cola"><a href="#Code-Cola" class="headerlink" title="Code Cola"></a><a href="https://chrome.google.com/webstore/detail/code-cola/lomkpheldlbkkfiifcbfifipaofnmnkn" target="_blank" rel="noopener">Code Cola</a></h2><p>推荐指数：★★★★</p>
+<p>Code Cola是一个可视化编辑在线页面css样式的chrome插件。</p>
+<h2 id="WEB前端助手-FeHelper"><a href="#WEB前端助手-FeHelper" class="headerlink" title="WEB前端助手(FeHelper)"></a><a href="https://chrome.google.com/webstore/detail/web%E5%89%8D%E7%AB%AF%E5%8A%A9%E6%89%8Bfehelper/pkgccpejnmalmdinmhkkfafefagiiiad" target="_blank" rel="noopener">WEB前端助手(FeHelper)</a></h2><p>推荐指数：★★★★</p>
+<p>FE助手：包括字符串编解码、图片base64编码、代码压缩、美化、JSON格式化、正则表达式、时间转换工具、二维码生成器、编码规范检测、页面性能检测、栅格检测、JS运行效率分析等</p>
+<h2 id="二维码-QR码-生成器"><a href="#二维码-QR码-生成器" class="headerlink" title="二维码(QR码)生成器"></a><a href="https://chrome.google.com/webstore/detail/%E4%BA%8C%E7%BB%B4%E7%A0%81qr%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/pflgjjogbmmcmfhfcnlohagkablhbpmg" target="_blank" rel="noopener">二维码(QR码)生成器</a></h2><p>推荐指数：★★★★</p>
+<p>前端开发调试，生成当前网页的二维码</p>
+<h2 id="XPath-Helper"><a href="#XPath-Helper" class="headerlink" title="XPath Helper"></a><a href="https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl" target="_blank" rel="noopener">XPath Helper</a></h2><p>爬虫好像使用到的一个插键，这里有个教程 <a href="https://blog.csdn.net/love666666shen/article/details/72613143" target="_blank" rel="noopener">XPath Helper：chrome爬虫网页解析工具 Chrome插件图文教程</a></p>
+<h1 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h1><h2 id="20190303"><a href="#20190303" class="headerlink" title="20190303"></a>20190303</h2><ul>
+<li>去除了一些不用的插键</li>
+<li>补充了工作后用到的一些有用的插键，比如 git 相关的</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zhaoolee.gitbooks.io/chrome/content/004-tampermonkey-you-hou-5b5021-gei-liu-lan-qi-kai-ge-gua.html" target="_blank" rel="noopener">Chrome插件英雄榜</a> 介绍了一些比较少见的扩展，掘金上发的一篇<a href="https://juejin.im/post/5c6824076fb9a049c966374c" target="_blank" rel="noopener">文章</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/06/23/video-tools-chrome-vimium/" rel="bookmark">Chrome 扩展神器 Vimium 使用教程——快速搜索收藏的书签</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/09/03/blog-logfile/" rel="bookmark">博客建站日志</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/05/19/hexo-blog-full-note/" rel="bookmark">利用 Hexo + Github Pages 搭建博客并优化 Next 主题教程</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2015/11/30/hexo-gitcafe-github-deploy/" rel="bookmark">hexo之github\gitcafe多线路托管博客deploy及SSH设置问题</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2015/11/26/tools-chrome-extentions/" title="那些离不开的 Chrome 扩展插件">https://michael728.github.io/2015/11/26/tools-chrome-extentions/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Chrome/" rel="tag"># Chrome</a>
+          
+            <a href="/tags/扩展/" rel="tag"># 扩展</a>
+          
+            <a href="/tags/效率软件/" rel="tag"># 效率软件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/26/python-pyenv-anaconda/" rel="prev" title="Python多版本共存工具-Pyenv及Anaconda科学计算环境的配置">
+                Python多版本共存工具-Pyenv及Anaconda科学计算环境的配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用网页浏览非开发类扩展："><span class="nav-number">1.</span> <span class="nav-text">常用网页浏览非开发类扩展：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tampermonkey"><span class="nav-number">1.1.</span> <span class="nav-text">Tampermonkey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OneTab"><span class="nav-number">1.2.</span> <span class="nav-text">OneTab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown-Here"><span class="nav-number">1.3.</span> <span class="nav-text">Markdown Here</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新浪微博图床"><span class="nav-number">1.4.</span> <span class="nav-text">新浪微博图床</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展管理器"><span class="nav-number">1.5.</span> <span class="nav-text">扩展管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右键搜"><span class="nav-number">1.6.</span> <span class="nav-text">右键搜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#眼不见心不烦（新浪微博）"><span class="nav-number">1.7.</span> <span class="nav-text">眼不见心不烦（新浪微博）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LastPass-Free-Password-Manager"><span class="nav-number">1.8.</span> <span class="nav-text">LastPass: Free Password Manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrono下载管理器"><span class="nav-number">1.9.</span> <span class="nav-text">Chrono下载管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网页截图-注释-amp-批注"><span class="nav-number">1.10.</span> <span class="nav-text">网页截图:注释&amp;批注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#印象笔记·剪藏"><span class="nav-number">1.11.</span> <span class="nav-text">印象笔记·剪藏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uBlock-Origin"><span class="nav-number">1.12.</span> <span class="nav-text">uBlock Origin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Save-to-Pocket"><span class="nav-number">1.13.</span> <span class="nav-text">Save to Pocket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Imagus"><span class="nav-number">1.14.</span> <span class="nav-text">Imagus</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crxMouse-Chrome-Gestures"><span class="nav-number">1.14.1.</span> <span class="nav-text">crxMouse Chrome Gestures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签页"><span class="nav-number">1.15.</span> <span class="nav-text">标签页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Infinity新标签页"><span class="nav-number">1.15.1.</span> <span class="nav-text">Infinity新标签页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Momentum"><span class="nav-number">1.15.2.</span> <span class="nav-text">Momentum</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSSHub-Radar"><span class="nav-number">1.16.</span> <span class="nav-text">RSSHub Radar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惠惠购物助手"><span class="nav-number">1.17.</span> <span class="nav-text">惠惠购物助手</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序猿开发相关扩展："><span class="nav-number">2.</span> <span class="nav-text">程序猿开发相关扩展：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vimium"><span class="nav-number">2.1.</span> <span class="nav-text">Vimium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-测试工具"><span class="nav-number">2.2.</span> <span class="nav-text">API 测试工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clear-Cache"><span class="nav-number">2.3.</span> <span class="nav-text">Clear Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-Viewer-Awesome"><span class="nav-number">2.4.</span> <span class="nav-text">JSON Viewer Awesome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">2.5.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#octotree"><span class="nav-number">2.5.1.</span> <span class="nav-text">octotree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sourcegraph"><span class="nav-number">2.5.2.</span> <span class="nav-text">sourcegraph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-History-Browser-Extension"><span class="nav-number">2.5.3.</span> <span class="nav-text">Git History Browser Extension</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isometric-Contributions"><span class="nav-number">2.5.4.</span> <span class="nav-text">Isometric Contributions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WhatRuns"><span class="nav-number">2.6.</span> <span class="nav-text">WhatRuns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-Cola"><span class="nav-number">2.7.</span> <span class="nav-text">Code Cola</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB前端助手-FeHelper"><span class="nav-number">2.8.</span> <span class="nav-text">WEB前端助手(FeHelper)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维码-QR码-生成器"><span class="nav-number">2.9.</span> <span class="nav-text">二维码(QR码)生成器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath-Helper"><span class="nav-number">2.10.</span> <span class="nav-text">XPath Helper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Changelog"><span class="nav-number">3.</span> <span class="nav-text">Changelog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#20190303"><span class="nav-number">3.1.</span> <span class="nav-text">20190303</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2015/11/26/tools-chrome-extentions/";
+    this.page.identifier = "2015/11/26/tools-chrome-extentions/";
+    this.page.title = '那些离不开的 Chrome 扩展插件';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

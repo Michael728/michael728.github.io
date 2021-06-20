@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简介首先引用 Elasticsearch （下文简称 ES）官网的一段描述：  Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心，它集中存储您的数据，帮助您发现意料之中以及意料之外的情况。  本文主要介绍 Elasticsearch 集群的搭建。通过在一台服务器上创建 3 个 ES 实例来">
+<meta name="keywords" content="Elasticsearch,Kibana,Logstash,Filebeat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch安装及集群的配置">
+<meta property="og:url" content="https://michael728.github.io/2020/04/12/elk-es-install/index.html">
+<meta property="og:site_name" content="Michael翔">
+<meta property="og:description" content="简介首先引用 Elasticsearch （下文简称 ES）官网的一段描述：  Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心，它集中存储您的数据，帮助您发现意料之中以及意料之外的情况。  本文主要介绍 Elasticsearch 集群的搭建。通过在一台服务器上创建 3 个 ES 实例来">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/pexels-andrea-piacquadio-3769697.jpg">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/dt7Hon.png">
+<meta property="og:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/aPk5ub.png">
+<meta property="og:updated_time" content="2021-06-20T15:45:44.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elasticsearch安装及集群的配置">
+<meta name="twitter:description" content="简介首先引用 Elasticsearch （下文简称 ES）官网的一段描述：  Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心，它集中存储您的数据，帮助您发现意料之中以及意料之外的情况。  本文主要介绍 Elasticsearch 集群的搭建。通过在一台服务器上创建 3 个 ES 实例来">
+<meta name="twitter:image" content="https://gitee.com/michael_xiang/images/raw/master/uPic/pexels-andrea-piacquadio-3769697.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Michael翔" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://michael728.github.io/2020/04/12/elk-es-install/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Elasticsearch安装及集群的配置 | Michael翔</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-158916947-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-158916947-1');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1c9958c951d5a7661571422e0340e156";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <meta name="referrer" content="never">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael翔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">因上努力，果上随缘！</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tools/" rel="section"><i class="menu-item-icon fa fa-fw fa-location-arrow"></i> <br>利器</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-books">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/books" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-movies">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/movies" rel="section"><i class="menu-item-icon fa fa-fw fa-film"></i> <br>观影</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-think">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/think" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br>一言</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/michael728" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://michael728.github.io/2020/04/12/elk-es-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Michael翔">
+      <meta itemprop="description" content="DevOps，公众号『Coder魔法院』">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael翔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Elasticsearch安装及集群的配置
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-12 23:10:57" itemprop="dateCreated datePublished" datetime="2020-04-12T23:10:57+00:00">2020-04-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-20 15:45:44" itemprop="dateModified" datetime="2021-06-20T15:45:44+00:00">2021-06-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ELK/" itemprop="url" rel="index"><span itemprop="name">ELK</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/pexels-andrea-piacquadio-3769697.jpg" alt="Search"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>首先引用 Elasticsearch （下文简称 ES）<a href="https://www.elastic.co/cn/elasticsearch/" target="_blank" rel="noopener">官网</a>的一段描述：</p>
+<blockquote>
+<p>Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心，它集中存储您的数据，帮助您发现意料之中以及意料之外的情况。</p>
+</blockquote>
+<p>本文主要介绍 Elasticsearch 集群的搭建。通过在一台服务器上创建 3 个 ES 实例来创建一个建议的 ES 集群。</p>
+<h2 id="Elasticsearch-ES"><a href="#Elasticsearch-ES" class="headerlink" title="Elasticsearch/ES"></a>Elasticsearch/ES</h2><p>官方的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/index.html" target="_blank" rel="noopener">Elasticsearch Reference</a> 提供了不同版本的文档连接，真是赞！</p>
+<blockquote>
+<p>如果英文的不想看，还提供了中文版的 <a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener">Elasticsearch 2.x: 权威指南</a>，版本不是最新的，但是了解基本概念也是有帮助的。</p>
+</blockquote>
+<p>Elasticsearch 7.x 包里自包含了 OpenJDK 的包。如果你想要使用你自己配置好的 Java 版本，需要设置 <code>JAVA_HOME</code> 环境变量 —— <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html" target="_blank" rel="noopener">参考</a></p>
+<p>官方文档 <code>Set up Elasticsearch</code> 有各个 OS 的安装指导，页面 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/install-elasticsearch.html" target="_blank" rel="noopener">Installing Elasticsearch</a> 中提供了多种安装包对应的指导链接！</p>
+<p>本文选择绿色安装包的的方式（<code>tar.gz</code>）安装。</p>
+<blockquote>
+<p>由于实验机器有限，可以在同一台机器上模拟出 3 个节点，安装 ES 集群。</p>
+</blockquote>
+<h2 id="安装-ES"><a href="#安装-ES" class="headerlink" title="安装 ES"></a>安装 ES</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><div class="note warning">
+            <p>不能使用 root 用户启动 es，否则会报错：</p><p>Caused by: java.lang.RuntimeException: can not run elasticsearch as root</p>
+          </div>
+<p>如果需要新建用户的话可以运行 <code>sudo adduser es</code>，修改 es 用户的密码：<code>sudo passwd es</code>。</p>
+<h3 id="下载-ES-安装包"><a href="#下载-ES-安装包" class="headerlink" title="下载 ES 安装包"></a>下载 ES 安装包</h3><p>安装包下载地址：</p>
+<ul>
+<li><a href="https://www.elastic.co/cn/downloads/past-releases#elasticsearch" target="_blank" rel="noopener">官方-Past Releases</a> 官网的下载速度龟速</li>
+<li><a href="https://mirrors.huaweicloud.com/elasticsearch/" target="_blank" rel="noopener">华为镜像站</a> 下载速度不错，推荐</li>
+</ul>
+<p>下面的步骤参考 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html" target="_blank" rel="noopener">Set up Elasticsearch » Installing Elasticsearch » Install Elasticsearch from archive on Linux or MacOS</a>，选择的安装包是 elasticsearch-7.3.0 版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载安装包</span><br><span class="line">wget https://mirrors.huaweicloud.com/elasticsearch/7.3.0/elasticsearch-7.3.0-linux-x86_64.tar.gz</span><br><span class="line">wget https://mirrors.huaweicloud.com/elasticsearch/7.3.0/elasticsearch-7.3.0-linux-x86_64.tar.gz.sha512</span><br><span class="line"><span class="meta">#</span> 验证安装包的完整性，如果没问题，会输出 OK</span><br><span class="line">shasum -a 512 -c elasticsearch-7.3.0-linux-x86_64.tar.gz.sha512</span><br><span class="line">tar -xzf elasticsearch-7.3.0-linux-x86_64.tar.gz</span><br><span class="line"><span class="meta">#</span> 将目录复制三份，作为三个节点，后面配置 ES 集群时，对应了三个 ES 实例</span><br><span class="line">cp -R elasticsearch-7.3.0 es-7.3.0-node-1</span><br><span class="line">cp -R elasticsearch-7.3.0 es-7.3.0-node-2</span><br><span class="line">mv elasticsearch-7.3.0 es-7.3.0-node-3</span><br><span class="line"><span class="meta">#</span> 因为以 root 用户启动不了 ES</span><br><span class="line">chown -R es es-7.3.0*</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>如果是 Mac 平台，则下载包 <code>elasticsearch-{version}-darwin-x86_64.tar.gz</code>。</p><p>MacOS Catalina 在你第一次运行 ES 时，会弹出对话框阻止运行，你需要到设置-》安全隐私中允许才行。为了阻止这种告警，可以运行如下的命令：xattr -d -r com.apple.quarantine &lt;$ES_HOME or archive-or-directory&gt;</p>
+          </div>
+<blockquote>
+<p><code>$ES_HOME</code> 是指 ES 的安装包 tar 包解压后的文件夹目录。</p>
+</blockquote>
+<p>解压后的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html#targz-layout" target="_blank" rel="noopener">目录组成</a>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin # 二进制脚本存放目录，包括 elasticsearch 来指定运行一个 node，包括 elasticsearch-plugin 来安装 plugins</span><br><span class="line">├── config # 包含了 elasticsearch.yml 配置文件</span><br><span class="line">├── data # 节点上分配的每个 index/分片 的数据文件</span><br><span class="line">├── lib</span><br><span class="line">├── LICENSE.txt</span><br><span class="line">├── logs</span><br><span class="line">├── modules</span><br><span class="line">├── NOTICE.txt</span><br><span class="line">├── plugins # 插键文件存放的位置</span><br><span class="line">└── README.textile</span><br></pre></td></tr></table></figure>
+<h3 id="运行-Elasticsearch"><a href="#运行-Elasticsearch" class="headerlink" title="运行 Elasticsearch"></a>运行 Elasticsearch</h3><p>我们先运行一个节点，创建 ES 单机版实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elasticsearch</span><br></pre></td></tr></table></figure>
+<p>如果要将 ES 作为守护程序运行，请在命令行中指定 <code>-d</code>，指定 <code>-p</code> 参数，将进程 ID 记录到 <code>pid</code> 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elasticsearch -d -p pid</span><br></pre></td></tr></table></figure>
+<p>日志在 <code>$ES_HOME/logs</code> 目录中。</p>
+<p>如果要停止 ES，运行如下的命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -F pid</span><br></pre></td></tr></table></figure>
+<h3 id="检查一下运行状态"><a href="#检查一下运行状态" class="headerlink" title="检查一下运行状态"></a>检查一下运行状态</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET "localhost:9200/?pretty"</span><br></pre></td></tr></table></figure>
+<p>或者在浏览器中访问 <code>localhost:9200</code> 都可以，会返回：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "name": "node-1",</span><br><span class="line">    "cluster_name": "appsearch-7.3.2",</span><br><span class="line">    "cluster_uuid": "GlzI_v__QJ2s9ewAgomOqg",</span><br><span class="line">    "version": &#123;</span><br><span class="line">        "number": "7.3.0",</span><br><span class="line">        "build_flavor": "default",</span><br><span class="line">        "build_type": "tar",</span><br><span class="line">        "build_hash": "de777fa",</span><br><span class="line">        "build_date": "2019-07-24T18:30:11.767338Z",</span><br><span class="line">        "build_snapshot": false,</span><br><span class="line">        "lucene_version": "8.1.0",</span><br><span class="line">        "minimum_wire_compatibility_version": "6.8.0",</span><br><span class="line">        "minimum_index_compatibility_version": "6.0.0-beta1"</span><br><span class="line">    &#125;,</span><br><span class="line">    "tagline": "You Know, for Search"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你是在远端服务器上部署的 ES，那么，此时在你本地的工作机上还无法调通 <code>&lt;IP&gt;:9200</code>，需要对 ES 进行相关配置才能访问，下文会介绍。</p>
+<h2 id="ES-配置相关"><a href="#ES-配置相关" class="headerlink" title="ES 配置相关"></a>ES 配置相关</h2><p>官网关于配置的内容主要有两处：</p>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html" target="_blank" rel="noopener">Configuraing Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html" target="_blank" rel="noopener">Important Elasticsearch configuration</a></li>
+</ul>
+<p>Elasticsearch 主要有三个配置文件：</p>
+<ul>
+<li><code>elasticsearch.yml</code> ES 的配置，<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html" target="_blank" rel="noopener">more</a></li>
+<li><code>jvm.options</code> ES JVM 配置，<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/jvm-options.html#jvm-options" target="_blank" rel="noopener">more</a></li>
+<li><code>log4j2.properties</code> ES 日志配置，<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html#logging" target="_blank" rel="noopener">more</a></li>
+</ul>
+<blockquote>
+<p>配置文件主要位于 <code>$ES_HOME/config</code> 目录下，也可以通过 <code>ES_PATH_CONF</code> 环境变量来修改</p>
+</blockquote>
+<p>YAML 的配置形式参考：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">path:</span></span><br><span class="line"><span class="attr">    data:</span> <span class="string">/var/lib/elasticsearch</span></span><br><span class="line"><span class="attr">    logs:</span> <span class="string">/var/log/elasticsearch</span></span><br></pre></td></tr></table></figure></p>
+<p>设置也可以按如下方式展平：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">path.data:</span> <span class="string">/var/lib/elasticsearch</span></span><br><span class="line"><span class="string">path.logs:</span> <span class="string">/var/log/elasticsearch</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="JVM-配置"><a href="#JVM-配置" class="headerlink" title="JVM 配置"></a>JVM 配置</h3><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/jvm-options.html#jvm-options" target="_blank" rel="noopener">JVM 参数设置</a>可以通过 <code>jvm.options</code> 文件（推荐方式）或者 <code>ES_JAVA_OPTS</code> 环境变量来修改。</p>
+<p><code>jvm.options</code> 位于 </p>
+<ul>
+<li><code>$ES_HOME/config/jvm.options</code> 当通过 <code>tar</code> or <code>zip</code> 包安装</li>
+<li><code>/etc/elasticsearch/jvm.options</code> 当通过 Debian or RPM packages</li>
+</ul>
+<p>官网也介绍了如何<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/heap-size.html" target="_blank" rel="noopener">设置堆大小</a>。</p>
+<p>默认情况，ES 告诉 JVM 使用一个最小和最大都为 1GB 的堆。但是到了生产环境，这个配置就比较重要了，确保 ES 有足够堆空间可用。</p>
+<p>ES 使用 <code>Xms(minimum heap size)</code> 和 <code>Xmx(maxmimum heap size)</code> 设置堆大小。你应该将这两个值设为同样的大小。</p>
+<p><strong><code>Xms</code> 和 <code>Xmx</code> 不能大于你物理机内存的 50%。</strong></p>
+<p>设置的示例：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xms2g </span><br><span class="line">-Xmx2g</span><br></pre></td></tr></table></figure></p>
+<h3 id="elasticsearch-yml-配置"><a href="#elasticsearch-yml-配置" class="headerlink" title="elasticsearch.yml 配置"></a>elasticsearch.yml 配置</h3><p>ES 默认会加载位于 <code>$ES_HOME/config/elasticsearch.yml</code> 的配置文件。</p>
+<p>备注：任何能够通过配置文件设置的内容，都可以通过命令行使用 <code>-E</code> 的语法进行指定，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/elasticsearch -d -Ecluster.name=my_cluster -Enode.name=node_1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过 <code>-E</code>  会覆盖掉 <code>elasticsearch.yml</code> 中的配置。</p>
+</blockquote>
+<hr>
+<h4 id="cluster-name"><a href="#cluster-name" class="headerlink" title="cluster.name"></a>cluster.name</h4><p><code>cluster.name</code> 设置<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.name.html" target="_blank" rel="noopener">集群名称</a>。一个节点只能加入一个集群中，默认的集群名称是 <code>elasticsearch</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster.name: search-7.3.2</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>确保节点的集群名称要设置正确，这样才能加入到同一个集群中。上面示例就自定义了集群名称为 appsearch-7.3.2。</p>
+          </div>
+<hr>
+<h4 id="node-name"><a href="#node-name" class="headerlink" title="node.name"></a>node.name</h4><p><code>node.name</code>：可以配置每个<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/node.name.html" target="_blank" rel="noopener">节点的名称</a>。用来提供可读性高的 ES 实例名称，它默认名称是机器的 <code>hostname</code>，可以自定义：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.name: node-1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>同一集群中的节点名称不能相同</p>
+</blockquote>
+<hr>
+<h4 id="network-host"><a href="#network-host" class="headerlink" title="network.host"></a>network.host</h4><p><code>network.host</code>：设置访问的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/network.host.html" target="_blank" rel="noopener">地址</a>。默认仅绑定在回环地址 <code>127.0.0.1</code> 和 <code>[::1]</code>。如果需要从其他服务器上访问以及多态机器搭建集群，我们需要设定 ES 运行绑定的 Host，节点需要绑定非回环的地址。建议设置为主机的公网 IP 或 <code>0.0.0.0</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">network.host: 0.0.0.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更多的网络设置可以阅读 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html" target="_blank" rel="noopener">Network Settings</a></p>
+</blockquote>
+<hr>
+<h4 id="http-port"><a href="#http-port" class="headerlink" title="http.port"></a>http.port</h4><p><code>http.port</code> 默认端口是 9200 ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure>
+<div class="note warning">
+            <p>注意：这是指 http 端口，如果采用 REST API 对接 ES，那么就是采用的 http 协议</p>
+          </div>
+<hr>
+<h4 id="transport-port"><a href="#transport-port" class="headerlink" title="transport.port"></a>transport.port</h4><p>REST 客户端通过 HTTP 将请求发送到您的 Elasticsearch 集群，但是接收到客户端请求的节点不能总是单独处理它，通常必须将其传递给其他节点以进行进一步处理。它使用传输网络层（transport networking layer）执行此操作。传输层用于集群中节点之间的所有内部通信，与远程集群节点的所有通信，以及 Elasticsearch Java API 中的 TransportClient。</p>
+<p><code>transport.port</code> 绑定端口范围。默认为 9300-9400</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transport.port: 9300</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为要在一台机器上创建是三个 ES 实例，这里明确指定每个实例的端口。</p>
+</blockquote>
+<hr>
+<h4 id="discovery-seed-hosts"><a href="#discovery-seed-hosts" class="headerlink" title="discovery.seed_hosts"></a>discovery.seed_hosts</h4><p><code>discovery.seed_hosts</code>：发现设置。有两种重要的发现和集群形成配置，以便集群中的节点能够彼此发现并且选择一个主节点。<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/discovery-settings.html" target="_blank" rel="noopener">官网/Important discovery and cluster formation settings</a></p>
+<p><code>discovery.seed_hosts</code> 是组件集群时比较重要的配置，用于启动当前节点时，发现其他节点的初始列表。</p>
+<p>开箱即用，无需任何网络配置， ES 将绑定到可用的环回地址，并将扫描本地端口 <code>9300 - 9305</code>，以尝试连接到同一服务器上运行的其他节点。 这无需任何配置即可提供自动群集的体验。</p>
+<p>如果要与其他主机上的节点组成集群，则必须设置 <code>discovery.seed_hosts</code>，用来提供集群中的其他主机列表（它们是符合主机资格要求的<code>master-eligible</code>并且可能处于活动状态的且可达的，以便寻址<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-hosts-providers.html" target="_blank" rel="noopener">发现过程</a>）。此设置应该是群集中所有符合主机资格的节点的地址的列表。 每个地址可以是 IP 地址，也可以是通过 DNS 解析为一个或多个 IP 地址的主机名（<code>hostname</code>）。</p>
+<blockquote>
+<p>当一个已经加入过集群的节点重启时，如果他无法与之前集群中的节点通信，很可能就会报这个错误 <code>master not discovered or elected yet, an election requires at least 2 nodes with ids from</code>。因此，我在一台服务器上模拟三个 ES 实例时，这个配置我明确指定了端口号。</p>
+</blockquote>
+<p>配置集群的主机地址，配置之后集群的主机之间可以自动发现（可以带上端口，例如 <code>127.0.0.1:9300</code>）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">discovery.seed_hosts: ["127.0.0.1:9300","127.0.0.1:9301"]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured</p>
+</blockquote>
+<p>必须至少配置 <code>[discovery.seed_hosts，discovery.seed_providers，cluster.initial_master_nodes]</code> 中的一个。</p>
+<hr>
+<h4 id="cluster-initial-master-nodes"><a href="#cluster-initial-master-nodes" class="headerlink" title="cluster.initial_master_nodes"></a>cluster.initial_master_nodes</h4><p><code>cluster.initial_master_nodes</code>: 初始的候选 master 节点列表。初始主节点应通过其 <code>node.name</code> 标识，默认为其主机名。确保 <code>cluster.initial_master_nodes</code> 中的值与 <code>node.name</code> 完全匹配。</p>
+<p>首次启动<strong>全新的 ES 集群</strong>时，会出现一个<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-bootstrap-cluster.html" target="_blank" rel="noopener">集群引导/集群选举/cluster bootstrapping</a>步骤，该步骤确定了在第一次选举中的符合主节点资格的节点集合。在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/bootstrap-checks.html#dev-vs-prod-mode" target="_blank" rel="noopener">开发模式</a>下，如果没有进行发现设置，此步骤由节点本身自动执行。由于这种自动引导从本质上讲是<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-quorums.html" target="_blank" rel="noopener">不安全的</a>，因此当您在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html#dev-vs-prod-mode" target="_blank" rel="noopener">生产模式</a>下第一次启动全新的群集时，你必须显式列出符合资格的主节点。也就是说，需要使用 <code>cluster.initial_master_nodes</code> 设置来设置该主节点列表。<strong>重新启动集群或将新节点添加到现有集群时，你不应使用此设置</strong></p>
+<blockquote>
+<p>在新版 7.x 的 ES 中，对 ES 的集群发现系统做了调整，不再有 <code>discovery.zen.minimum_master_nodes</code> 这个控制集群脑裂的配置，转而由集群自主控制，并且新版在启动一个新的集群的时候需要有 <code>cluster.initial_master_nodes</code> 初始化集群主节点列表。如果一个集群一旦形成，你不该再设置该配置项，应该移除它。该配置项仅仅是集群第一次创建时设置的！集群形成之后，这个配置也会被忽略的！</p>
+</blockquote>
+<div class="note warning">
+            <p><code>cluster.initial_master_nodes</code> 该配置项并不是需要每个节点设置保持一致，设置需谨慎，如果其中的主节点关闭了，可能会导致其他主节点也会关闭。因为一旦节点初始启动时设置了这个参数，它下次启动时还是会尝试和当初指定的主节点链接，当链接失败时，自己也会关闭！</p><p>因此，为了保证可用性，预备做主节点的节点不用每个上面都配置该配置项！保证有的主节点上就不设置该配置项，这样当有主节点故障时，还有可用的主节点不会一定要去寻找初始节点中的主节点！</p>
+          </div>
+<p>关于 <code>cluster.initial_master_nodes</code> 可以查看如下资料：</p>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-discovery-bootstrap-cluster.html" target="_blank" rel="noopener">Bootstrapping a cluster</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-settings.html" target="_blank" rel="noopener">Discovery and cluster formation settings</a></li>
+</ul>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>集群的主要配置项上面已经介绍的差不多了，同时也给出了一些文档拓展阅读。实际的生产环境中，配置稍微会复杂点，下面补充一些配置项的介绍。需要说明的是，下面的一些配置即使不配置，ES 的集群也可以成功启动的。</p>
+<p>下文节点角色会对上文中的 <code>node.master</code> 等配置做了介绍。如果本地仅是简单测试使用，上文中的 <code>node.master/node.data/node.ingest</code> 不用配置也没影响。</p>
+<h2 id="节点角色"><a href="#节点角色" class="headerlink" title="节点角色"></a>节点角色</h2><h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><p><strong>默认情况</strong>，一个节点 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/modules-node.html#voting-only-node" target="_blank" rel="noopener">Node</a> 包含下面所有的角色：<code>master-eligible, data, ingest, and machine learning (if available)</code>。</p>
+<table>
+<thead>
+<tr>
+<th>节点类型</th>
+<th>配置参数</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>master eligible</td>
+<td>node.master</td>
+<td>true</td>
+</tr>
+<tr>
+<td>data</td>
+<td>node.data</td>
+<td>true</td>
+</tr>
+<tr>
+<td>ingest</td>
+<td>node.ingest</td>
+<td>true</td>
+</tr>
+<tr>
+<td>coodrinating only</td>
+<td>无</td>
+<td>设置上面三个参数全部为 false</td>
+</tr>
+<tr>
+<td>machine learning</td>
+<td>node.ml</td>
+<td>true (需要 enable x-pack)</td>
+</tr>
+</tbody>
+</table>
+<div class="note info">
+            <p>随着群集的增长，尤其是如果您有大量机器学习工作，需要考虑将具有主机资格（<code>master-eligible</code>）的节点专用，将它与专用数据的节点（<code>data nodes</code>）和专用机器学习的节点（<code>machine learning nodes</code>）分开。</p><p>我理解，这里的专用（<code>dedicated</code>）一词就是表示，将一个节点的角色不要设置那么多，主节点资格的节点就是用于当主节点，而不是同时设置数据节点的角色！</p>
+          </div>
+<ul>
+<li>开发环境中，一个节点可以承担多种角色</li>
+<li>生产环境中，应该设置单一的角色的节点（dedicated node）</li>
+</ul>
+<p>本文 ES 是 7.3.0 版本，查看官方文档，发现 ES 7.9.0 的配置和它是有点区别的。</p>
+<h3 id="master-eligible-node"><a href="#master-eligible-node" class="headerlink" title="master-eligible node"></a>master-eligible node</h3><p><code>master-eligible node</code>：默认值就是 <code>true</code>，意味着每个节点启动后，默认就是一个 Master eligible 节点。具有该角色的节点表示它有资格被选举为 <code>mater node</code>。备注：<code>eligible</code> 一词表示符合条件的含义。</p>
+<p>主节点负责维护集群的状态，集群范围内的轻量级操作（只有 Master 节点才能修改集群的状态信息），例如：</p>
+<ul>
+<li>创建或删除索引，</li>
+<li>跟踪哪些节点是集群的一部分</li>
+<li>确定将哪些分片分配给哪些节点</li>
+<li>分片的路由信息</li>
+</ul>
+<blockquote>
+<p>任意节点都能修改信息，会导致数据的不一致性</p>
+</blockquote>
+<p><strong>拥有稳定的主节点对于群集健康非常重要。</strong></p>
+<p>在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/modules-discovery.html" target="_blank" rel="noopener">主节点选举过程中</a>，任何一个非 <code>voting-only</code> 的 <code>master-eligible</code> 节点都可能被选为主节点。</p>
+<blockquote>
+<p>很好理解，如果已经是「仅是选举」用途的节点，它怎么能称为主节点呢？</p>
+</blockquote>
+<p>索引和搜索数据是占用大量CPU，内存和 I/O 的工作，这可能给节点的资源带来压力。为了确保主节点稳定且不受压力，在较大的群集中，最好将符合角色的专用主节点和专用数据节点分开。</p>
+<p>尽管主节点还可以充当协调节点（<code>coordinating nodes</code>），将搜索和索引请求从客户端路由到数据节点，但最好不要为此目的使用专用的主节点。对于符合主节点要求的节点，其工作量应尽可能少，这对于群集的稳定性很重要。</p>
+<div class="note warning">
+            <p>概括来讲就是，主节点的机器不要身兼数职，不要给主节点配置其他节点角色，以免影响主节点的稳定性！</p>
+          </div>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可选为主节点（默认是 true）</span></span><br><span class="line"><span class="string">node.master:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># voting_only 角色不启用（默认也是 false） </span></span><br><span class="line"><span class="string">node.voting_only:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># data 角色不启用 （默认是 true） </span></span><br><span class="line"><span class="string">node.data:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># inges 角色不启用（默认是 true）</span></span><br><span class="line"><span class="string">node.ingest:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># ml 角色不启用（默认是 true）</span></span><br><span class="line"><span class="string">node.ml:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># xpack.ml.enabled 默认是启用的</span></span><br><span class="line"><span class="string">xpack.ml.enabled:</span> <span class="literal">true</span> </span><br><span class="line"><span class="comment"># 默认是 true</span></span><br><span class="line"><span class="string">cluster.remote.connect:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>xpack 功能时付费功能，因此，一般情况下，可以忽略 xpack 的设置。</p>
+</blockquote>
+<p>一个集群中可以有多个 master 节点，active 的 master 节点只有一个！</p>
+<h3 id="Voting-only-master-eligible-node"><a href="#Voting-only-master-eligible-node" class="headerlink" title="Voting-only master-eligible node"></a>Voting-only master-eligible node</h3><p>一个具有 <code>voting-only</code> <code>master-eligible</code> 两种角色的节点，它是参与主节点的选举但不会充当主节点的节点。特别指出，<code>voting-only</code> 可以在选举中为决胜局服务。</p>
+<p>要配置一个具有主机资格的节点为 <code>voting-only</code> 节点，需要如下配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认是 false</span></span><br><span class="line"><span class="string">node.voting_only:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<div class="note warning">
+            <p>注意：OSS-only 分布式版本不支持 voting-only 角色。<strong>只有 master-eligible 的节点才能标记为 voting-only 角色！这里虽然有点难理解，但是由于历史原因造成的。</strong></p>
+          </div>
+<p><strong>一个高可用的集群（HA —— High Avaliablity clusters）至少需要 3 个 <code>master-eligible</code> 角色的节点、至少 2 个不是 <code>voting-only</code> 节点。这样的集群将能够在一个主节点故障时选出一个主节点。</strong></p>
+<p>一个具有 <code>voting-only</code> <code>master-eligible</code> 两种角色的节点同样也可以赋予其他的角色。例如，一个节点可以同时赋予 <code>voting-only</code> <code>master-eligible</code> <code>data</code> 3 种角色。专用于 <code>voting-only</code> <code>master-eligible</code> 的节点配置如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">node.master:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 默认不启用，需要设置为 false </span></span><br><span class="line"><span class="string">node.voting_only:</span> <span class="literal">true</span> </span><br><span class="line"><span class="string">node.data:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.ingest:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.ml:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">xpack.ml.enabled:</span> <span class="literal">true</span> </span><br><span class="line"><span class="string">cluster.remote.connect:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="Data-Node"><a href="#Data-Node" class="headerlink" title="Data Node"></a>Data Node</h3><p>数据节点包含您已建立索引的文档的分片。数据节点处理与数据相关的操作，例如：</p>
+<ul>
+<li>CRUD，</li>
+<li>搜索和聚合。</li>
+</ul>
+<blockquote>
+<p>数据节点在数据扩展上起到了至关重要的作用</p>
+</blockquote>
+<p>这些操作是 I/O，内存和 CPU 密集型的。<strong>监视这些资源并在过载时添加更多数据节点非常重要。</strong></p>
+<p>具有专用数据节点的主要好处是将主节点角色和数据节点角色分开。 参考如下配置：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认是 true</span></span><br><span class="line"><span class="string">node.master:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># 默认是 false</span></span><br><span class="line"><span class="string">node.voting_only:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># 默认是 true</span></span><br><span class="line"><span class="string">node.data:</span> <span class="literal">true</span> </span><br><span class="line"><span class="comment"># 默认是 true</span></span><br><span class="line"><span class="string">node.ingest:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># 默认是 true</span></span><br><span class="line"><span class="string">node.ml:</span> <span class="literal">false</span> </span><br><span class="line"><span class="comment"># 默认是 true</span></span><br><span class="line"><span class="string">cluster.remote.connect:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Ingest-Node"><a href="#Ingest-Node" class="headerlink" title="Ingest Node"></a>Ingest Node</h3><p>接收节点（<code>Ingest nodes</code>）可以执行由一个或多个接收处理器组成的预处理管道。根据摄取处理器执行的操作类型和所需的资源，拥有专用的摄取节点可能会很有意义，这些节点仅会执行此特定任务。</p>
+<blockquote>
+<p>Ingest 节点也称为预处理节点。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">node.master:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.voting_only:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.data:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.ingest:</span> <span class="literal">true</span> </span><br><span class="line"><span class="string">node.ml:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">cluster.remote.connect:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>Ingest Node，可以用来承担一些数据管道的数据转换工作，例如，为你的文档增加一个新的字段，例如帮转换文档中的字段。</p>
+<h3 id="Coordinating-only-nodes"><a href="#Coordinating-only-nodes" class="headerlink" title="Coordinating only nodes"></a>Coordinating only nodes</h3><p>如果您不具备处理主节点职责、保存数据和预处理文档的能力，那么你就剩下一个仅可路由请求的协调节点角色（<code>coordinating only nodes</code>），处理搜索缩减阶段、分配批量索引的。本质上，coordinating only nodes 可充当智能负载平衡器。</p>
+<ul>
+<li>负责接受 Client 的请求，将请求分发到合适的节点，最终把结果汇集到一起。</li>
+<li>每个节点默认都起到了 Coordinating Node 的职责</li>
+</ul>
+<blockquote>
+<p>仅协调节点也称为负载均衡节点或 Client 节点</p>
+</blockquote>
+<div class="note warning">
+            <p>在集群中添加过多的仅协调节点可能会增加整个集群的负担，因为选择的主节点必须等待每个节点的集群状态更新确认！仅协调节点的好处不应被夸大 —— 数据节点可以很好地达到相同的目的。</p>
+          </div>
+<p>为了创建一个仅协调节点（coordinating only node），可以如下配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">node.master:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.voting_only:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.data:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.ingest:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">node.ml:</span> <span class="literal">false</span> </span><br><span class="line"><span class="string">cluster.remote.connect:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他节点类型"><a href="#其他节点类型" class="headerlink" title="其他节点类型"></a>其他节点类型</h3><ul>
+<li>Hot &amp; Warm Node<ul>
+<li>不同硬件配置的 Data Node，用来实现 Hot &amp; Warm 架构，降低集群部署的成本</li>
+</ul>
+</li>
+<li>Machine Learning Node<ul>
+<li>负责跑机器学习的 Job，用来做异常检测 </li>
+</ul>
+</li>
+</ul>
+<h3 id="单一职责节点"><a href="#单一职责节点" class="headerlink" title="单一职责节点"></a>单一职责节点</h3><p>一个节点只承担一个角色，总结图：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/dt7Hon.png" alt="单一职责"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/modules-node.html#coordinating-node" target="_blank" rel="noopener">官宣-Elasticsearch Reference [7.3] » Modules » Node</a></li>
+<li><a href="https://learnku.com/articles/40718" target="_blank" rel="noopener">learnku-笔记五十二：集常见的集群部署方式</a></li>
+<li><a href="https://elasticsearch.cn/question/8487" target="_blank" rel="noopener">Elasticsearch集群规划求助</a></li>
+</ul>
+<h2 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h2><p>实验机器有限，我们在同一台机器上创建三个 ES 实例来创建集群，分别明确指定了这些实例的 <code>http.port</code> 和 <code>transport.port</code>。<strong><code>discovery.seed_hosts</code></strong>明确指定实例的端口对测试集群的高可用性很关键。</p>
+<blockquote>
+<p>如果后期有新节点加入，新节点的 <code>discovery.seed_hosts</code> 没必要包含所有的节点，只要它里面包含集群中已有的节点信息，新节点就能发现整个集群了。</p>
+</blockquote>
+<h3 id="集群配置预览"><a href="#集群配置预览" class="headerlink" title="集群配置预览"></a>集群配置预览</h3><p>分别进入<code>es-7.3.0-node-1</code>、<code>es-7.3.0-node-2</code> 和 <code>es-7.3.0-node-3</code> 的文件夹，<code>config/elasticsearch.yml</code> 设置如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> es-7.3.0-node-1</span><br><span class="line">cluster.name: search-7.3.2</span><br><span class="line">node.name: node-1</span><br><span class="line">node.master: true</span><br><span class="line">node.data: false</span><br><span class="line">node.ingest: false</span><br><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9200</span><br><span class="line">transport.port: 9300</span><br><span class="line">discovery.seed_hosts: ["127.0.0.1:9300","127.0.0.1:9301","127.0.0.1:9302"]</span><br><span class="line">cluster.initial_master_nodes: ["node-1"]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> es-7.3.0-node-2</span><br><span class="line">cluster.name: search-7.3.2</span><br><span class="line">node.name: node-2</span><br><span class="line">node.master: true</span><br><span class="line">node.data: true</span><br><span class="line">node.ingest: false</span><br><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9201</span><br><span class="line">transport.port: 9301</span><br><span class="line">discovery.seed_hosts: ["127.0.0.1:9300","127.0.0.1:9301","127.0.0.1:9302"]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> es-7.3.0-node-3</span><br><span class="line">cluster.name: search-7.3.2</span><br><span class="line">node.name: node-3</span><br><span class="line">node.master: true</span><br><span class="line">node.data: true</span><br><span class="line">node.ingest: false</span><br><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9202</span><br><span class="line">transport.port: 9302</span><br><span class="line">discovery.seed_hosts: ["127.0.0.1:9300","127.0.0.1:9301","127.0.0.1:9302"]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>node-1 节点仅仅是一个 master 节点，它不是一个数据节点。</p>
+</blockquote>
+<p>经过上面的配置，可以通过命令 <code>egrep -v &quot;^#|^$&quot; config/elasticsearch.yml</code> 检查配置项。</p>
+<p>先启动 node-1 节点，因为它设置了初始主节点的列表。这时候就可以使用 <code>http://&lt;host IP&gt;:9200/</code> 看到结果了。然后逐一启动 node-2 和 node-3。通过访问 <code>http://127.0.0.1:9200/_cat/nodes</code> 查看集群是否 OK：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.3.112 25 87 13 4.29   dm - node-3</span><br><span class="line">192.168.3.112 26 87 16 4.29   dm - node-2</span><br><span class="line">192.168.3.112 35 87 16 4.29   m  * node-1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>http://127.0.0.1:9200/_nodes</code> 将会显示节点更多的详情信息</p>
+</blockquote>
+<p>插键显示结果：</p>
+<p><img src="https://gitee.com/michael_xiang/images/raw/master/uPic/aPk5ub.png" alt="集群"></p>
+<blockquote>
+<p>五角星表示该节点是主节点，圆圈表示该节点是数据节点</p>
+</blockquote>
+<p>有没有发现，我并没有给 <code>node-2</code> 和 <code>node-3</code> 明确指定端口，为什么在一台机器上也成功启动了这两个节点？</p>
+<p>因为 Elasticsearch 会取用 9200~9299 这个范围内的端口，如果 9200 被占用，就选择 9201，依次类推。</p>
+<p>补充：其实，还有一个简单的方法模拟创建集群（该方法我未测试，仅供参考）。</p>
+<p>我们首先将上面运行的三个节点停止掉，然后进入 <code>es-7.3.0-node-1</code> 文件夹下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p data/data&#123;1,2,3&#125;</span><br><span class="line">./bin/elasticsearch -E node.name=node-1 -E cluster.name=appsearch-7.3.2 -E path.data=data/data1 -E path.logs=logs/logs1 -d -p pid1</span><br><span class="line">./bin/elasticsearch -E node.name=node-2 -E cluster.name=appsearch-7.3.2 -E path.data=data/data2 -E path.logs=logs/logs2 -E http.port=9201 -d -p pid2</span><br><span class="line">./bin/elasticsearch -E node.name=node-3 -E cluster.name=appsearch-7.3.2 -E path.data=data/data3 -E path.logs=logs/logs3 -E http.port=9202 -d -p pid3</span><br></pre></td></tr></table></figure>
+<h2 id="安装插键"><a href="#安装插键" class="headerlink" title="安装插键"></a>安装插键</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查看已经安装的插键列表</span><br><span class="line">bin/elasticsearch-plugin list</span><br><span class="line"><span class="meta">#</span> 安装一个国际化分词插键</span><br><span class="line">bin/elasticsearch-plugin install analysis-icu</span><br></pre></td></tr></table></figure>
+<p>如果插键安装慢，可以先下载下来，再安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-icu/analysis-icu-7.3.0.zip</span><br><span class="line">./bin/elasticsearch-plugin install file://file path Of analysis-icu-7.1.0.zip</span><br></pre></td></tr></table></figure>
+<p>如下 API 也可以查看 ES 插键列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:9200/_cat/plugins</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>一个三个节点的 ES 集群，如果安装插件则需要三个节点都安装</p>
+</blockquote>
+<h2 id="ES-FAQ"><a href="#ES-FAQ" class="headerlink" title="ES-FAQ"></a>ES-FAQ</h2><h3 id="Q1：-1-max-virtual-memory-areas-vm-max-map-count-65530-is-too-low-increase-to-at-least-262144"><a href="#Q1：-1-max-virtual-memory-areas-vm-max-map-count-65530-is-too-low-increase-to-at-least-262144" class="headerlink" title="Q1：[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]"></a>Q1：[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "vm.max_map_count=262144" &gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<h3 id="Q2：max-file-descriptors-4096-for-elasticsearch-process-is-too-low-increase-to-at-least-65536"><a href="#Q2：max-file-descriptors-4096-for-elasticsearch-process-is-too-low-increase-to-at-least-65536" class="headerlink" title="Q2：max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]"></a>Q2：max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/security/limits.conf</span><br><span class="line"><span class="meta">#</span> 加入以下内容</span><br><span class="line">* soft nofile 300000</span><br><span class="line">* hard nofile 300000</span><br><span class="line">* soft nproc 102400</span><br><span class="line">* soft memlock unlimited</span><br><span class="line">* hard memlock unlimited</span><br></pre></td></tr></table></figure>
+<h3 id="Q3：master-not-discovered-exception"><a href="#Q3：master-not-discovered-exception" class="headerlink" title="Q3：master_not_discovered_exception"></a>Q3：master_not_discovered_exception</h3><p>主节点指定的名字要保证存在，别指定了不存在的节点名。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文是通过 tar 包方式安装的，安装目录相对集中、配置方便。用 RPM 包安装的话，可以直接用 systemctl 的命令查看 ES 状态、对其重启等。</p>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://learnku.com/docs/elasticsearch73/7.3" target="_blank" rel="noopener">learnku/Elasticsearch中文文档-7.3版本</a> 推荐</li>
+<li><a href="https://www.elastic.co/cn/blog/a-new-era-for-cluster-coordination-in-elasticsearch" target="_blank" rel="noopener">ES-CN 官网/Elasticsearch 集群协调迎来新时代</a> 对于 ES7 的集群发现机制介绍较为详细，推荐</li>
+<li><a href="https://www.jianshu.com/p/04f4d7b4a1d3" target="_blank" rel="noopener">程序羊-CentOS7上ElasticSearch安装填坑记</a> FAQ 有帮助</li>
+<li><a href="https://jeremy-xu.oschina.io/2018/10/%E6%90%AD%E5%BB%BAelfk%E6%97%A5%E5%BF%97%E9%87%87%E9%9B%86%E7%B3%BB%E7%BB%9F/" target="_blank" rel="noopener">搭建ELFK日志采集系统</a></li>
+<li><a href="https://cuiqingcai.com/6255.html" target="_blank" rel="noopener">静觅—Ubuntu 搭建 Elasticsearch 6 集群流程</a></li>
+<li><a href="https://www.cnblogs.com/xishuai/p/elk-elasticsearch-kibana.html" target="_blank" rel="noopener">ELK 架构之 Elasticsearch 和 Kibana 安装配置</a></li>
+<li><a href="https://wsgzao.github.io/post/elk/" target="_blank" rel="noopener">使用 ELK(Elasticsearch + Logstash + Kibana) 搭建日志集中分析平台实践</a></li>
+<li><a href="http://www.justdojava.com/2019/08/11/elk-install/" target="_blank" rel="noopener">手把手教你，在CentOS上安装ELK，进行服务器日志收集</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/02/14/elk-es-basic-tutorial-note/" rel="bookmark">Elasticsearch 学习笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/02/14/elk-es-kibana/" rel="bookmark">Kibana 学习笔记</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/02/16/elk-es-operation-api/" rel="bookmark">Elasticsearch常见API</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/08/14/elk-install/" rel="bookmark">DevOps 之 ELK 基础设施搭建</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2021/05/17/es-code-debug/" rel="bookmark">基于 IDEA 针对 Elasticsearch 7.10 源码 Debug</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-subscribe.jpg" alt="Michael翔 wechat" style="width: 200px; max-width: 100%;">
+  <div>ヾﾉ≧∀≦)o  欢迎订阅公众号「Coder魔法院」☑工具控 ☑编程 ☑读书☑电影</div>
+</div>
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>「🤓 码字不易，来杯Coffee👇」</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Michael翔 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Michael翔 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Michael翔</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://michael728.github.io/2020/04/12/elk-es-install/" title="Elasticsearch安装及集群的配置">https://michael728.github.io/2020/04/12/elk-es-install/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ELK/" rel="tag"># ELK</a>
+          
+            <a href="/tags/Search/" rel="tag"># Search</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/04/tools-mac-change-wallpaper-login/" rel="next" title="Mac 10.15 Catalina 开机登录壁纸图片修改">
+                <i class="fa fa-chevron-left"></i> Mac 10.15 Catalina 开机登录壁纸图片修改
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/19/food-spicy-chicken-clams/" rel="prev" title="202016周 菜谱 辣子鸡 & 辣炒蚬子肉">
+                202016周 菜谱 辣子鸡 & 辣炒蚬子肉 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="Michael翔">
+            
+              <p class="site-author-name" itemprop="name">Michael翔</p>
+              <div class="site-description motion-element" itemprop="description">DevOps，公众号『Coder魔法院』</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">116</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Michael728" title="GitHub &rarr; https://github.com/Michael728" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/1838446070/profile?topnav=1&wvr=6" title="微博 &rarr; https://weibo.com/1838446070/profile?topnav=1&wvr=6" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.cnblogs.com/michael-xiang/" title="博客园 &rarr; https://www.cnblogs.com/michael-xiang/" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>博客园</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/michaelXoX" title="知乎 &rarr; https://www.zhihu.com/people/michaelXoX" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/728_michael" title="Twitter &rarr; https://twitter.com/728_michael" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/michaelxiang" title="Telegram &rarr; https://t.me/michaelxiang" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                关注列表
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2018/09/16/blog-interesting/" title="https://michael728.github.io/2018/09/16/blog-interesting/">Blog List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zcheng.ren/posts/" title="https://zcheng.ren/posts/" rel="noopener" target="_blank">ZeeCoder</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ehlxr.me/" title="https://ehlxr.me/" rel="noopener" target="_blank">ehlxr</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.kawabangga.com/" title="https://www.kawabangga.com/" rel="noopener" target="_blank">卡瓦邦噶-蚂蚁SRE</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.stdioa.com/" title="https://blog.stdioa.com/" rel="noopener" target="_blank">David Dai</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhyong.cn/" title="https://www.zhyong.cn/" rel="noopener" target="_blank">ZhangYong-爱折腾软件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.dalaoyang.cn/" title="https://www.dalaoyang.cn/" rel="noopener" target="_blank">Dalaoyang-SpringBoot</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wuliaole.com/index.html" title="http://www.wuliaole.com/index.html" rel="noopener" target="_blank">无聊小博</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ilovey.live/" title="http://ilovey.live/" rel="noopener" target="_blank">低调小熊猫-Java开发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://michael728.github.io/2016/09/03/blog-logfile/" title="https://michael728.github.io/2016/09/03/blog-logfile/">建站日志</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch-ES"><span class="nav-number">2.</span> <span class="nav-text">Elasticsearch/ES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-ES"><span class="nav-number">3.</span> <span class="nav-text">安装 ES</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">3.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-ES-安装包"><span class="nav-number">3.2.</span> <span class="nav-text">下载 ES 安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行-Elasticsearch"><span class="nav-number">3.3.</span> <span class="nav-text">运行 Elasticsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查一下运行状态"><span class="nav-number">3.4.</span> <span class="nav-text">检查一下运行状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES-配置相关"><span class="nav-number">4.</span> <span class="nav-text">ES 配置相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-配置"><span class="nav-number">4.1.</span> <span class="nav-text">JVM 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#elasticsearch-yml-配置"><span class="nav-number">4.2.</span> <span class="nav-text">elasticsearch.yml 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cluster-name"><span class="nav-number">4.2.1.</span> <span class="nav-text">cluster.name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-name"><span class="nav-number">4.2.2.</span> <span class="nav-text">node.name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#network-host"><span class="nav-number">4.2.3.</span> <span class="nav-text">network.host</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-port"><span class="nav-number">4.2.4.</span> <span class="nav-text">http.port</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transport-port"><span class="nav-number">4.2.5.</span> <span class="nav-text">transport.port</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#discovery-seed-hosts"><span class="nav-number">4.2.6.</span> <span class="nav-text">discovery.seed_hosts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cluster-initial-master-nodes"><span class="nav-number">4.2.7.</span> <span class="nav-text">cluster.initial_master_nodes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">4.2.8.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节点角色"><span class="nav-number">5.</span> <span class="nav-text">节点角色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node"><span class="nav-number">5.1.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#master-eligible-node"><span class="nav-number">5.2.</span> <span class="nav-text">master-eligible node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Voting-only-master-eligible-node"><span class="nav-number">5.3.</span> <span class="nav-text">Voting-only master-eligible node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Node"><span class="nav-number">5.4.</span> <span class="nav-text">Data Node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ingest-Node"><span class="nav-number">5.5.</span> <span class="nav-text">Ingest Node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coordinating-only-nodes"><span class="nav-number">5.6.</span> <span class="nav-text">Coordinating only nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他节点类型"><span class="nav-number">5.7.</span> <span class="nav-text">其他节点类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单一职责节点"><span class="nav-number">5.8.</span> <span class="nav-text">单一职责节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.9.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建集群"><span class="nav-number">6.</span> <span class="nav-text">创建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集群配置预览"><span class="nav-number">6.1.</span> <span class="nav-text">集群配置预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装插键"><span class="nav-number">7.</span> <span class="nav-text">安装插键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES-FAQ"><span class="nav-number">8.</span> <span class="nav-text">ES-FAQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1：-1-max-virtual-memory-areas-vm-max-map-count-65530-is-too-low-increase-to-at-least-262144"><span class="nav-number">8.1.</span> <span class="nav-text">Q1：[1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2：max-file-descriptors-4096-for-elasticsearch-process-is-too-low-increase-to-at-least-65536"><span class="nav-number">8.2.</span> <span class="nav-text">Q2：max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3：master-not-discovered-exception"><span class="nav-number">8.3.</span> <span class="nav-text">Q3：master_not_discovered_exception</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考-1"><span class="nav-number">10.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael翔</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael728.github.io/2020/04/12/elk-es-install/";
+    this.page.identifier = "2020/04/12/elk-es-install/";
+    this.page.title = 'Elasticsearch安装及集群的配置';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://michaelxiang.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
