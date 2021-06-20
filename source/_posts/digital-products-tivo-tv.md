@@ -19,9 +19,11 @@ categories: 数码
 <!-- more -->
 ## 背景知识
 
-Netflix 在未进行 DRM（即 Digital Rights Management 数字版权管理） 认证的设备上无法提供高清播放。Netflix 官方帮助教程列出了支持 HD 以及 HDR 的 安卓设备。查询：[Netflix is available in HD on the Android phones below.](https://help.netflix.com/en/node/23939/cn)
+Netflix 在未进行 DRM（即 Digital Rights Management 数字版权管理） 认证的设备上无法提供高清播放。Netflix 官方帮助教程列出了支持 HD 以及 HDR 的 安卓设备。在 [Netflix is available in HD on the Android phones below.](https://help.netflix.com/en/node/23939/cn) 的页面，可以查看哪些安卓平板、安卓手机设备是可以播放 Netflix 高清视频的。
 
-在播放 Netflix 的问题上，电视盒子的标准比上面的 DRM 认证更为严格。设备必须经过 Netflix 认证才能正常安装和播放 Netflix。查询[2020 Netflix Recommended TVs](https://devices.netflix.com/en/recommendedtv/2020/#tvs)
+在播放 Netflix 的问题上，电视盒子的标准比上面的 DRM 认证更为严格。设备必须经过 Netflix 认证才能正常安装和播放 Netflix。在[2020 Netflix Recommended TVs](https://devices.netflix.com/en/recommendedtv/2020/#tvs)的页面，看到了 Netflix 推荐的热门电视设备。
+
+哪些电视盒子是 Netflix 认证的设备呢？在这个网址查询：[Both Netflix & Prime Video Certified Android TV Streaming Players](https://www.androidtv-guide.com/streaming-gaming/netflix-amazon-atv-certified)
 
 ## Tivo TV 激活
 
