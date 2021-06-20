@@ -10,6 +10,7 @@ keywords: 软路由
 
 为了让新家的网络可以自由访问各大流媒体资源，以及方便自己开发环境中下载各种国外资源依赖软件包等，购入了 R4S 软路由设备。
 
+<!-- more -->
 ## 固件下载
 
 - [官方固件/NanoPi R4S/zh](https://wiki.friendlyarm.com/wiki/index.php/NanoPi_R4S/zh#.E4.B8.8B.E8.BD.BD.E7.B3.BB.E7.BB.9F.E5.9B.BA.E4.BB.B6) 对应的[网盘地址/5fd2](https://pan.baidu.com/share/init?surl=IVKSPo5m4SGGh8z_hY_hTg )

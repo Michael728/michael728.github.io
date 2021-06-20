@@ -1,5 +1,5 @@
 ---
-title: Tivo Stream TV 激活配置使用笔记
+title: Tivo Stream TV 使用笔记
 tags: [数码, 多媒体]
 toc: true
 date: 2021-04-25 21:29:08
@@ -12,9 +12,16 @@ categories: 数码
 
 目前国产电视机的硬件性能其实都还 OK，个人觉得影响观看体验的重要因素反而是片源！国内「优爱腾」流媒体的质量还有待提高，2K/4K 的片源质量堪忧，甚至 1080P 的片源都不行。因为小米电视并不是 Netflix 认证的设备，是无法直接安装 Netflix 官方 APP 的。因此，决定购入一个国外的电视盒子——TiVo Stream TV 盒子，然后在它上面安装 Netflix、Youtube 等 APP 观看世界各地高质量的片源了。
 
-![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/kxUeaF.png)
+![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/aa9Skp.png)
 
 上图就是效果图啦，美滋滋，顺带安利一部剧《纸钞屋》，西班牙剧真是给力！
+
+<!-- more -->
+## 背景知识
+
+Netflix 在未进行 DRM（即 Digital Rights Management 数字版权管理） 认证的设备上无法提供高清播放。Netflix 官方帮助教程列出了支持 HD 以及 HDR 的 安卓设备。查询：[Netflix is available in HD on the Android phones below.](https://help.netflix.com/en/node/23939/cn)
+
+在播放 Netflix 的问题上，电视盒子的标准比上面的 DRM 认证更为严格。设备必须经过 Netflix 认证才能正常安装和播放 Netflix。查询[2020 Netflix Recommended TVs](https://devices.netflix.com/en/recommendedtv/2020/#tvs)
 
 ## Tivo TV 激活
 

@@ -8,7 +8,12 @@ categories: 数码
 
 ## 前言
 
-![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/kxUeaF.png)
+![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/aa9Skp.png)
+
+为了让已经拥有不错硬件的电视机发挥它应有的实力，提高片源质量是非常关键的！因此，我购入了一款国外的 TV 盒子，它拥有原生的 Google Android 框架，可以支持安装 Youtube 和 Netflix，并且，该设备是经过 Netflix 认证的，可以看 4K 高清视频。关于这款盒子的使用，可以阅读 [Tivo Stream TV 使用笔记](https://michael728.github.io/2021/04/25/digital-products-tivo-tv/)
+
+<!-- more -->
+
 ## aida64
 
 这个软件可以方便的查看电视机的系统信息、CPU 架构等。
