@@ -8,7 +8,7 @@ categories: 数码
 
 ## 前言
 
-![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/aa9Skp.png)
+![效果](https://gitee.com/michael_xiang/images/raw/master/uPic/bncTZ6.png)
 
 为了让已经拥有不错硬件的电视机发挥它应有的实力，
 - **提高片源质量是非常关键的！**

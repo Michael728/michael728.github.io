@@ -8,11 +8,11 @@ categories: 数码
 
 ## 前言
 
+![NAS](https://gitee.com/michael_xiang/images/raw/master/uPic/5ihVj4.png)
+
 很早之前就听说过 NAS 设备，但是苦于一直在租房的状态（其实是穷），一直没有入手。今年终于搬到新家了，加上近期老婆抱怨手机存储空间不够，已经塞满了吉宝的照片和视频了，因此，终于狠心剁手了一台群晖 920+ 的 NAS 设备。
 
 本文主要就是围绕 NAS 到手后，我进行了哪些设置以及安装哪些好玩的套件。
-
-![NAS](https://gitee.com/michael_xiang/images/raw/master/uPic/5ihVj4.png)
 
 <!-- more -->
 
