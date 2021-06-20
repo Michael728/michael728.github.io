@@ -402,7 +402,7 @@ reward_settings:
   # You can show or hide reward in a specific article throuth `reward: true | false` in Front-matter.
   enable: true
   animation: true
-  comment: 「🤓 码字不易，赏个茶叶蛋 👇」
+  comment: 「🤓 码字不易，来杯Coffee👇」
 
 reward:
   wechatpay: /images/wechatpay.jpg
@@ -653,7 +653,7 @@ calendar:
 
 # Disqus
 disqus:
-  enable: false
+  enable: true
   shortname: michaelxiang
   count: false
   lazyload: true
@@ -683,7 +683,7 @@ changyan:
 # More info available at https://valine.js.org
 # https://reuixiy.github.io/technology/computer/computer-aided-art/2018/07/15/use-valine-in-theme-next.html
 valine:
-  enable: true # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version.
+  enable: false # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version.
   appid: 7CDtrbb4U7nQzOdctmXXnMqt-gzGzoHsz # your leancloud application appid
   appkey: ISgUUtg79U9Eq0ActHmVRtmN # your leancloud application appkey
   notify: true # mail notifier, See: https://github.com/xCss/Valine/wiki
