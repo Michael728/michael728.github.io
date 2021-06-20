@@ -4,6 +4,38 @@ date: 2019-05-19 17:37:22
 ---
 
 {% note success no-icon %}
+站在岸上永远学不会游泳🏊
+—— 20210521
+{% endnote %}
+
+{% note success no-icon %}
+入职以后，公司给每位员工发了一台电脑，表面上看是每个人拥有了一台电脑，其实是给每个电脑配了一个人。
+—— 202110430 摘抄自阮一峰的博客
+{% endnote %}
+
+{% note success no-icon %}
+旅行不是为了看到不同的事物，而是为了学会不同地看待事物。
+Yon don't travel to see different things, you travel to see things differently. 
+—— Ben Davenpor
+{% endnote %}
+
+{% note success no-icon %}
+第一个做出来的人并不一定就会占领市场，其很有可能会成为先驱。
+—— 20210322
+{% endnote %}
+
+{% note success no-icon %}
+你需要的不是"水平方向的努力"，而是"垂直方向的努力"。
+—— 20210322
+{% endnote %}
+
+{% note success no-icon %}
+行是知之始，知是行之成。
+实践是知识的源头，知识是实践的成果。强调知行合一的重要性。
+—— 20200924
+{% endnote %}
+
+{% note success no-icon %}
 - 做你没做过的事叫成长
 - 做你不愿意做的事叫改变
 - 做你不敢做的事叫突破

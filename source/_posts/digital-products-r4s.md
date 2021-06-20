@@ -82,7 +82,7 @@ balenaEtcher 刷固件
 
 - [NanoPi R4S 上手体验](https://blog.qust.me/posts/nanopir4s/) 介绍了 OpenClash 的使用，简略
 - [资料：悟空的日常](https://didiboy0702.gitbook.io/wukongdaily/)
-- 测速网站：∂https://fast.com/zh/cn/
+- 测速网站：https://fast.com/zh/cn/
 
 ### 设置桥接模式
 
