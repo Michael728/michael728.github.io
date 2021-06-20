@@ -12,6 +12,10 @@ categories: 数码
 
 本文主要就是围绕 NAS 到手后，我进行了哪些设置以及安装哪些好玩的套件。
 
+![NAS](https://gitee.com/michael_xiang/images/raw/master/uPic/5ihVj4.png)
+
+<!-- more -->
+
 ## DS video
 
 群晖安装套件：Video Station
